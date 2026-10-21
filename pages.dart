@@ -80,24 +80,67 @@ class Tile extends StatelessWidget {
       ));
 }
 
+void openAdd(BuildContext c) {
+  if (!store.pro && store.items.length >= 15) { toast(c, 'Limit 15 paragonów w planie Start – zobacz Pro'); return; }
+  Navigator.push(c, MaterialPageRoute(builder: (_) => const AddPage()));
+}
+
+Future<void> loadDemo() async {
+  final t = today(); var k = 0;
+  final demo = [['Pralka Bosch Serie 6', 'Media Expert', -20, 2299.0], ['Słuchawki Sony WH-1000XM5', 'x-kom', -700, 1199.0], ['Wiertarka Makita DF333', 'Leroy Merlin', -340, 459.0], ['Opony zimowe 205/55', 'Oponeo', -60, 1680.0]];
+  for (final x in demo) {
+    store.items.add(Item(id: DateTime.now().millisecondsSinceEpoch + k++, name: x[0] as String, store: x[1] as String, cat: guessCat('${x[0]} ${x[1]}'), date: t.add(Duration(days: x[2] as int)), price: x[3] as double));
+  }
+  await store.save();
+}
+
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
+  Widget _stat(BuildContext c, String v, String l, Color? col) => Expanded(child: Card(child: Padding(padding: const EdgeInsets.all(14), child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        Text(v, style: TextStyle(fontSize: 26, fontWeight: FontWeight.w600, color: col)), const SizedBox(height: 2), Text(l, style: Theme.of(c).textTheme.bodySmall)]))));
+  Widget _step(BuildContext c, int n, String t, String d) => Padding(padding: const EdgeInsets.symmetric(vertical: 8), child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        CircleAvatar(radius: 14, backgroundColor: Theme.of(c).colorScheme.primaryContainer, child: Text('$n', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: Theme.of(c).colorScheme.onPrimaryContainer))),
+        const SizedBox(width: 12), Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [Text(t, style: const TextStyle(fontWeight: FontWeight.w600)), Text(d, style: Theme.of(c).textTheme.bodySmall)]))]));
   @override
   Widget build(BuildContext c) {
+    final cs = Theme.of(c).colorScheme;
+    final head = Padding(padding: const EdgeInsets.only(bottom: 4), child: Row(children: [
+      Container(width: 40, height: 40, decoration: BoxDecoration(color: cs.primaryContainer, borderRadius: BorderRadius.circular(12)), child: const Center(child: Text('🧾', style: TextStyle(fontSize: 22)))),
+      const SizedBox(width: 12), Text('Szuflada', style: Theme.of(c).textTheme.headlineSmall)]));
+    if (store.items.isEmpty) {
+      return ListView(padding: const EdgeInsets.all(16), children: [
+        head, const SizedBox(height: 28),
+        Center(child: Container(width: 112, height: 112, decoration: BoxDecoration(color: cs.primaryContainer, shape: BoxShape.circle), child: Icon(Icons.receipt_long, size: 52, color: cs.onPrimaryContainer))),
+        const SizedBox(height: 20),
+        Text('Zacznij od pierwszego paragonu', textAlign: TextAlign.center, style: Theme.of(c).textTheme.titleLarge),
+        const SizedBox(height: 8),
+        Text('Zeskanuj paragon lub fakturę, a Szuflada sama wypełni dane i przypomni o końcu gwarancji.', textAlign: TextAlign.center, style: Theme.of(c).textTheme.bodyMedium),
+        const SizedBox(height: 20),
+        FilledButton.icon(onPressed: () => openAdd(c), icon: const Icon(Icons.document_scanner), label: const Text('Skanuj pierwszy dokument')),
+        const SizedBox(height: 8),
+        OutlinedButton.icon(onPressed: loadDemo, icon: const Icon(Icons.auto_awesome), label: const Text('Zobacz na przykładach')),
+        const SizedBox(height: 24),
+        Card(child: Padding(padding: const EdgeInsets.all(16), child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Text('Jak to działa', style: Theme.of(c).textTheme.titleMedium),
+          _step(c, 1, 'Zrób zdjęcie', 'Paragon lub faktura. Skaner sam przytnie i wyprostuje dokument.'),
+          _step(c, 2, 'Sprawdź dane', 'Sklep, data i cena wypełnią się same. Poprawisz, co trzeba.'),
+          _step(c, 3, 'Gotowe', 'Przypomnimy przed końcem gwarancji i pomożemy złożyć reklamację.'),
+        ]))),
+      ]);
+    }
     final act = store.items.where((e) => e.left >= 0).toList();
     final soon = act.where((e) => e.left < 60).toList()..sort((a, b) => a.left.compareTo(b.left));
-    final val = act.fold<double>(0, (s, e) => s + e.price); final cs = Theme.of(c).colorScheme;
+    final val = act.fold<double>(0, (s, e) => s + e.price);
     final recent = [...store.items]..sort((a, b) => b.id.compareTo(a.id));
     return ListView(padding: const EdgeInsets.all(16), children: [
-      Text('Szuflada', style: Theme.of(c).textTheme.headlineMedium),
-      const SizedBox(height: 12),
+      head, const SizedBox(height: 12),
       Card(color: cs.primaryContainer, child: Padding(padding: const EdgeInsets.all(20), child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Text('${act.length}', style: TextStyle(fontSize: 44, color: cs.onPrimaryContainer)),
+        Text('${act.length}', style: TextStyle(fontSize: 48, fontWeight: FontWeight.w500, color: cs.onPrimaryContainer, height: 1.1)),
         Text('${pl(act.length, 'produkt', 'produkty', 'produktów')} na gwarancji${val > 0 ? ' o wartości ${val.round()} zł' : ''}', style: TextStyle(color: cs.onPrimaryContainer)),
       ]))),
-      if (store.items.isEmpty) const Padding(padding: EdgeInsets.all(24), child: Text('Szuflada jest pusta. Dotknij +, zeskanuj pierwszy paragon, a przypomnę o końcu gwarancji.', textAlign: TextAlign.center)),
-      if (soon.isNotEmpty) ...[const Padding(padding: EdgeInsets.only(top: 16, bottom: 8), child: Text('Kończy się wkrótce', style: TextStyle(fontSize: 18))), ...soon.take(4).map(Tile.new)],
-      if (recent.isNotEmpty) ...[const Padding(padding: EdgeInsets.only(top: 16, bottom: 8), child: Text('Ostatnio dodane', style: TextStyle(fontSize: 18))), ...recent.take(3).map(Tile.new)],
+      Row(children: [_stat(c, '${soon.length}', 'kończy się w 2 mies.', soon.isEmpty ? null : const Color(0xFFE37400)), _stat(c, '${store.items.length}', 'wszystkich dokumentów', null)]),
+      if (soon.isNotEmpty) ...[const Padding(padding: EdgeInsets.only(top: 12, bottom: 8), child: Text('Kończy się wkrótce', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500))), ...soon.take(4).map(Tile.new)],
+      const Padding(padding: EdgeInsets.only(top: 12, bottom: 8), child: Text('Ostatnio dodane', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500))), ...recent.take(3).map(Tile.new),
     ]);
   }
 }
