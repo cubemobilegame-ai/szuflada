@@ -7,13 +7,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Uporzadkuj pliki (jesli wgrano je bez folderow)
+        run: |
+          mkdir -p lib tool
+          for f in add claim core letters main pages services; do
+            if [ -f "$f.dart" ]; then mv "$f.dart" lib/; fi
+          done
+          if [ -f setup_android.py ]; then mv setup_android.py tool/; fi
+          ls -R lib tool
       - uses: actions/setup-java@v4
         with: { distribution: temurin, java-version: '17' }
       - uses: subosito/flutter-action@v2
         with: { channel: stable, cache: true }
-      - name: Wygeneruj projekt Androida, jeśli go brak
+      - name: Wygeneruj projekt Androida, jesli go brak
         run: |
-          if [ ! -d android ]; then flutter create --platforms=android --org pl.szuflada --project-name szuflada .; fi
+          if [ ! -d android ]; then
+            cp -r lib /tmp/lib_bak && cp pubspec.yaml /tmp/pubspec_bak
+            flutter create --platforms=android --org pl.szuflada --project-name szuflada .
+            rm -rf lib test && cp -r /tmp/lib_bak lib && cp /tmp/pubspec_bak pubspec.yaml
+          fi
           python3 tool/setup_android.py
       - run: flutter pub get
       - run: flutter build apk --release
