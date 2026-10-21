@@ -27,6 +27,18 @@ jobs:
             rm -rf lib test && cp -r /tmp/lib_bak lib && cp /tmp/pubspec_bak pubspec.yaml
           fi
           python3 tool/setup_android.py
+      - name: Wylacz minifikacje R8 (blad przy bibliotekach ML Kit)
+        run: |
+          python3 - <<'PY'
+          import re, os
+          for g, kts in [('android/app/build.gradle.kts', 1), ('android/app/build.gradle', 0)]:
+              if os.path.exists(g):
+                  t = open(g).read()
+                  if 'inifyEnabled' not in t:
+                      add = 'isMinifyEnabled = false\n            isShrinkResources = false\n            ' if kts else 'minifyEnabled false\n            shrinkResources false\n            '
+                      t = re.sub(r'(release\s*\{)', lambda m: m.group(1) + '\n            ' + add, t, count=1)
+                      open(g, 'w').write(t)
+          PY
       - run: flutter pub get
       - run: flutter build apk --release
       - run: flutter build appbundle --release
