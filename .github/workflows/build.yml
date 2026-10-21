@@ -2,6 +2,8 @@ name: Build Android
 on:
   push:
   workflow_dispatch:
+permissions:
+  contents: write
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -65,9 +67,13 @@ jobs:
       - run: flutter pub get
       - run: flutter build apk --release
       - run: flutter build appbundle --release
-      - uses: actions/upload-artifact@v4
-        with:
-          name: szuflada
-          path: |
-            build/app/outputs/flutter-apk/app-release.apk
-            build/app/outputs/bundle/release/app-release.aab
+      - name: Opublikuj plik APK w zakladce Releases
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "build-${{ github.run_number }}" \
+            build/app/outputs/flutter-apk/app-release.apk \
+            build/app/outputs/bundle/release/app-release.aab \
+            --target "${{ github.sha }}" \
+            --title "Szuflada - wersja ${{ github.run_number }}" \
+            --notes "Automatycznie zbudowana aplikacja. Pobierz plik app-release.apk."
