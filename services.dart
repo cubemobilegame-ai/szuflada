@@ -112,7 +112,7 @@ class Backup {
 // Skaner dokumentów (ML Kit), odczyt tekstu i parser paragonów / faktur
 class Line { String name; double price; bool on = false; Line(this.name, this.price); }
 class Parsed {
-  String path, store = '', doc = 'Paragon', docNo = '', buyer = ''; DateTime? date; double? total; List<Line> lines = [];
+  String path, store = '', doc = 'Paragon', docNo = '', buyer = '', raw = '', nameGuess = ''; DateTime? date; double? total; List<Line> lines = [];
   Parsed(this.path);
 }
 class Scanner {
@@ -122,39 +122,73 @@ class Scanner {
       final r = await sc.scanDocument();
       final imgs = r.images;
       if (imgs == null || imgs.isEmpty) return null;
-      final rec = TextRecognizer(script: TextRecognitionScript.latin);
-      final t = await rec.processImage(InputImage.fromFilePath(imgs.first));
-      await rec.close();
-      return parse(t.text, imgs.first);
+      return _ocr(imgs.first);
     } finally { sc.close(); }
   }
+  // Odczyt ze zdjęcia z galerii (paragon lub faktura zapisane w telefonie)
+  static Future<Parsed?> fromFile(String path) => _ocr(path);
 
-  static final _price = RegExp(r'(\d{1,6}[.,]\d{2})');
-  static final _skip = RegExp(r'SUMA|RAZEM|PTU|SPRZED|GOT[ÓO]WK|KARTA|RESZTA|ZAP[ŁL]AT|NIP|RABAT|PODATEK|VAT|PARAGON|FISKAL', caseSensitive: false);
-  static double _num(String s) => double.parse(s.replaceAll(',', '.'));
+  static Future<Parsed?> _ocr(String path) async {
+    final rec = TextRecognizer(script: TextRecognitionScript.latin);
+    try {
+      final t = await rec.processImage(InputImage.fromFilePath(path));
+      return parse(_rows(t), path);
+    } finally { await rec.close(); }
+  }
+
+  // Składa tekst w wiersze według położenia na zdjęciu: nazwa produktu i cena z drugiej kolumny trafiają do jednej linii
+  static String _rows(RecognizedText t) {
+    final ls = <TextLine>[];
+    for (final b in t.blocks) { ls.addAll(b.lines); }
+    ls.sort((a, b) => a.boundingBox.center.dy.compareTo(b.boundingBox.center.dy));
+    final rows = <List<TextLine>>[];
+    for (final l in ls) {
+      if (rows.isNotEmpty) {
+        final r = rows.last;
+        final cy = r.map((e) => e.boundingBox.center.dy).reduce((a, b) => a + b) / r.length;
+        final h = r.map((e) => e.boundingBox.height).reduce((a, b) => a + b) / r.length;
+        if ((l.boundingBox.center.dy - cy).abs() < h * 0.6) { r.add(l); continue; }
+      }
+      rows.add([l]);
+    }
+    return rows.map((r) { r.sort((a, b) => a.boundingBox.left.compareTo(b.boundingBox.left)); return r.map((e) => e.text).join('  '); }).join('\n');
+  }
+
+  static final _pr = RegExp(r'(\d{1,6})\s?[.,]\s?(\d{2})(?!\d)');
+  static final _skip = RegExp(r'SUMA|RAZEM|PTU|SPRZED|GOT[ÓO]WK|KARTA|RESZTA|ZAP[ŁL]AT|NIP|RABAT|PODATEK|VAT|PARAGON|FISKAL|KASJER|WYDRUK|NR SYS|GODZ', caseSensitive: false);
+  static final _letters = RegExp(r'[A-Za-zĄąĆćĘęŁłŃńÓóŚśŹźŻż]{3,}');
+  static double _val(RegExpMatch m) => double.parse('${m[1]}.${m[2]}');
+  static String _fix(String s) => s.replaceAllMapped(RegExp(r'(?<=\d)[Oo](?=\d)'), (_) => '0').replaceAllMapped(RegExp(r'(?<=\d)[lI](?=\d)'), (_) => '1');
 
   static Parsed parse(String text, String path) {
-    final p = Parsed(path);
-    final rows = text.split('\n').map((e) => e.trim()).where((e) => e.isNotEmpty).toList();
+    final p = Parsed(path)..raw = text;
+    final rows = text.split('\n').map((e) => _fix(e.trim())).where((e) => e.isNotEmpty).toList();
     final up = text.toUpperCase();
-    final letters = RegExp(r'[A-Za-zĄąĆćĘęŁłŃńÓóŚśŹźŻż]{3,}');
     final bad = RegExp(r'^(NIP|PARAGON|FAKTURA|UL\.|\d)', caseSensitive: false);
-    for (final r in rows) { if (letters.hasMatch(r) && !bad.hasMatch(r)) { p.store = r; break; } }
+    var storeIdx = -1;
+    for (var i = 0; i < rows.length && i < 6; i++) { if (_letters.hasMatch(rows[i]) && !bad.hasMatch(rows[i])) { p.store = rows[i]; storeIdx = i; break; } }
     for (final s in ['Media Expert', 'RTV Euro AGD', 'x-kom', 'Leroy Merlin', 'Castorama', 'Biedronka', 'Lidl', 'Media Markt', 'Ikea', 'Decathlon', 'Allegro']) {
       if (up.contains(s.toUpperCase())) { p.store = s; break; }
     }
-    final d1 = RegExp(r'(\d{2})[.\-/](\d{2})[.\-/](\d{4})').firstMatch(text);
-    final d2 = RegExp(r'(\d{4})[.\-/](\d{2})[.\-/](\d{2})').firstMatch(text);
+    final d1 = RegExp(r'(\d{2})\s?[.\-/]\s?(\d{2})\s?[.\-/]\s?(\d{4})').firstMatch(text);
+    final d2 = RegExp(r'(\d{4})\s?[.\-/]\s?(\d{2})\s?[.\-/]\s?(\d{2})').firstMatch(text);
     try {
       if (d2 != null) { p.date = DateTime(int.parse(d2[1]!), int.parse(d2[2]!), int.parse(d2[3]!)); }
       else if (d1 != null) { p.date = DateTime(int.parse(d1[3]!), int.parse(d1[2]!), int.parse(d1[1]!)); }
       if (p.date != null && (p.date!.year < 2000 || p.date!.isAfter(DateTime.now().add(const Duration(days: 2))))) p.date = null;
     } catch (_) { p.date = null; }
-    final lineRe = RegExp(r'^(.{3,}?)\s+(?:\d+(?:[.,]\d+)?\s*[xX*]\s*\d+[.,]\d{2}\s+)?(\d{1,6}[.,]\d{2})\s*[A-Ca-c]?$');
-    for (final r in rows) {
-      final m = lineRe.firstMatch(r);
-      if (m != null && !_skip.hasMatch(r) && letters.hasMatch(m[1]!)) p.lines.add(Line(m[1]!.trim(), _num(m[2]!)));
-      if (RegExp(r'SUMA|RAZEM|DO ZAP', caseSensitive: false).hasMatch(r)) { final all = _price.allMatches(r).toList(); if (all.isNotEmpty) p.total = _num(all.last[1]!); }
+
+    String? pending;
+    for (var i = 0; i < rows.length; i++) {
+      final r = rows[i]; final prices = _pr.allMatches(r).toList();
+      if (RegExp(r'SUMA|RAZEM|DO ZAP', caseSensitive: false).hasMatch(r)) { if (prices.isNotEmpty) p.total = _val(prices.last); pending = null; continue; }
+      if (_skip.hasMatch(r)) { pending = null; continue; }
+      if (prices.isEmpty) { pending = (_letters.hasMatch(r) && r.length >= 4) ? r : null; if (pending != null && p.nameGuess.isEmpty && i != storeIdx && !r.toLowerCase().contains('ul.')) p.nameGuess = r; continue; }
+      var name = r.substring(0, prices.first.start).replaceAll(RegExp(r'(?:\s+\d+(?:[.,]\d+)?\s*[xX*])?[\s=]*$'), '').replaceAll(RegExp(r'^\d+[.)]?\s+'), '').trim();
+      if (!_letters.hasMatch(name)) name = pending ?? '';
+      pending = null;
+      final price = _val(prices.last);
+      if (_letters.hasMatch(name) && price > 0) p.lines.add(Line(name, price));
     }
     p.total ??= p.lines.isEmpty ? null : p.lines.map((e) => e.price).reduce((a, b) => a > b ? a : b);
     if (up.contains('FAKTURA')) {

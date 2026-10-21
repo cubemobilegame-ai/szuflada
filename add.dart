@@ -1,5 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
 import 'core.dart';
 import 'pages.dart';
 import 'services.dart';
@@ -8,7 +10,7 @@ class AddPage extends StatefulWidget { final Item? edit; const AddPage({super.ke
 class _A extends State<AddPage> {
   final n = TextEditingController(), st = TextEditingController(), pr = TextEditingController(), mo = TextEditingController(text: '24'), nt = TextEditingController(), dn = TextEditingController(), by = TextEditingController();
   DateTime date = today(); String cat = 'Inne', doc = 'Paragon'; bool online = false, busy = false, lowDate = false, scanned = false, empty = false;
-  String? photoName, newPath; List<Line> lines = [];
+  String? photoName, newPath; String raw = ''; List<Line> lines = [];
 
   @override
   void initState() {
@@ -17,17 +19,22 @@ class _A extends State<AddPage> {
     if (e != null) { n.text = e.name; st.text = e.store; pr.text = e.price > 0 ? e.price.toStringAsFixed(2) : ''; mo.text = '${e.months}'; nt.text = e.note; dn.text = e.docNo; by.text = e.buyer; date = e.date; cat = e.cat; doc = e.doc; online = e.online; photoName = e.photo; }
   }
 
-  Future<void> _scan() async {
+  Future<Parsed?> _fromGallery() async {
+    final x = await ImagePicker().pickImage(source: ImageSource.gallery, maxWidth: 2400, imageQuality: 95);
+    return x == null ? null : Scanner.fromFile(x.path);
+  }
+
+  Future<void> _scan({bool gallery = false}) async {
     setState(() => busy = true);
     try {
-      final r = await Scanner.run();
+      final r = gallery ? await _fromGallery() : await Scanner.run();
       if (r == null) return;
       setState(() {
         newPath = r.path; st.text = r.store; if (r.date != null) date = r.date!; lowDate = r.date == null; doc = r.doc; dn.text = r.docNo; by.text = r.buyer;
         lines = r.lines..forEach((l) => l.on = l.price > store.threshold);
         final on = lines.where((l) => l.on);
         if (on.isNotEmpty) { n.text = on.first.name; pr.text = on.first.price.toStringAsFixed(2); } else if (r.total != null) { pr.text = r.total!.toStringAsFixed(2); }
-        cat = guessCat('${n.text} ${st.text}'); scanned = true; empty = r.store.isEmpty && r.lines.isEmpty && r.total == null;
+        if (n.text.isEmpty && r.nameGuess.isNotEmpty) n.text = r.nameGuess; raw = r.raw; cat = guessCat('${n.text} ${st.text}'); scanned = true; empty = r.store.isEmpty && r.lines.isEmpty && r.total == null;
       });
     } catch (e) { if (mounted) toast(context, 'Skanowanie nie powiodło się. Uzupełnij dane ręcznie.'); }
     finally { if (mounted) setState(() => busy = false); }
@@ -54,10 +61,13 @@ class _A extends State<AddPage> {
     final img = newPath != null ? File(newPath!) : store.img(photoName);
     return Scaffold(appBar: AppBar(title: Text(widget.edit == null ? 'Nowy dokument zakupu' : 'Edytuj dokument')), body: ListView(padding: const EdgeInsets.all(16), children: [
       FilledButton.icon(onPressed: busy ? null : _scan, icon: busy ? const SizedBox(width: 18, height: 18, child: CircularProgressIndicator(strokeWidth: 2)) : const Icon(Icons.document_scanner), label: Text(busy ? 'Odczytuję…' : (img == null ? 'Skanuj paragon lub fakturę' : 'Skanuj ponownie'))),
+      const SizedBox(height: 8),
+      OutlinedButton.icon(onPressed: busy ? null : () => _scan(gallery: true), icon: const Icon(Icons.photo_library), label: const Text('Wybierz zdjęcie z galerii')),
       if (img != null && img.existsSync()) Padding(padding: const EdgeInsets.only(top: 12), child: ClipRRect(borderRadius: BorderRadius.circular(12), child: Image.file(img, height: 220, width: double.infinity, fit: BoxFit.cover))),
       if (scanned) Card(color: Theme.of(c).colorScheme.primaryContainer, child: Padding(padding: const EdgeInsets.all(12), child: Text(empty
           ? 'Nie udało się odczytać danych. Uzupełnij je ręcznie.'
           : 'Dokument wykadrowano, dane odczytano. Sprawdź je i popraw, jeśli coś się nie zgadza.${lowDate ? ' Data nie została rozpoznana – ustaw ją ręcznie.' : ''}'))),
+      if (raw.isNotEmpty) ExpansionTile(title: const Text('Pokaż odczytany tekst'), children: [SelectableText(raw), TextButton(onPressed: () { Clipboard.setData(ClipboardData(text: raw)); toast(c, 'Skopiowano'); }, child: const Text('Kopiuj tekst'))]),
       if (lines.length > 1) ...[const SizedBox(height: 8), Text('Pozycje z dokumentu (zaznaczone: powyżej ${store.threshold} zł)'), ...List.generate(lines.length, (i) => CheckboxListTile(dense: true, contentPadding: EdgeInsets.zero, value: lines[i].on, title: Text(lines[i].name), secondary: Text('${lines[i].price.toStringAsFixed(2)} zł'),
           onChanged: (v) => setState(() { lines[i].on = v ?? false; final on = lines.where((l) => l.on); if (on.isNotEmpty) { n.text = on.first.name; pr.text = on.first.price.toStringAsFixed(2); } })))],
       const SizedBox(height: 12),
