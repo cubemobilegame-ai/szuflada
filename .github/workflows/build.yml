@@ -16,6 +16,8 @@ jobs:
             if [ -f "$f.dart" ]; then mv "$f.dart" lib/; fi
           done
           if [ -f setup_android.py ]; then mv setup_android.py tool/; fi
+          mkdir -p assets
+          for f in icon icon_fg; do if [ -f "$f.png" ]; then mv "$f.png" assets/; fi; done
           ls -R lib tool
       - uses: actions/setup-java@v4
         with: { distribution: temurin, java-version: '17' }
@@ -65,6 +67,8 @@ jobs:
                   open(g, 'w').write(t)
           PY
       - run: flutter pub get
+      - name: Ikona aplikacji
+        run: dart run flutter_launcher_icons
       - run: flutter build apk --release
       - run: flutter build appbundle --release
       - name: Opublikuj plik APK w zakladce Releases
