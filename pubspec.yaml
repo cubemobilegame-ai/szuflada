@@ -24,5 +24,13 @@ dependencies:
   printing: ^5.13.2
 dev_dependencies:
   flutter_test: {sdk: flutter}
+  flutter_launcher_icons: ^0.14.3
 flutter:
   uses-material-design: true
+
+flutter_launcher_icons:
+  android: true
+  ios: false
+  image_path: "assets/icon.png"
+  adaptive_icon_background: "#1A73E8"
+  adaptive_icon_foreground: "assets/icon_fg.png"

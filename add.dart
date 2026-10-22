@@ -56,34 +56,50 @@ class _A extends State<AddPage> {
 
   InputDecoration _d(String l, {bool low = false}) => InputDecoration(labelText: l, filled: low, fillColor: low ? Colors.amber.withOpacity(.2) : null);
 
+  Widget _sec(BuildContext c, String s) => Padding(padding: const EdgeInsets.only(top: 22, bottom: 10), child: Text(s, style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700, letterSpacing: .4, color: Theme.of(c).colorScheme.primary)));
+  Widget _gap() => const SizedBox(height: 12);
+
   @override
   Widget build(BuildContext c) {
+    final cs = Theme.of(c).colorScheme;
     final img = newPath != null ? File(newPath!) : store.img(photoName);
-    return Scaffold(appBar: AppBar(title: Text(widget.edit == null ? 'Nowy dokument zakupu' : 'Edytuj dokument')), body: ListView(padding: const EdgeInsets.all(16), children: [
-      FilledButton.icon(onPressed: busy ? null : _scan, icon: busy ? const SizedBox(width: 18, height: 18, child: CircularProgressIndicator(strokeWidth: 2)) : const Icon(Icons.document_scanner), label: Text(busy ? 'Odczytuję…' : (img == null ? 'Skanuj paragon lub fakturę' : 'Skanuj ponownie'))),
-      const SizedBox(height: 8),
-      OutlinedButton.icon(onPressed: busy ? null : () => _scan(gallery: true), icon: const Icon(Icons.photo_library), label: const Text('Wybierz zdjęcie z galerii')),
-      if (img != null && img.existsSync()) Padding(padding: const EdgeInsets.only(top: 12), child: ClipRRect(borderRadius: BorderRadius.circular(12), child: Image.file(img, height: 220, width: double.infinity, fit: BoxFit.cover))),
-      if (scanned) Card(color: Theme.of(c).colorScheme.primaryContainer, child: Padding(padding: const EdgeInsets.all(12), child: Text(empty
-          ? 'Nie udało się odczytać danych. Uzupełnij je ręcznie.'
-          : 'Dokument wykadrowano, dane odczytano. Sprawdź je i popraw, jeśli coś się nie zgadza.${lowDate ? ' Data nie została rozpoznana – ustaw ją ręcznie.' : ''}'))),
-      if (raw.isNotEmpty) ExpansionTile(title: const Text('Pokaż odczytany tekst'), children: [SelectableText(raw), TextButton(onPressed: () { Clipboard.setData(ClipboardData(text: raw)); toast(c, 'Skopiowano'); }, child: const Text('Kopiuj tekst'))]),
-      if (lines.length > 1) ...[const SizedBox(height: 8), Text('Pozycje z dokumentu (zaznaczone: powyżej ${store.threshold} zł)'), ...List.generate(lines.length, (i) => CheckboxListTile(dense: true, contentPadding: EdgeInsets.zero, value: lines[i].on, title: Text(lines[i].name), secondary: Text('${lines[i].price.toStringAsFixed(2)} zł'),
-          onChanged: (v) => setState(() { lines[i].on = v ?? false; final on = lines.where((l) => l.on); if (on.isNotEmpty) { n.text = on.first.name; pr.text = on.first.price.toStringAsFixed(2); } })))],
-      const SizedBox(height: 12),
-      DropdownButtonFormField<String>(value: doc, decoration: _d('Rodzaj dokumentu'), items: const ['Paragon', 'Faktura imienna'].map((e) => DropdownMenuItem(value: e, child: Text(e))).toList(), onChanged: (v) => setState(() => doc = v!)),
-      const SizedBox(height: 12), TextField(controller: n, decoration: _d('Nazwa produktu', low: scanned && n.text.isEmpty)),
-      const SizedBox(height: 12), TextField(controller: st, decoration: _d('Sklep')),
-      const SizedBox(height: 12), TextField(controller: pr, keyboardType: const TextInputType.numberWithOptions(decimal: true), decoration: _d('Cena brutto (zł)')),
-      const SizedBox(height: 12), InkWell(onTap: () async { final d = await showDatePicker(context: c, initialDate: date, firstDate: DateTime(2000), lastDate: DateTime.now().add(const Duration(days: 1))); if (d != null) setState(() { date = d; lowDate = false; }); },
-        child: InputDecorator(decoration: _d('Data zakupu', low: lowDate), child: Text(fmtD.format(date)))),
-      const SizedBox(height: 12), DropdownButtonFormField<String>(value: cat, decoration: _d('Kategoria'), items: icons.keys.map((e) => DropdownMenuItem(value: e, child: Text('${icons[e]} $e'))).toList(), onChanged: (v) => setState(() => cat = v!)),
-      const SizedBox(height: 12), TextField(controller: mo, keyboardType: TextInputType.number, decoration: _d('Gwarancja (miesiące)')),
-      SwitchListTile(contentPadding: EdgeInsets.zero, title: const Text('Zakup przez internet (przypomnę o 14 dniach na zwrot)'), value: online, onChanged: (v) => setState(() => online = v)),
-      TextField(controller: dn, decoration: _d('Numer dokumentu')), const SizedBox(height: 12),
-      TextField(controller: by, decoration: _d('Nabywca (faktura imienna)')), const SizedBox(height: 12),
+    return Scaffold(appBar: AppBar(title: Text(widget.edit == null ? 'Nowy dokument' : 'Edytuj dokument')), body: ListView(padding: const EdgeInsets.fromLTRB(16, 4, 16, 28), children: [
+      Card(child: Padding(padding: const EdgeInsets.all(16), child: Column(children: [
+        Icon(Icons.document_scanner_outlined, size: 34, color: cs.primary), const SizedBox(height: 6),
+        const Text('Zeskanuj paragon lub fakturę', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
+        Text('Dane uzupełnimy automatycznie, Ty tylko sprawdzasz.', textAlign: TextAlign.center, style: TextStyle(fontSize: 13, color: cs.onSurfaceVariant)),
+        const SizedBox(height: 14),
+        Row(children: [
+          Expanded(child: FilledButton.icon(onPressed: busy ? null : _scan, icon: busy ? const SizedBox(width: 16, height: 16, child: CircularProgressIndicator(strokeWidth: 2)) : const Icon(Icons.photo_camera_outlined, size: 20), label: Text(busy ? 'Odczyt…' : 'Skanuj'))),
+          const SizedBox(width: 10),
+          Expanded(child: OutlinedButton.icon(onPressed: busy ? null : () => _scan(gallery: true), icon: const Icon(Icons.photo_library_outlined, size: 20), label: const Text('Z galerii'))),
+        ]),
+      ]))),
+      if (img != null && img.existsSync()) Padding(padding: const EdgeInsets.only(top: 6), child: ClipRRect(borderRadius: BorderRadius.circular(12), child: Image.file(img, height: 200, width: double.infinity, fit: BoxFit.cover))),
+      if (scanned) Container(margin: const EdgeInsets.only(top: 10), padding: const EdgeInsets.all(12), decoration: BoxDecoration(borderRadius: BorderRadius.circular(12), border: Border.all(color: cs.primary), color: cs.primaryContainer.withOpacity(.4)),
+        child: Text(empty ? 'Nie udało się odczytać danych. Uzupełnij je ręcznie.' : 'Dane odczytano ze zdjęcia. Sprawdź je i popraw, jeśli coś się nie zgadza.${lowDate ? ' Data nie została rozpoznana – ustaw ją ręcznie.' : ''}', style: const TextStyle(fontSize: 13.5))),
+      if (raw.isNotEmpty) Theme(data: Theme.of(c).copyWith(dividerColor: Colors.transparent), child: ExpansionTile(tilePadding: EdgeInsets.zero, title: Text('Pokaż odczytany tekst', style: TextStyle(fontSize: 13, color: cs.onSurfaceVariant)), children: [SelectableText(raw, style: const TextStyle(fontSize: 12)), TextButton(onPressed: () { Clipboard.setData(ClipboardData(text: raw)); toast(c, 'Skopiowano'); }, child: const Text('Kopiuj tekst'))])),
+      if (lines.length > 1) ...[
+        _sec(c, 'POZYCJE Z DOKUMENTU (ZAZNACZONE: POWYŻEJ ${store.threshold} ZŁ)'),
+        Card(child: Column(children: List.generate(lines.length, (i) => CheckboxListTile(dense: true, controlAffinity: ListTileControlAffinity.leading, value: lines[i].on, title: Text(lines[i].name, maxLines: 2, overflow: TextOverflow.ellipsis), secondary: Text('${lines[i].price.toStringAsFixed(2)} zł', style: const TextStyle(fontWeight: FontWeight.w500)),
+          onChanged: (v) => setState(() { lines[i].on = v ?? false; final on = lines.where((l) => l.on); if (on.isNotEmpty) { n.text = on.first.name; pr.text = on.first.price.toStringAsFixed(2); } }))))),
+      ],
+      _sec(c, 'PRODUKT'),
+      TextField(controller: n, decoration: _d('Nazwa produktu', low: scanned && n.text.isEmpty)), _gap(),
+      TextField(controller: st, decoration: _d('Sklep')), _gap(),
+      TextField(controller: pr, keyboardType: const TextInputType.numberWithOptions(decimal: true), decoration: _d('Cena brutto (zł)')), _gap(),
+      DropdownButtonFormField<String>(value: cat, decoration: _d('Kategoria'), items: icons.keys.map((e) => DropdownMenuItem(value: e, child: Text('${icons[e]} $e'))).toList(), onChanged: (v) => setState(() => cat = v!)),
+      _sec(c, 'ZAKUP I GWARANCJA'),
+      InkWell(borderRadius: BorderRadius.circular(12), onTap: () async { final d = await showDatePicker(context: c, initialDate: date, firstDate: DateTime(2000), lastDate: DateTime.now().add(const Duration(days: 1))); if (d != null) setState(() { date = d; lowDate = false; }); },
+        child: InputDecorator(decoration: _d('Data zakupu', low: lowDate).copyWith(suffixIcon: const Icon(Icons.calendar_today_outlined, size: 20)), child: Text(fmtD.format(date)))), _gap(),
+      TextField(controller: mo, keyboardType: TextInputType.number, decoration: _d('Gwarancja (miesiące)')),
+      SwitchListTile(contentPadding: EdgeInsets.zero, title: const Text('Zakup przez internet', style: TextStyle(fontSize: 15)), subtitle: const Text('Przypomnę o 14 dniach na zwrot'), value: online, onChanged: (v) => setState(() => online = v)),
+      _sec(c, 'DOKUMENT'),
+      DropdownButtonFormField<String>(value: doc, decoration: _d('Rodzaj dokumentu'), items: const ['Paragon', 'Faktura imienna'].map((e) => DropdownMenuItem(value: e, child: Text(e))).toList(), onChanged: (v) => setState(() => doc = v!)), _gap(),
+      TextField(controller: dn, decoration: _d('Numer dokumentu')),
+      if (doc == 'Faktura imienna') ...[_gap(), TextField(controller: by, decoration: _d('Nabywca'))], _gap(),
       TextField(controller: nt, decoration: _d('Notatka (numer seryjny, nr zamówienia…)')),
-      const SizedBox(height: 16), FilledButton(onPressed: _save, child: Text(widget.edit == null ? 'Zapisz w szufladzie' : 'Zapisz zmiany')),
+      const SizedBox(height: 24), FilledButton(onPressed: _save, child: Text(widget.edit == null ? 'Zapisz w szufladzie' : 'Zapisz zmiany')),
     ]));
   }
 }

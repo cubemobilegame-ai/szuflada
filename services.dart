@@ -155,10 +155,22 @@ class Scanner {
   }
 
   static final _pr = RegExp(r'(\d{1,6})\s?[.,]\s?(\d{2})(?!\d)');
-  static final _skip = RegExp(r'SUMA|RAZEM|PTU|SPRZED|GOT[ÓO]WK|KARTA|RESZTA|ZAP[ŁL]AT|NIP|RABAT|PODATEK|VAT|PARAGON|FISKAL|KASJER|WYDRUK|NR SYS|GODZ', caseSensitive: false);
+  static final _skip = RegExp(r'SUMA|RAZEM|PTU|SPRZED|GOT[ÓO]WK|KARTA|RESZTA|ZAP[ŁL]AT|NIP|RABAT|PODATEK|VAT|PARAGON|FISKAL|KASJER|WYDRUK|NR SYS|GODZ|OPODATK', caseSensitive: false);
   static final _letters = RegExp(r'[A-Za-zĄąĆćĘęŁłŃńÓóŚśŹźŻż]{3,}');
   static double _val(RegExpMatch m) => double.parse('${m[1]}.${m[2]}');
   static String _fix(String s) => s.replaceAllMapped(RegExp(r'(?<=\d)[Oo](?=\d)'), (_) => '0').replaceAllMapped(RegExp(r'(?<=\d)[lI](?=\d)'), (_) => '1');
+  // usuwa numery artykułów i słowo „Opis”
+  static String _clean(String s) => s.replaceAll(RegExp(r'^\s*\d[\d./\- ]*\s+'), '').replaceAll(RegExp(r'^Opis:?\s*', caseSensitive: false), '').trim();
+  // WIELKIE LITERY -> Wielkie Litery
+  static String _nice(String s) {
+    final l = s.replaceAll(RegExp(r'[^A-Za-zĄąĆćĘęŁłŃńÓóŚśŹźŻż]'), '');
+    if (l.isEmpty) return s;
+    final low = l.replaceAll(RegExp(r'[^a-ząćęłńóśźż]'), '').length;
+    if (low / l.length > .3) return s;
+    return s.toLowerCase().split(' ').map((w) => w.isEmpty ? w : w[0].toUpperCase() + w.substring(1)).join(' ');
+  }
+  // znane sklepy rozpoznawane także przy błędach odczytu (np. NEDIA MARKT)
+  static const _stores = {'MARKT': 'Media Markt', 'MEDIA EXPERT': 'Media Expert', 'RTV EURO': 'RTV Euro AGD', 'X-KOM': 'x-kom', 'LEROY': 'Leroy Merlin', 'CASTORAMA': 'Castorama', 'BIEDRONKA': 'Biedronka', 'LIDL': 'Lidl', 'IKEA': 'Ikea', 'DECATHLON': 'Decathlon', 'ALLEGRO': 'Allegro', 'NEONET': 'Neonet', 'KAUFLAND': 'Kaufland', 'OBI': 'OBI', 'EMPIK': 'Empik'};
 
   static Parsed parse(String text, String path) {
     final p = Parsed(path)..raw = text;
@@ -166,10 +178,8 @@ class Scanner {
     final up = text.toUpperCase();
     final bad = RegExp(r'^(NIP|PARAGON|FAKTURA|UL\.|\d)', caseSensitive: false);
     var storeIdx = -1;
-    for (var i = 0; i < rows.length && i < 6; i++) { if (_letters.hasMatch(rows[i]) && !bad.hasMatch(rows[i])) { p.store = rows[i]; storeIdx = i; break; } }
-    for (final s in ['Media Expert', 'RTV Euro AGD', 'x-kom', 'Leroy Merlin', 'Castorama', 'Biedronka', 'Lidl', 'Media Markt', 'Ikea', 'Decathlon', 'Allegro']) {
-      if (up.contains(s.toUpperCase())) { p.store = s; break; }
-    }
+    for (var i = 0; i < rows.length && i < 6; i++) { if (_letters.hasMatch(rows[i]) && !bad.hasMatch(rows[i])) { p.store = _nice(rows[i]); storeIdx = i; break; } }
+    for (final e in _stores.entries) { if (up.contains(e.key)) { p.store = e.value; break; } }
     final d1 = RegExp(r'(\d{2})\s?[.\-/]\s?(\d{2})\s?[.\-/]\s?(\d{4})').firstMatch(text);
     final d2 = RegExp(r'(\d{4})\s?[.\-/]\s?(\d{2})\s?[.\-/]\s?(\d{2})').firstMatch(text);
     try {
@@ -178,17 +188,24 @@ class Scanner {
       if (p.date != null && (p.date!.year < 2000 || p.date!.isAfter(DateTime.now().add(const Duration(days: 2))))) p.date = null;
     } catch (_) { p.date = null; }
 
-    String? pending;
+    String? p1, p2; // dwa ostatnie wiersze tekstu bez ceny (nazwa bywa rozbita na 2 linie)
     for (var i = 0; i < rows.length; i++) {
       final r = rows[i]; final prices = _pr.allMatches(r).toList();
-      if (RegExp(r'SUMA|RAZEM|DO ZAP', caseSensitive: false).hasMatch(r)) { if (prices.isNotEmpty) p.total = _val(prices.last); pending = null; continue; }
-      if (_skip.hasMatch(r)) { pending = null; continue; }
-      if (prices.isEmpty) { pending = (_letters.hasMatch(r) && r.length >= 4) ? r : null; if (pending != null && p.nameGuess.isEmpty && i != storeIdx && !r.toLowerCase().contains('ul.')) p.nameGuess = r; continue; }
+      if (RegExp(r'SUMA|RAZEM|DO ZAP', caseSensitive: false).hasMatch(r)) { if (prices.isNotEmpty) p.total = _val(prices.last); p1 = p2 = null; continue; }
+      if (_skip.hasMatch(r)) { p1 = p2 = null; continue; }
+      if (prices.isEmpty) {
+        if (_letters.hasMatch(r) && r.length >= 4) { p2 = p1; p1 = r; if (p.nameGuess.isEmpty && i != storeIdx && !r.toLowerCase().contains('ul.')) p.nameGuess = _nice(_clean(r)); } else { p1 = p2 = null; }
+        continue;
+      }
       var name = r.substring(0, prices.first.start).replaceAll(RegExp(r'(?:\s+\d+(?:[.,]\d+)?\s*[xX*])?[\s=]*$'), '').replaceAll(RegExp(r'^\d+[.)]?\s+'), '').trim();
-      if (!_letters.hasMatch(name)) name = pending ?? '';
-      pending = null;
+      if (!_letters.hasMatch(name)) {
+        if (p1 != null && p1.toLowerCase().startsWith('opis') && p2 != null) { name = '${_clean(p2)} – ${_clean(p1)}'; }
+        else if (p1 != null) { name = _clean(p1); }
+        else { name = ''; }
+      }
+      p1 = p2 = null;
       final price = _val(prices.last);
-      if (_letters.hasMatch(name) && price > 0) p.lines.add(Line(name, price));
+      if (_letters.hasMatch(name) && price > 0) p.lines.add(Line(_nice(name), price));
     }
     p.total ??= p.lines.isEmpty ? null : p.lines.map((e) => e.price).reduce((a, b) => a > b ? a : b);
     if (up.contains('FAKTURA')) {
