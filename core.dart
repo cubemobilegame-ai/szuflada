@@ -22,6 +22,19 @@ String guessCat(String t) {
   return 'Inne';
 }
 
+const catIcons = <String, IconData>{'Elektronika': Icons.devices_other, 'AGD': Icons.local_laundry_service, 'Dom i ogród': Icons.chair, 'Auto': Icons.directions_car, 'Odzież i buty': Icons.checkroom, 'Zdrowie': Icons.health_and_safety, 'Sport': Icons.pedal_bike, 'Inne': Icons.inventory_2};
+const catColors = <String, Color>{'Elektronika': Color(0xFF1A73E8), 'AGD': Color(0xFF00897B), 'Dom i ogród': Color(0xFF7E57C2), 'Auto': Color(0xFF5F6368), 'Odzież i buty': Color(0xFFE91E63), 'Zdrowie': Color(0xFF1E8E3E), 'Sport': Color(0xFFEF6C00), 'Inne': Color(0xFF5F6368)};
+
+class CatIcon extends StatelessWidget {
+  final String cat; final double size;
+  const CatIcon(this.cat, {super.key, this.size = 36});
+  @override
+  Widget build(BuildContext c) {
+    final col = catColors[cat] ?? Colors.grey;
+    return Container(width: size, height: size, decoration: BoxDecoration(color: col.withOpacity(.14), borderRadius: BorderRadius.circular(size * .3)), child: Icon(catIcons[cat] ?? Icons.inventory_2, size: size * .58, color: col));
+  }
+}
+
 final fmtD = DateFormat('d MMM y', 'pl_PL');
 DateTime today() { final n = DateTime.now(); return DateTime(n.year, n.month, n.day); }
 DateTime addMonths(DateTime d, int m) {

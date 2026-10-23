@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:archive/archive.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:google_mlkit_document_scanner/google_mlkit_document_scanner.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
@@ -65,8 +66,12 @@ class Billing {
 class Auth {
   static final _a = LocalAuthentication();
   static Future<bool> supported() async { try { return await _a.isDeviceSupported(); } catch (_) { return false; } }
-  static Future<bool> unlock() async {
-    try { return await _a.authenticate(localizedReason: 'Odblokuj Szufladę', options: const AuthenticationOptions(biometricOnly: false, stickyAuth: true)); } catch (_) { return false; }
+  // null = sukces, w przeciwnym razie kod: 'cancel' lub kod błędu systemu
+  static Future<String?> unlock() async {
+    try {
+      final ok = await _a.authenticate(localizedReason: 'Odblokuj Szufladę', options: const AuthenticationOptions(biometricOnly: false, stickyAuth: true));
+      return ok ? null : 'cancel';
+    } on PlatformException catch (e) { return e.code; } catch (e) { return 'error: $e'; }
   }
 }
 

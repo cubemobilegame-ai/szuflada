@@ -26,7 +26,14 @@ for g in ['android/app/build.gradle.kts', 'android/app/build.gradle']:
     kts = g.endswith('.kts')
     t = re.sub(r'minSdk(Version)?\s*=?\s*flutter\.minSdkVersion', 'minSdk = 23' if kts else 'minSdkVersion 23', t)
     t = t.replace('compileOptions {', 'compileOptions {\n        ' + ('isCoreLibraryDesugaringEnabled = true' if kts else 'coreLibraryDesugaringEnabled true'), 1)
-    t += '\ndependencies {\n    coreLibraryDesugaring' + ('("com.android.tools:desugar_jdk_libs:2.1.4")' if kts else " 'com.android.tools:desugar_jdk_libs:2.1.4'") + '\n}\n'
+    t += '\ndependencies {\n    coreLibraryDesugaring' + ('("com.android.tools:desugar_jdk_libs:2.1.4")\n    implementation("androidx.appcompat:appcompat:1.7.0")' if kts else " 'com.android.tools:desugar_jdk_libs:2.1.4'\n    implementation 'androidx.appcompat:appcompat:1.7.0'") + '\n}\n'
     open(g, 'w', encoding='utf-8').write(t)
     break
+# local_auth wymaga motywu AppCompat dla okna odcisku palca / PIN-u
+for f in glob.glob('android/app/src/main/res/values*/styles.xml'):
+    t = open(f, encoding='utf-8').read()
+    night = 'night' in f
+    n = re.sub(r'parent="@android:style/Theme\.[A-Za-z.]*(NoTitleBar|NoActionBar)"', 'parent="Theme.AppCompat.NoActionBar"' if night else 'parent="Theme.AppCompat.Light.NoActionBar"', t)
+    if n != t:
+        open(f, 'w', encoding='utf-8').write(n)
 print('Android skonfigurowany')

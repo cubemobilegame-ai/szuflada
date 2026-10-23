@@ -13,7 +13,7 @@ Color statusColor(int n) => n < 0 ? Colors.grey : n < 14 ? const Color(0xFFD9302
 // ---- Ekran startowy z ładowaniem i blokadą ----
 class Gate extends StatefulWidget { const Gate({super.key}); @override State<Gate> createState() => _G(); }
 class _G extends State<Gate> {
-  int ph = 0;
+  int ph = 0; String? err;
   @override
   void initState() {
     super.initState();
@@ -24,7 +24,10 @@ class _G extends State<Gate> {
   }
   Future<void> _unlock() async {
     if (!await Auth.supported()) { if (mounted) setState(() => ph = 2); return; }
-    if (await Auth.unlock() && mounted) setState(() => ph = 2);
+    final e = await Auth.unlock();
+    if (!mounted) return;
+    if (e == null || e == 'NotAvailable' || e == 'NotEnrolled' || e == 'PasscodeNotSet') { setState(() => ph = 2); return; }
+    setState(() => err = e == 'cancel' ? 'Odblokowanie anulowane' : 'Nie udało się odblokować ($e)');
   }
   @override
   Widget build(BuildContext c) {
@@ -34,7 +37,7 @@ class _G extends State<Gate> {
       Container(width: 84, height: 84, decoration: BoxDecoration(color: cs.primaryContainer, borderRadius: BorderRadius.circular(24)), child: const Center(child: Text('🧾', style: TextStyle(fontSize: 44)))),
       const SizedBox(height: 16), Text('Szuflada', style: Theme.of(c).textTheme.headlineMedium), const SizedBox(height: 4),
       const Text('Paragony i gwarancje w jednym miejscu'), const SizedBox(height: 24),
-      ph == 0 ? const SizedBox(width: 140, child: LinearProgressIndicator()) : FilledButton.icon(onPressed: _unlock, icon: const Icon(Icons.lock_open), label: const Text('Odblokuj')),
+      if (ph == 0) const SizedBox(width: 140, child: LinearProgressIndicator()) else ...[if (err != null) Padding(padding: const EdgeInsets.only(bottom: 10), child: Text(err!, textAlign: TextAlign.center)), FilledButton.icon(onPressed: _unlock, icon: const Icon(Icons.lock_open), label: const Text('Odblokuj'))],
     ])));
   }
 }
@@ -75,7 +78,9 @@ class Tile extends StatelessWidget {
   @override
   Widget build(BuildContext c) => Card(child: ListTile(
         leading: Ring(it), title: Text(it.name, maxLines: 1, overflow: TextOverflow.ellipsis),
-        subtitle: Text('${icons[it.cat]} ${it.cat}${it.store.isNotEmpty ? ' · ${it.store}' : ''}\n${it.left < 0 ? 'Gwarancja zakończona' : 'Gwarancja do'} ${fmtD.format(it.end)}'),
+        subtitle: Padding(padding: const EdgeInsets.only(top: 4), child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Row(children: [CatIcon(it.cat, size: 20), const SizedBox(width: 6), Expanded(child: Text('${it.cat}${it.store.isNotEmpty ? ' · ${it.store}' : ''}', maxLines: 1, overflow: TextOverflow.ellipsis))]),
+          const SizedBox(height: 2), Text('${it.left < 0 ? 'Gwarancja zakończona' : 'Gwarancja do'} ${fmtD.format(it.end)}')])),
         isThreeLine: true, onTap: () => Navigator.push(c, MaterialPageRoute(builder: (_) => DetailPage(it.id))),
       ));
 }
@@ -154,7 +159,7 @@ class _L extends State<ListPage> {
     return ListView(padding: const EdgeInsets.all(16), children: [
       Text('Paragony', style: Theme.of(c).textTheme.headlineMedium), const SizedBox(height: 12),
       TextField(decoration: const InputDecoration(hintText: 'Szukaj po nazwie, sklepie, notatce…', prefixIcon: Icon(Icons.search)), onChanged: (v) => setState(() => q = v)),
-      SingleChildScrollView(scrollDirection: Axis.horizontal, child: Row(children: ['Wszystkie', ...icons.keys].map((k) => Padding(padding: const EdgeInsets.only(right: 8, top: 8, bottom: 8), child: ChoiceChip(label: Text('${icons[k] ?? ''} $k'.trim()), selected: cat == k, onSelected: (_) => setState(() => cat = k)))).toList())),
+      SingleChildScrollView(scrollDirection: Axis.horizontal, child: Row(children: ['Wszystkie', ...icons.keys].map((k) => Padding(padding: const EdgeInsets.only(right: 8, top: 8, bottom: 8), child: ChoiceChip(avatar: k == 'Wszystkie' ? null : Icon(catIcons[k], size: 18, color: catColors[k]), label: Text(k), selected: cat == k, onSelected: (_) => setState(() => cat = k)))).toList())),
       if (L.isEmpty) const Padding(padding: EdgeInsets.all(16), child: Text('Brak wyników.')) else ...L.map(Tile.new),
     ]);
   }
@@ -200,7 +205,7 @@ class PlanPage extends StatelessWidget {
       _sec(c, 'Wygląd', [SegmentedButton<ThemeMode>(segments: const [ButtonSegment(value: ThemeMode.system, label: Text('Auto')), ButtonSegment(value: ThemeMode.light, label: Text('Jasny')), ButtonSegment(value: ThemeMode.dark, label: Text('Ciemny'))], selected: {store.theme}, onSelectionChanged: (s) => store.setTheme(s.first))]),
       _sec(c, 'Blokada', [SwitchListTile(contentPadding: EdgeInsets.zero, title: const Text('Odcisk palca, twarz lub PIN telefonu'), value: store.lockOn, onChanged: (v) async {
         if (v && !await Auth.supported()) { if (c.mounted) toast(c, 'Ustaw blokadę ekranu w telefonie'); return; }
-        if (v && !await Auth.unlock()) return;
+        if (v) { final e = await Auth.unlock(); if (e != null) { if (c.mounted) toast(c, e == 'cancel' ? 'Odblokowanie anulowane' : 'Błąd blokady: $e'); return; } }
         await store.setLock(v);
       })]),
       _sec(c, 'Kopia zapasowa', [
@@ -225,7 +230,7 @@ class DetailPage extends StatelessWidget {
         if (i < 0) return const Scaffold();
         final it = store.items[i]; final img = store.img(it.photo); final cl = it.claim;
         return Scaffold(appBar: AppBar(title: Text(it.name)), body: ListView(padding: const EdgeInsets.all(16), children: [
-          Row(children: [Expanded(child: Text('${icons[it.cat]} ${it.cat}${it.store.isNotEmpty ? ' · ${it.store}' : ''}')), Ring(it)]),
+          Row(children: [CatIcon(it.cat, size: 40), const SizedBox(width: 12), Expanded(child: Text('${it.cat}${it.store.isNotEmpty ? ' · ${it.store}' : ''}', style: const TextStyle(fontSize: 15))), Ring(it)]),
           if (img != null && img.existsSync()) Padding(padding: const EdgeInsets.only(top: 12), child: GestureDetector(
             onTap: () => showDialog(context: c, builder: (_) => Dialog(child: InteractiveViewer(child: Image.file(img)))),
             child: ClipRRect(borderRadius: BorderRadius.circular(12), child: Image.file(img, height: 240, width: double.infinity, fit: BoxFit.cover)))),
