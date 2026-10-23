@@ -13,6 +13,8 @@ if 'POST_NOTIFICATIONS' not in s:
            '            </intent-filter>\n        </receiver>\n    ')
     s = s.replace('<application', perms + '<application', 1).replace('</application>', rec + '</application>', 1)
     s = re.sub(r'android:label="[^"]*"', 'android:label="Szuflada"', s, 1)
+    # tylko uklad pionowy
+    s = s.replace('<activity', '<activity android:screenOrientation="portrait"', 1)
     open(mf, 'w', encoding='utf-8').write(s)
 for f in glob.glob('android/app/src/main/kotlin/**/MainActivity.kt', recursive=True):
     t = open(f, encoding='utf-8').read()

@@ -187,8 +187,12 @@ class _AddState extends State<AddForm> {
           child: Container(padding: const EdgeInsets.symmetric(horizontal: 14), alignment: Alignment.center, decoration: BoxDecoration(color: t.card, borderRadius: BorderRadius.circular(14), boxShadow: t.softShadow),
             child: Row(mainAxisSize: MainAxisSize.min, children: [Ic('store', size: 15, color: t.accent, width: 2.1), const SizedBox(width: 6), Text(s, style: ts(14, w: w6, c: t.text))])))),
       ])), by: 18, height: 36)),
-      Field('Cena (zł)', pr, hint: 'np. 2299,00', kb: const TextInputType.numberWithOptions(decimal: true), fmt: [FilteringTextInputFormatter.allow(RegExp(r'[0-9.,\s]'))]),
-      FieldBtn('Data zakupu', fmtD.format(date), _date, warn: lowDate),
+      LayoutBuilder(builder: (_, cons) {
+        final price = Field('Cena (zł)', pr, hint: '2299,00', kb: const TextInputType.numberWithOptions(decimal: true), fmt: [FilteringTextInputFormatter.allow(RegExp(r'[0-9.,\s]'))]);
+        final day = FieldBtn('Data zakupu', fmtD.format(date), _date, warn: lowDate);
+        if (cons.maxWidth < 330) return Column(children: [price, day]);
+        return Row(crossAxisAlignment: CrossAxisAlignment.start, children: [Expanded(child: price), const SizedBox(width: 10), Expanded(child: day)]);
+      }),
       Padding(padding: const EdgeInsets.only(bottom: 6, left: 2), child: Text('Gwarancja', style: ts(13, c: t.sub))),
       Wrap(spacing: 8, runSpacing: 8, children: [
         for (final m in [12, 24, 36, 60]) _choice(c, m % 12 == 0 ? '${m ~/ 12} ${pl(m ~/ 12, 'rok', 'lata', 'lat')}' : '$m mies.', !customMonths && months == m, () => setState(() { months = m; customMonths = false; })),
@@ -198,7 +202,7 @@ class _AddState extends State<AddForm> {
       if (customMonths) Field('Gwarancja w miesiącach', mo, hint: 'np. 30', kb: TextInputType.number, fmt: [FilteringTextInputFormatter.digitsOnly]),
       Padding(padding: const EdgeInsets.only(bottom: 12, left: 2), child: Text('Koniec gwarancji: ${fmtD.format(addMonths(date, customMonths ? (int.tryParse(mo.text) ?? months) : months))}', style: ts(13, w: w6, c: t.accent))),
       Padding(padding: const EdgeInsets.only(bottom: 6, left: 2), child: Row(children: [Text('Kategoria', style: ts(13, c: t.sub)), if (!catTouched && cat != 'Inne') Text(' · wykryta automatycznie', style: ts(13, c: t.accent))])),
-      Padding(padding: const EdgeInsets.only(bottom: 14), child: Bleed(Chips(items: [for (final k in cats) k.name], value: cat, icons: {for (final k in cats) k.name: k.icon}, onPick: (v) => setState(() { cat = v; catTouched = true; }), pad: const EdgeInsets.symmetric(horizontal: 18)), by: 18)),
+      Padding(padding: const EdgeInsets.only(bottom: 14), child: Bleed(Chips(items: [for (final k in cats) k.name], value: cat, icons: {for (final k in cats) k.name: k.icon}, iconColors: {for (final k in cats) k.name: k.color}, onPick: (v) => setState(() { cat = v; catTouched = true; }), pad: const EdgeInsets.symmetric(horizontal: 18)), by: 18)),
       Seg<String>(values: const ['Paragon', 'Faktura imienna'], labels: const ['Paragon', 'Faktura imienna'], value: doc, onChanged: (v) => setState(() => doc = v)),
       const SizedBox(height: 12),
       Field(doc == 'Paragon' ? 'Numer paragonu (opcjonalnie)' : 'Numer faktury', dn, hint: doc == 'Paragon' ? 'np. 1234/56' : 'np. FV/10/2026/0412', caps: TextCapitalization.characters),

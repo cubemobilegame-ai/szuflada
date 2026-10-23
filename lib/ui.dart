@@ -6,15 +6,18 @@ import 'art.dart';
 import 'core.dart';
 
 // ---------- kolory (te same co w TapPass) ----------
+// kolory zatwierdzone w podglądzie: kobaltowy akcent, spokojne neutralne tła
 class T {
-  final bool dark; final Color bg, card, panel, text, sub, line, accent, on;
-  const T(this.dark, this.bg, this.card, this.panel, this.text, this.sub, this.line, this.accent, this.on);
-  static const light = T(false, Color(0xFFF4F5FB), Color(0xFFFFFFFF), Color(0xFFE7EAFB), Color(0xFF14141A), Color(0xFF6F7285), Color(0xFFE8E9F1), Color(0xFF5A3DF0), Color(0xFFFFFFFF));
-  static const night = T(true, Color(0xFF121214), Color(0xFF1C1C20), Color(0xFF222238), Color(0xFFF4F4F7), Color(0xFF9B9CAD), Color(0xFF2B2B33), Color(0xFFA99BFF), Color(0xFF14141A));
-  List<BoxShadow> get shadow => [BoxShadow(color: dark ? const Color(0x73000000) : const Color(0x1F28285A), blurRadius: 30, offset: const Offset(0, 10))];
-  List<BoxShadow> get softShadow => [BoxShadow(color: dark ? const Color(0x59000000) : const Color(0x1428285A), blurRadius: 16, offset: const Offset(0, 4))];
+  final bool dark; final Color bg, card, panel, text, sub, line, accent, on, accSoft, accInk, hd1, hd2;
+  const T(this.dark, this.bg, this.card, this.panel, this.text, this.sub, this.line, this.accent, this.on, this.accSoft, this.accInk, this.hd1, this.hd2);
+  static const light = T(false, Color(0xFFF4F5F8), Color(0xFFFFFFFF), Color(0xFFEEF1F8), Color(0xFF13161D), Color(0xFF697184), Color(0xFFE7E9EF), Color(0xFF2F54EB), Color(0xFFFFFFFF), Color(0xFFE8EDFF), Color(0xFF1D3BB8), Color(0xFF3A5CFF), Color(0xFF1A2C8C));
+  static const night = T(true, Color(0xFF0F1115), Color(0xFF191C22), Color(0xFF1E232D), Color(0xFFEEF0F4), Color(0xFF8E95A5), Color(0xFF272B34), Color(0xFF7F97FF), Color(0xFF0F1115), Color(0xFF202A46), Color(0xFFB5C3FF), Color(0xFF2B45C4), Color(0xFF101853));
+  List<BoxShadow> get shadow => dark
+      ? const [BoxShadow(color: Color(0x4D000000), blurRadius: 2, offset: Offset(0, 1)), BoxShadow(color: Color(0x40000000), blurRadius: 20, offset: Offset(0, 6))]
+      : const [BoxShadow(color: Color(0x0D141E3C), blurRadius: 2, offset: Offset(0, 1)), BoxShadow(color: Color(0x0F141E3C), blurRadius: 20, offset: Offset(0, 6))];
+  List<BoxShadow> get softShadow => shadow;
 }
-const cGreen = Color(0xFF34C759), cRed = Color(0xFFFF3B30), cOrange = Color(0xFFFF9500), cAmber = Color(0xFFFF9F0A), cPink = Color(0xFFFF375F), cBlue = Color(0xFF007AFF), cGray = Color(0xFF8E8E93), cIndigo = Color(0xFF5856D6), cYellow = Color(0xFFFFD166);
+const cGreen = Color(0xFF1F9D5C), cRed = Color(0xFFE5484D), cOrange = Color(0xFFE8890C), cAmber = Color(0xFFF2A516), cPink = Color(0xFFE64980), cBlue = Color(0xFF2F6BFF), cGray = Color(0xFF9AA0AB), cIndigo = Color(0xFF6A5AE0), cYellow = Color(0xFFFFD166);
 extension Ctx on BuildContext {
   T get t => Theme.of(this).brightness == Brightness.dark ? T.night : T.light;
 }
@@ -23,8 +26,8 @@ String hexOf(Color c) => '#${(c.toARGB32() & 0xFFFFFF).toRadixString(16).padLeft
 // kolor statusu wg liczby dni do końca
 Color dayColor(int n) => n < 0 ? cGray : n <= 14 ? cRed : n <= 60 ? cOrange : cGreen;
 
-TextStyle ts(double size, {FontWeight w = FontWeight.w400, Color? c, double? h, double ls = 0, TextDecoration? deco}) =>
-    TextStyle(fontFamily: 'Jakarta', fontSize: size, fontWeight: w, color: c, height: h, letterSpacing: ls, decoration: deco, decorationColor: c);
+TextStyle ts(double size, {FontWeight w = FontWeight.w500, Color? c, double? h, double ls = 0, TextDecoration? deco}) =>
+    TextStyle(fontFamily: 'Manrope', fontSize: size, fontWeight: w, color: c, height: h, letterSpacing: ls, decoration: deco, decorationColor: c);
 const w5 = FontWeight.w500, w6 = FontWeight.w600, w7 = FontWeight.w700, w8 = FontWeight.w800;
 
 // ---------- ikony ----------
@@ -95,8 +98,8 @@ class CatTile extends StatelessWidget {
   @override
   Widget build(BuildContext c) {
     final k = catOf(cat);
-    return Container(width: size, height: size, decoration: BoxDecoration(color: translucent ? const Color(0x38FFFFFF) : k.color, borderRadius: BorderRadius.circular(radius)),
-        child: Center(child: Ic(k.icon, size: size * .52, width: 2)));
+    return Container(width: size, height: size, decoration: BoxDecoration(color: translucent ? const Color(0x38FFFFFF) : k.color.withValues(alpha: .14), borderRadius: BorderRadius.circular(radius)),
+        child: Center(child: Ic(k.icon, size: size * .5, width: 2, color: translucent ? Colors.white : k.color)));
   }
 }
 class IconSq extends StatelessWidget {
@@ -195,8 +198,8 @@ class Group extends StatelessWidget {
   final List<Widget> children; final EdgeInsets margin;
   const Group(this.children, {super.key, this.margin = const EdgeInsets.symmetric(vertical: 12)});
   @override
-  Widget build(BuildContext c) => Container(margin: margin, decoration: cardDeco(c, r: 24),
-      child: ClipRRect(borderRadius: BorderRadius.circular(24), child: Material(type: MaterialType.transparency, child: Column(children: children))));
+  Widget build(BuildContext c) => Container(margin: margin, decoration: cardDeco(c, r: 20),
+      child: ClipRRect(borderRadius: BorderRadius.circular(20), child: Material(type: MaterialType.transparency, child: Column(children: children))));
 }
 class SetRow extends StatelessWidget {
   final String? icon; final Color? bg; final String title; final String? sub; final VoidCallback? onTap; final Widget? trailing; final bool last, chevron; final Widget? titleRight; final Color? titleColor;
@@ -222,8 +225,8 @@ class SetRow extends StatelessWidget {
 
 // filtry w formie kapsułek
 class Chips extends StatelessWidget {
-  final List<String> items; final String value; final ValueChanged<String> onPick; final Map<String, String>? icons; final EdgeInsets pad;
-  const Chips({super.key, required this.items, required this.value, required this.onPick, this.icons, this.pad = const EdgeInsets.symmetric(horizontal: 14)});
+  final List<String> items; final String value; final ValueChanged<String> onPick; final Map<String, String>? icons; final Map<String, Color>? iconColors; final EdgeInsets pad;
+  const Chips({super.key, required this.items, required this.value, required this.onPick, this.icons, this.iconColors, this.pad = const EdgeInsets.symmetric(horizontal: 14)});
   @override
   Widget build(BuildContext c) {
     final t = c.t;
@@ -232,9 +235,9 @@ class Chips extends StatelessWidget {
         Padding(padding: const EdgeInsets.only(right: 8), child: Tap(onTap: () { HapticFeedback.selectionClick(); onPick(k); }, child: AnimatedContainer(
           duration: const Duration(milliseconds: 160),
           padding: const EdgeInsets.symmetric(horizontal: 15),
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(99), color: value == k ? t.text : Colors.transparent, border: Border.all(color: value == k ? t.text : t.text.withValues(alpha: .75), width: 1.5)),
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(99), color: value == k ? t.text : t.card, boxShadow: value == k ? null : t.shadow),
           child: Row(mainAxisSize: MainAxisSize.min, children: [
-            if (icons != null && icons![k] != null) ...[Ic(icons![k]!, size: 15, color: value == k ? t.bg : t.text, width: 2.1), const SizedBox(width: 6)],
+            if (icons != null && icons![k] != null) ...[Ic(icons![k]!, size: 15, color: value == k ? t.bg : (iconColors?[k] ?? t.text), width: 2.1), const SizedBox(width: 6)],
             Text(k, style: ts(14, w: w6, c: value == k ? t.bg : t.text)),
           ]),
         ))),
@@ -279,12 +282,12 @@ class Cta extends StatelessWidget {
     final t = c.t; final on = onTap != null && !busy;
     final f = fg ?? t.on;
     return Tap(onTap: on ? onTap : null, haptic: true, child: AnimatedOpacity(duration: const Duration(milliseconds: 150), opacity: onTap == null ? .4 : 1, child: Container(
-      width: double.infinity, padding: const EdgeInsets.symmetric(vertical: 17, horizontal: 16),
-      decoration: BoxDecoration(color: color ?? t.accent, borderRadius: BorderRadius.circular(99)),
+      width: double.infinity, padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+      decoration: BoxDecoration(color: color ?? t.accent, borderRadius: BorderRadius.circular(16)),
       child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
         if (busy) ...[SizedBox(width: 18, height: 18, child: CircularProgressIndicator(strokeWidth: 2.4, color: f)), const SizedBox(width: 10)]
         else if (icon != null) ...[Ic(icon!, size: 20, color: f, width: 2.3), const SizedBox(width: 8)],
-        Flexible(child: Text(text, textAlign: TextAlign.center, style: ts(17, w: w8, c: f))),
+        Flexible(child: Text(text, textAlign: TextAlign.center, style: ts(16, w: w8, c: f))),
       ]),
     )));
   }
@@ -297,8 +300,8 @@ class Ghost extends StatelessWidget {
   Widget build(BuildContext c) {
     final t = c.t;
     return Tap(onTap: onTap, child: Container(
-      width: double.infinity, padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 14),
-      decoration: BoxDecoration(color: t.card, borderRadius: BorderRadius.circular(99), boxShadow: t.softShadow),
+      width: double.infinity, padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 14),
+      decoration: BoxDecoration(color: t.card, borderRadius: BorderRadius.circular(16), boxShadow: t.shadow),
       child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
         if (icon != null) ...[Ic(icon!, size: 18, color: fg ?? t.text, width: 2.1), const SizedBox(width: 8)],
         Flexible(child: Text(text, textAlign: TextAlign.center, style: ts(15, w: w7, c: fg ?? t.text))),
@@ -314,7 +317,8 @@ class ActionTile extends StatelessWidget {
   Widget build(BuildContext c) {
     final t = c.t;
     return Tap(onTap: onTap, child: Container(
-      padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 8), decoration: cardDeco(c, r: 20),
+      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+      decoration: BoxDecoration(color: t.accSoft.withValues(alpha: .6), borderRadius: BorderRadius.circular(18), border: Border.all(color: Color.lerp(t.accent, t.line, .55)!, width: 2)),
       child: Column(children: [
         Ic(icon, size: 26, color: t.accent, width: 1.9), const SizedBox(height: 6),
         Text(label, textAlign: TextAlign.center, style: ts(13, w: w7, c: t.accent)),
@@ -357,7 +361,7 @@ class Field extends StatelessWidget {
   @override
   Widget build(BuildContext c) {
     final t = c.t;
-    final border = OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide(color: warn ? cOrange : t.line, width: 1.5));
+    final border = OutlineInputBorder(borderRadius: BorderRadius.circular(14), borderSide: BorderSide(color: warn ? cOrange : t.line, width: 1.5));
     return Padding(padding: const EdgeInsets.only(bottom: 12), child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       if (label.isNotEmpty) Padding(padding: const EdgeInsets.only(bottom: 6, left: 2), child: Row(children: [
         Text(label, style: ts(13, c: t.sub)),
@@ -409,7 +413,7 @@ class ToastHost extends StatelessWidget {
           duration: const Duration(milliseconds: 220),
           transitionBuilder: (w, a) => FadeTransition(opacity: a, child: SlideTransition(position: Tween(begin: const Offset(0, .3), end: Offset.zero).animate(a), child: w)),
           child: m == null ? const SizedBox(key: ValueKey('none')) : Center(key: ValueKey(m), child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 11), decoration: BoxDecoration(color: const Color(0xF01E1E20), borderRadius: BorderRadius.circular(99)),
+            padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 11), decoration: BoxDecoration(color: const Color(0xFF1B1F27), borderRadius: BorderRadius.circular(14)),
             child: Text(m, textAlign: TextAlign.center, style: ts(14, c: Colors.white, w: w5)))),
         )))),
       ]);
@@ -451,8 +455,8 @@ class SheetFrame extends StatelessWidget {
     return Padding(padding: EdgeInsets.only(bottom: mq.viewInsets.bottom), child: Align(alignment: Alignment.bottomCenter, child: ConstrainedBox(
       constraints: BoxConstraints(maxWidth: 520, maxHeight: mq.size.height * .92),
       child: Container(
-        decoration: BoxDecoration(color: t.bg, borderRadius: const BorderRadius.vertical(top: Radius.circular(32))),
-        child: ClipRRect(borderRadius: const BorderRadius.vertical(top: Radius.circular(32)), child: Stack(children: [
+        decoration: BoxDecoration(color: t.bg, borderRadius: const BorderRadius.vertical(top: Radius.circular(28))),
+        child: ClipRRect(borderRadius: const BorderRadius.vertical(top: Radius.circular(28)), child: Stack(children: [
           scroll
               ? SingleChildScrollView(padding: EdgeInsets.fromLTRB(18, 22, 18, 26 + mq.padding.bottom), child: child)
               : Padding(padding: EdgeInsets.fromLTRB(18, 22, 18, 26 + mq.padding.bottom), child: child),
@@ -541,3 +545,59 @@ Route<R> fadeRoute<R>(Widget w) => PageRouteBuilder<R>(
       transitionsBuilder: (_, a, __, child) => FadeTransition(opacity: CurvedAnimation(parent: a, curve: Curves.easeOut), child: SlideTransition(
         position: Tween(begin: const Offset(0, .04), end: Offset.zero).animate(CurvedAnimation(parent: a, curve: Curves.easeOutCubic)), child: child)),
     );
+
+// plan w nagłówku: FREE / PRO
+class PlanBadge extends StatelessWidget {
+  final bool pro; final VoidCallback onTap;
+  const PlanBadge(this.pro, {super.key, required this.onTap});
+  @override
+  Widget build(BuildContext c) => Tap(onTap: onTap, child: Container(padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 6), decoration: BoxDecoration(color: const Color(0x38FFFFFF), borderRadius: BorderRadius.circular(99)),
+      child: Text(pro ? 'PRO' : 'FREE', style: ts(11, w: w8, c: Colors.white, ls: .6))));
+}
+
+// pozostały czas: liczba + krótki pasek
+class LeftBox extends StatelessWidget {
+  final Item it; const LeftBox(this.it, {super.key});
+  @override
+  Widget build(BuildContext c) {
+    final t = c.t; final n = it.left; final col = dayColor(n);
+    final v = n < 0 ? 'minęła' : n < 100 ? daysTxt(n) : n < 730 ? '${(n / 30.4).round()} mies.' : '${n ~/ 365} ${pl(n ~/ 365, 'rok', 'lata', 'lat')}';
+    return SizedBox(width: 76, child: Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
+      Text(v, maxLines: 1, overflow: TextOverflow.fade, softWrap: false, style: ts(14, w: w8, c: n < 0 ? t.sub : n <= 60 ? col : t.text)),
+      const SizedBox(height: 7),
+      ClipRRect(borderRadius: BorderRadius.circular(99), child: Stack(children: [
+        Container(height: 4, color: t.line),
+        FractionallySizedBox(alignment: Alignment.centerLeft, widthFactor: it.progress, child: Container(height: 4, color: col)),
+      ])),
+    ]));
+  }
+}
+
+// wiersz sprzętu z paragonu
+class ItemRow extends StatelessWidget {
+  final Item it; final VoidCallback onTap; final bool last;
+  const ItemRow(this.it, {super.key, required this.onTap, this.last = false});
+  @override
+  Widget build(BuildContext c) {
+    final t = c.t; final n = it.left; final cl = it.claim;
+    String? wn; Color wc = t.sub;
+    if (cl != null && cl.open) { wn = 'Reklamacja w toku'; wc = t.accent; }
+    else if (n < 0) { wn = 'Gwarancja minęła ${fmtD.format(it.end)}'; wc = cGray; }
+    else if (n <= 60) { wn = n == 0 ? 'Gwarancja kończy się dziś' : 'Kończy się ${fmtD.format(it.end)}'; wc = dayColor(n); }
+    return InkWell(onTap: onTap, child: Container(
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+      decoration: BoxDecoration(border: last ? null : Border(bottom: BorderSide(color: t.line))),
+      child: Row(children: [
+        CatTile(it.cat, size: 42, radius: 13), const SizedBox(width: 12),
+        Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Text(it.name, maxLines: 1, overflow: TextOverflow.ellipsis, style: ts(15.5, w: w7, c: t.text)),
+          const SizedBox(height: 1),
+          Text([if (it.store.isNotEmpty) it.store, fmtD.format(it.date)].join(' · '), maxLines: 1, overflow: TextOverflow.ellipsis, style: ts(13, c: t.sub)),
+          if (wn != null) Padding(padding: const EdgeInsets.only(top: 3), child: Text(wn, maxLines: 1, overflow: TextOverflow.ellipsis, style: ts(12, w: w7, c: wc))),
+        ])),
+        const SizedBox(width: 10),
+        LeftBox(it),
+      ]),
+    ));
+  }
+}

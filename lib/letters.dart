@@ -61,8 +61,8 @@ Future<pw.Font> _font(String file) async {
   try { return pw.Font.ttf(await rootBundle.load('assets/fonts/$file')); } catch (_) { return PdfGoogleFonts.robotoRegular(); }
 }
 Future<void> sharePdf(String text, String name, {File? receipt, File? defect}) async {
-  final reg = await _font('PlusJakartaSans-400Regular.ttf');
-  final bold = await _font('PlusJakartaSans-700Bold.ttf');
+  final reg = await _font('Manrope-400Regular.ttf');
+  final bold = await _font('Manrope-700Bold.ttf');
   final doc = pw.Document(title: name, author: 'Szuflada');
   final paras = text.split(RegExp(r'\n\s*\n'));
   doc.addPage(pw.MultiPage(pageFormat: PdfPageFormat.a4, margin: const pw.EdgeInsets.fromLTRB(56, 52, 56, 52), build: (c) => [

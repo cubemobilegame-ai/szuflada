@@ -1,7 +1,7 @@
 name: szuflada
 description: Paragony i gwarancje w jednym miejscu
 publish_to: none
-version: 1.1.0+2
+version: 1.1.0+3
 environment:
   sdk: ">=3.3.0 <4.0.0"
 dependencies:
@@ -32,17 +32,17 @@ flutter:
   assets:
     - assets/fonts/
   fonts:
-    - family: Jakarta
+    - family: Manrope
       fonts:
-        - asset: assets/fonts/PlusJakartaSans-400Regular.ttf
+        - asset: assets/fonts/Manrope-400Regular.ttf
           weight: 400
-        - asset: assets/fonts/PlusJakartaSans-500Medium.ttf
+        - asset: assets/fonts/Manrope-500Medium.ttf
           weight: 500
-        - asset: assets/fonts/PlusJakartaSans-600SemiBold.ttf
+        - asset: assets/fonts/Manrope-600SemiBold.ttf
           weight: 600
-        - asset: assets/fonts/PlusJakartaSans-700Bold.ttf
+        - asset: assets/fonts/Manrope-700Bold.ttf
           weight: 700
-        - asset: assets/fonts/PlusJakartaSans-800ExtraBold.ttf
+        - asset: assets/fonts/Manrope-800ExtraBold.ttf
           weight: 800
 
 flutter_launcher_icons:

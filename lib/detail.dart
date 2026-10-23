@@ -65,7 +65,7 @@ class _DetailState extends State<DetailPage> with SingleTickerProviderStateMixin
             child: Center(child: ConstrainedBox(constraints: const BoxConstraints(maxWidth: 520), child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
               _countdown(c, it),
               if (cl != null) ...[const SizedBox(height: 12), _claimCard(c, it, cl)],
-              if (hasImg) ...[const SizedBox(height: 12), _photo(c, img, it)],
+              const SizedBox(height: 12), _receiptCard(c, it, hasImg ? img : null),
               Group([
                 if (it.price > 0) _info(c, 'coins', cAmber, 'Cena', money(it.price)),
                 _info(c, 'calendar', cRed, 'Data zakupu', fmtD.format(it.date)),
@@ -76,7 +76,6 @@ class _DetailState extends State<DetailPage> with SingleTickerProviderStateMixin
                 if (it.buyer.isNotEmpty) _info(c, 'user', t.accent, 'Nabywca', it.buyer),
                 if (it.note.isNotEmpty) _info(c, 'note', cOrange, 'Notatka', it.note, copy: it.note),
               ]),
-              if (!hasImg) Padding(padding: const EdgeInsets.only(bottom: 12), child: Ghost('Dodaj zdjęcie paragonu', () => openAddSheet(c, edit: it, autoScan: true), icon: 'camera')),
               Cta(cl != null && cl.open ? 'Zobacz reklamację' : 'Złóż reklamację', () {
                 if (cl != null && cl.open) { showClaimStatus(c, it); return; }
                 if (!store.pro) { showPaywall(c); return; }
@@ -142,14 +141,24 @@ class _DetailState extends State<DetailPage> with SingleTickerProviderStateMixin
     ));
   }
 
-  Widget _photo(BuildContext c, File img, Item it) => Tap(onTap: () => Navigator.of(c).push(fadeRoute(PhotoView(img, title: it.name))), child: Container(
-        height: 210, decoration: cardDeco(c, r: 24),
-        child: ClipRRect(borderRadius: BorderRadius.circular(24), child: Stack(fit: StackFit.expand, children: [
-          Image.file(img, fit: BoxFit.cover, cacheWidth: 900, errorBuilder: (_, __, ___) => const SizedBox()),
-          Positioned(left: 12, bottom: 12, child: Container(padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7), decoration: BoxDecoration(color: const Color(0xB3000000), borderRadius: BorderRadius.circular(99)),
-            child: Row(children: [const Ic('eye', size: 15, width: 2.2), const SizedBox(width: 6), Text('Zdjęcie dokumentu', style: ts(12, w: w7, c: Colors.white))]))),
+  // podgląd paragonu: zdjęcie na pełnym ekranie albo paragon odtworzony z danych
+  Widget _receiptCard(BuildContext c, Item it, File? img) {
+    final t = c.t;
+    return Tap(onTap: () => img != null ? Navigator.of(c).push(fadeRoute(PhotoView(img, title: '${it.doc}${it.docNo.isNotEmpty ? ' nr ${it.docNo}' : ''}'))) : showDigitalReceipt(c, it), child: Container(
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12), decoration: cardDeco(c, r: 18),
+      child: Row(children: [
+        ClipRRect(borderRadius: BorderRadius.circular(10), child: img != null
+            ? Image.file(img, width: 52, height: 68, fit: BoxFit.cover, cacheWidth: 200, errorBuilder: (_, __, ___) => const SizedBox(width: 52, height: 68))
+            : Container(width: 52, height: 68, color: t.panel, child: Center(child: Ic('receipt', size: 26, color: t.sub, width: 1.8)))),
+        const SizedBox(width: 14),
+        Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Text('Podgląd paragonu', style: ts(16, w: w8, c: t.text)),
+          Text('${it.doc}${it.docNo.isNotEmpty ? ' nr ${it.docNo}' : ''} · ${img != null ? 'zdjęcie dokumentu' : 'zapis bez zdjęcia'}', maxLines: 2, style: ts(13, c: t.sub)),
         ])),
-      ));
+        Ic('chev', size: 18, color: t.sub, width: 2.2),
+      ]),
+    ));
+  }
 
   Widget _info(BuildContext c, String icon, Color bg, String label, String value, {String copy = ''}) {
     final t = c.t;
@@ -187,4 +196,43 @@ class PhotoView extends StatelessWidget {
       Positioned(bottom: mq.padding.bottom + 18, left: 0, right: 0, child: Center(child: Text('Rozsuń palce, aby powiększyć', style: ts(13, c: const Color(0x99FFFFFF))))),
     ])));
   }
+}
+
+// paragon odtworzony z danych (gdy brak zdjęcia)
+Future<void> showDigitalReceipt(BuildContext c, Item it) => showSheet(c, (ctx) {
+      final rows = it.store.isEmpty ? [it] : store.items.where((x) => (x.photo ?? '').isEmpty && x.store == it.store && dayOf(x.date) == dayOf(it.date) && x.docNo == it.docNo).toList();
+      final list = rows.isEmpty ? [it] : rows;
+      final sum = list.fold<double>(0, (s, x) => s + x.price);
+      const ink = Color(0xFF1D1F24);
+      Widget dash() => Padding(padding: const EdgeInsets.symmetric(vertical: 8), child: LayoutBuilder(builder: (_, cons) => Row(children: List.generate((cons.maxWidth / 8).floor(), (_) => Container(width: 4, height: 1.5, margin: const EdgeInsets.only(right: 4), color: const Color(0x40000000))))));
+      return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+        const H2('Podgląd paragonu'),
+        const Muted('Brak zdjęcia. Tak wygląda zapis z danych dokumentu.'),
+        const SizedBox(height: 14),
+        ClipPath(clipper: _Zigzag(), child: Container(color: const Color(0xFFFFFDF7), padding: const EdgeInsets.fromLTRB(20, 26, 20, 26), child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+          Text((it.store.isEmpty ? 'Sklep' : it.store).toUpperCase(), textAlign: TextAlign.center, style: ts(16, w: w8, c: ink, ls: .5)),
+          Text('${it.doc}${it.docNo.isNotEmpty ? ' nr ${it.docNo}' : ''}', textAlign: TextAlign.center, style: ts(12, c: const Color(0xB31D1F24))),
+          Text(fmtD.format(it.date), textAlign: TextAlign.center, style: ts(12, c: const Color(0xB31D1F24))),
+          dash(),
+          for (final x in list) Padding(padding: const EdgeInsets.symmetric(vertical: 3), child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Expanded(child: Text(x.name, style: ts(14, c: ink))), const SizedBox(width: 10), Text(x.price > 0 ? money(x.price) : '—', style: ts(14, w: w8, c: ink))])),
+          dash(),
+          Row(children: [Expanded(child: Text('SUMA', style: ts(16, w: w8, c: ink))), Text(sum > 0 ? money(sum) : '—', style: ts(16, w: w8, c: ink))]),
+          if (it.buyer.isNotEmpty) Padding(padding: const EdgeInsets.only(top: 8), child: Text('Nabywca: ${it.buyer}', style: ts(12, c: const Color(0xB31D1F24)))),
+          dash(),
+          Text('Gwarancja do ${fmtD.format(it.end)}', textAlign: TextAlign.center, style: ts(12, c: const Color(0xB31D1F24))),
+        ]))),
+      ]);
+    });
+class _Zigzag extends CustomClipper<Path> {
+  @override
+  Path getClip(Size s) {
+    const z = 8.0, w = 16.0; final p = Path()..moveTo(0, z);
+    for (double x = 0; x < s.width; x += w) { p.lineTo(x + w / 2, 0); p.lineTo(x + w, z); }
+    p.lineTo(s.width, s.height - z);
+    for (double x = s.width; x > 0; x -= w) { p.lineTo(x - w / 2, s.height); p.lineTo(x - w, s.height - z); }
+    p.close(); return p;
+  }
+  @override
+  bool shouldReclip(CustomClipper<Path> o) => false;
 }

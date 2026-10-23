@@ -25,6 +25,8 @@ for g, kts in [('android/app/build.gradle.kts', 1), ('android/app/build.gradle',
     if os.path.exists(g):
         t = open(g).read()
         t = re.sub(r'compileSdk(Version)?\s*=?\s*flutter\.compileSdkVersion', 'compileSdk = 36' if kts else 'compileSdk 36', t)
+        # Google Play: nowe aplikacje musza celowac w Android 16 (API 36)
+        t = re.sub(r'targetSdk(Version)?\s*=?\s*flutter\.targetSdkVersion', 'targetSdk = 36' if kts else 'targetSdkVersion 36', t)
         if 'inifyEnabled' not in t:
             add = 'isMinifyEnabled = false\n            isShrinkResources = false\n            ' if kts else 'minifyEnabled false\n            shrinkResources false\n            '
             t = re.sub(r'(release\s*\{)', lambda m: m.group(1) + '\n            ' + add, t, count=1)

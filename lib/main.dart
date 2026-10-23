@@ -26,15 +26,15 @@ ThemeData _theme(T t) {
     primary: t.accent, onPrimary: t.on, surface: t.bg, onSurface: t.text, onSurfaceVariant: t.sub, outline: t.line, outlineVariant: t.line, surfaceTint: Colors.transparent,
     surfaceContainerHighest: t.card, surfaceContainerHigh: t.card, surfaceContainer: t.card, surfaceContainerLow: t.card,
   );
-  final base = ThemeData(useMaterial3: true, colorScheme: cs, brightness: t.dark ? Brightness.dark : Brightness.light, fontFamily: 'Jakarta');
+  final base = ThemeData(useMaterial3: true, colorScheme: cs, brightness: t.dark ? Brightness.dark : Brightness.light, fontFamily: 'Manrope');
   return base.copyWith(
     scaffoldBackgroundColor: t.bg,
     splashFactory: InkSparkle.splashFactory,
-    textTheme: base.textTheme.apply(fontFamily: 'Jakarta', bodyColor: t.text, displayColor: t.text),
+    textTheme: base.textTheme.apply(fontFamily: 'Manrope', bodyColor: t.text, displayColor: t.text),
     datePickerTheme: DatePickerThemeData(
       backgroundColor: t.bg, surfaceTintColor: Colors.transparent, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
       headerBackgroundColor: t.accent, headerForegroundColor: t.on,
-      dayStyle: const TextStyle(fontFamily: 'Jakarta', fontWeight: FontWeight.w600), yearStyle: const TextStyle(fontFamily: 'Jakarta', fontWeight: FontWeight.w600),
+      dayStyle: const TextStyle(fontFamily: 'Manrope', fontWeight: FontWeight.w600), yearStyle: const TextStyle(fontFamily: 'Manrope', fontWeight: FontWeight.w600),
       cancelButtonStyle: TextButton.styleFrom(foregroundColor: t.sub), confirmButtonStyle: TextButton.styleFrom(foregroundColor: t.accent),
     ),
     textSelectionTheme: TextSelectionThemeData(cursorColor: t.accent, selectionColor: t.accent.withValues(alpha: .25), selectionHandleColor: t.accent),
