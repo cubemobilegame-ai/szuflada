@@ -1,0 +1,53 @@
+name: Sprawdz (galaz robocza)
+on:
+  push:
+    branches: ['claude/**']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - name: Czcionka Plus Jakarta Sans
+        run: |
+          mkdir -p assets/fonts
+          cd /tmp && npm pack @expo-google-fonts/plus-jakarta-sans 2>&1 | tee /tmp/0-fonts.log && tar xzf expo-google-fonts-plus-jakarta-sans-*.tgz
+          find /tmp/package -name "*.ttf" | tee -a /tmp/0-fonts.log
+          cd "$GITHUB_WORKSPACE"
+          for w in 400Regular 500Medium 600SemiBold 700Bold 800ExtraBold; do
+            f=$(find /tmp/package -name "PlusJakartaSans_${w}.ttf" | head -1)
+            test -n "$f" && cp "$f" "assets/fonts/PlusJakartaSans-${w}.ttf"
+          done
+          ls -la assets/fonts | tee -a /tmp/0-fonts.log
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: '17' }
+      - uses: subosito/flutter-action@v2
+        with: { channel: stable, cache: true }
+      - name: Projekt Androida
+        run: |
+          flutter --version 2>&1 | tee /tmp/1-version.log
+          cp -r lib /tmp/lib_bak && cp pubspec.yaml /tmp/pubspec_bak
+          flutter create --platforms=android --org pl.szuflada --project-name szuflada . 2>&1 | tail -5 | tee /tmp/2-create.log
+          rm -rf lib test && cp -r /tmp/lib_bak lib && cp /tmp/pubspec_bak pubspec.yaml
+          python3 tool/setup_android.py 2>&1 | tee -a /tmp/2-create.log
+          python3 tool/gradle_fix.py > /dev/null
+      - name: pub get
+        run: flutter pub get 2>&1 | tee /tmp/3-pub.log
+      - name: analyze
+        run: flutter analyze --no-fatal-infos --no-fatal-warnings 2>&1 | tee /tmp/4-analyze.log
+      - name: ikona
+        run: dart run flutter_launcher_icons 2>&1 | tail -20 | tee /tmp/5-icons.log
+      - name: build apk
+        run: flutter build apk --release 2>&1 | tee /tmp/6-build.log
+      - name: Zapisz logi na galaz ci-logs
+        if: always()
+        run: |
+          mkdir -p /tmp/out && cp /tmp/*.log /tmp/out/ 2>/dev/null || true
+          echo "${{ github.sha }} run ${{ github.run_number }} ${{ job.status }}" > /tmp/out/status.txt
+          ls -la build/app/outputs/flutter-apk/ >> /tmp/out/status.txt 2>&1 || true
+          cd /tmp/out && git init -q && git checkout -q -b ci-logs && git add -A
+          git -c user.name=ci -c user.email=ci@example.com commit -qm "logi ${{ github.run_number }}"
+          git push -qf "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" ci-logs
