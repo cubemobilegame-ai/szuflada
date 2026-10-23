@@ -174,7 +174,7 @@ class _ShellState extends State<Shell> {
                   : Tap(onTap: () => goTab(k), child: Padding(padding: const EdgeInsets.only(top: 6, bottom: 4), child: Column(mainAxisSize: MainAxisSize.min, children: [
                       Ic(tabs[k]![0], size: 22, color: tab == k ? t.accent : t.sub, width: tab == k ? 2.2 : 1.8),
                       const SizedBox(height: 3),
-                      Text(tabs[k]![1], maxLines: 1, overflow: TextOverflow.ellipsis, style: ts(narrow ? 10.5 : 11, w: w7, c: tab == k ? t.accent : t.sub)),
+                      FittedBox(fit: BoxFit.scaleDown, child: Text(tabs[k]![1], maxLines: 1, style: ts(narrow ? 10.5 : 11, w: w7, c: tab == k ? t.accent : t.sub))),
                     ])))),
           ]))),
         ),

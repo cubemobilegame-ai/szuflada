@@ -8,6 +8,7 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:szuflada/core.dart';
 import 'package:szuflada/main.dart';
+import 'package:szuflada/ui.dart';
 
 Future<void> _fonts() async {
   final l = FontLoader('Manrope');
@@ -75,7 +76,7 @@ void main() {
       navKey.currentState!.pop(); await _settle(t, 1000);
 
       await t.tap(find.text('Start')); await _settle(t);
-      await t.tapAt(Offset(dev.width / 2, dev.height - 48 - 6 - 4 - 23)); await _settle(t, 1200);
+      await t.tap(find.byWidgetPredicate((w) => w is Ic && w.name == 'plus').first); await _settle(t, 1200);
       await _shot(t, '$tag-6-dodaj');
     });
   }
