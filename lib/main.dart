@@ -1,60 +1,46 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'core.dart';
 import 'pages.dart';
 import 'services.dart';
+import 'ui.dart';
+
+final navKey = GlobalKey<NavigatorState>();
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await initializeDateFormatting('pl_PL');
   await store.init();
-  await Notifier.init();
-  await Notifier.reschedule(store.items);
+  try { await Notifier.init(); } catch (_) {}
+  try { await Notifier.reschedule(store.items); } catch (_) {}
   Billing.init();
   runApp(const App());
 }
 
-ThemeData _theme(Brightness b) {
-  final d = b == Brightness.dark;
-  final cs = ColorScheme.fromSeed(seedColor: const Color(0xFF1A73E8), brightness: b).copyWith(
-    primary: d ? const Color(0xFF8AB4F8) : const Color(0xFF1A73E8),
-    onPrimary: d ? const Color(0xFF202124) : Colors.white,
-    primaryContainer: d ? const Color(0xFF2D3B55) : const Color(0xFFE8F0FE),
-    onPrimaryContainer: d ? const Color(0xFFD2E3FC) : const Color(0xFF174EA6),
-    surface: d ? const Color(0xFF202124) : Colors.white,
-    onSurface: d ? const Color(0xFFE8EAED) : const Color(0xFF202124),
-    onSurfaceVariant: d ? const Color(0xFF9AA0A6) : const Color(0xFF5F6368),
-    outline: d ? const Color(0xFF5F6368) : const Color(0xFF9AA0A6),
-    outlineVariant: d ? const Color(0xFF3C4043) : const Color(0xFFDADCE0),
-    surfaceTint: Colors.transparent,
-    error: d ? const Color(0xFFF28B82) : const Color(0xFFD93025),
+ThemeData _theme(T t) {
+  final cs = ColorScheme.fromSeed(seedColor: t.accent, brightness: t.dark ? Brightness.dark : Brightness.light).copyWith(
+    primary: t.accent, onPrimary: t.on, surface: t.bg, onSurface: t.text, onSurfaceVariant: t.sub, outline: t.line, outlineVariant: t.line, surfaceTint: Colors.transparent,
+    surfaceContainerHighest: t.card, surfaceContainerHigh: t.card, surfaceContainer: t.card, surfaceContainerLow: t.card,
   );
-  final line = cs.outlineVariant;
-  final card = d ? const Color(0xFF292A2D) : const Color(0xFFF8F9FA);
-  final pill = const StadiumBorder();
-  const btnText = TextStyle(fontSize: 15, fontWeight: FontWeight.w500);
-  return ThemeData(
-    useMaterial3: true, colorScheme: cs, scaffoldBackgroundColor: cs.surface,
-    appBarTheme: AppBarTheme(backgroundColor: cs.surface, surfaceTintColor: Colors.transparent, elevation: 0, scrolledUnderElevation: 0, centerTitle: false, titleTextStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: cs.onSurface)),
-    navigationBarTheme: NavigationBarThemeData(backgroundColor: cs.surface, surfaceTintColor: Colors.transparent, indicatorColor: cs.primaryContainer, elevation: 0, height: 68, labelTextStyle: const WidgetStatePropertyAll(TextStyle(fontSize: 12, fontWeight: FontWeight.w500))),
-    floatingActionButtonTheme: FloatingActionButtonThemeData(backgroundColor: cs.primary, foregroundColor: cs.onPrimary, elevation: 3, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16))),
-    filledButtonTheme: FilledButtonThemeData(style: FilledButton.styleFrom(shape: pill, minimumSize: const Size(64, 50), textStyle: btnText)),
-    outlinedButtonTheme: OutlinedButtonThemeData(style: OutlinedButton.styleFrom(shape: pill, minimumSize: const Size(64, 50), textStyle: btnText, side: BorderSide(color: line))),
-    textButtonTheme: TextButtonThemeData(style: TextButton.styleFrom(shape: pill, textStyle: btnText)),
-    inputDecorationTheme: InputDecorationTheme(
-      contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
-      border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide(color: line)),
-      enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide(color: line)),
-      focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide(color: cs.primary, width: 2)),
+  final base = ThemeData(useMaterial3: true, colorScheme: cs, brightness: t.dark ? Brightness.dark : Brightness.light, fontFamily: 'Jakarta');
+  return base.copyWith(
+    scaffoldBackgroundColor: t.bg,
+    splashFactory: InkSparkle.splashFactory,
+    textTheme: base.textTheme.apply(fontFamily: 'Jakarta', bodyColor: t.text, displayColor: t.text),
+    datePickerTheme: DatePickerThemeData(
+      backgroundColor: t.bg, surfaceTintColor: Colors.transparent, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
+      headerBackgroundColor: t.accent, headerForegroundColor: t.on,
+      dayStyle: const TextStyle(fontFamily: 'Jakarta', fontWeight: FontWeight.w600), yearStyle: const TextStyle(fontFamily: 'Jakarta', fontWeight: FontWeight.w600),
+      cancelButtonStyle: TextButton.styleFrom(foregroundColor: t.sub), confirmButtonStyle: TextButton.styleFrom(foregroundColor: t.accent),
     ),
-    cardTheme: CardThemeData(color: card, elevation: 0, margin: const EdgeInsets.symmetric(vertical: 5), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12), side: BorderSide(color: line))),
-    chipTheme: ChipThemeData(shape: StadiumBorder(side: BorderSide(color: line)), backgroundColor: cs.surface, selectedColor: cs.primaryContainer, showCheckmark: false, labelStyle: TextStyle(fontSize: 13, color: cs.onSurface)),
-    dividerTheme: DividerThemeData(color: line, space: 1),
-    textTheme: Typography.material2021().black.apply(bodyColor: cs.onSurface, displayColor: cs.onSurface).copyWith(
-      headlineMedium: TextStyle(fontSize: 26, fontWeight: FontWeight.w500, color: cs.onSurface),
-      headlineSmall: TextStyle(fontSize: 22, fontWeight: FontWeight.w500, color: cs.onSurface),
-      titleLarge: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: cs.onSurface)),
+    textSelectionTheme: TextSelectionThemeData(cursorColor: t.accent, selectionColor: t.accent.withValues(alpha: .25), selectionHandleColor: t.accent),
+    progressIndicatorTheme: ProgressIndicatorThemeData(color: t.accent),
+    bottomSheetTheme: const BottomSheetThemeData(backgroundColor: Colors.transparent, surfaceTintColor: Colors.transparent, elevation: 0),
+    pageTransitionsTheme: const PageTransitionsTheme(builders: {TargetPlatform.android: PredictiveBackPageTransitionsBuilder()}),
   );
 }
 
@@ -64,8 +50,16 @@ class App extends StatelessWidget {
   Widget build(BuildContext c) => ListenableBuilder(
         listenable: store,
         builder: (_, __) => MaterialApp(
-          title: 'Szuflada', debugShowCheckedModeBanner: false, themeMode: store.theme, theme: _theme(Brightness.light), darkTheme: _theme(Brightness.dark),
+          title: 'Szuflada', debugShowCheckedModeBanner: false, navigatorKey: navKey,
+          themeMode: store.theme, theme: _theme(T.light), darkTheme: _theme(T.night),
           locale: const Locale('pl'), supportedLocales: const [Locale('pl')], localizationsDelegates: GlobalMaterialLocalizations.delegates,
+          builder: (ctx, child) {
+            final dark = Theme.of(ctx).brightness == Brightness.dark;
+            return AnnotatedRegion<SystemUiOverlayStyle>(
+              value: (dark ? SystemUiOverlayStyle.light : SystemUiOverlayStyle.dark).copyWith(statusBarColor: Colors.transparent, systemNavigationBarColor: Colors.transparent, systemNavigationBarContrastEnforced: false),
+              child: ToastHost(child: child ?? const SizedBox()),
+            );
+          },
           home: const Gate(),
         ),
       );

@@ -37,3 +37,10 @@ for f in glob.glob('android/app/src/main/res/values*/styles.xml'):
     if n != t:
         open(f, 'w', encoding='utf-8').write(n)
 print('Android skonfigurowany')
+# mała ikona powiadomień (biała sylwetka szuflady)
+import shutil
+if os.path.exists('assets/notif.png'):
+    d = 'android/app/src/main/res/drawable-xxxhdpi'
+    os.makedirs(d, exist_ok=True)
+    shutil.copy('assets/notif.png', d + '/ic_stat_szuflada.png')
+    print('Ikona powiadomien skopiowana')

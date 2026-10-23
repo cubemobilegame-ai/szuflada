@@ -1,3 +1,5 @@
+import 'dart:io';
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:intl/intl.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
@@ -36,7 +38,7 @@ String buildLetter(Item it, String basis, int req, String desc, DateTime dt, Str
   final rek = basis == 'rek';
   final nm = _o(me['n'], '[imię i nazwisko]');
   final who = '$nm\n${_o(me['a'], '[adres]')}\n${_o(me['c'], '[e-mail lub telefon]')}';
-  final cena = it.price > 0 ? ' (cena ${it.price.toStringAsFixed(2)} zł)' : '';
+  final cena = it.price > 0 ? ' (cena ${money(it.price)})' : '';
   final nr = it.docNo.isNotEmpty ? ' nr ${it.docNo}' : '';
   final proof = '${it.doc}$nr z dnia ${_f.format(it.date)}';
   final by = it.buyer.isNotEmpty ? 'Dane nabywcy zgodne z fakturą: ${it.buyer}.\n\n' : '';
@@ -44,8 +46,8 @@ String buildLetter(Item it, String basis, int req, String desc, DateTime dt, Str
   final head = 'Miejscowość, dnia ${_f.format(DateTime.now())}\n\n$who\n\n$to\n\n';
   final w = 'W dniu ${_f.format(dt)} stwierdziłem(am) wadę towaru: ${_o(desc, '[opis wady]')}.\n\n';
   if (rek) {
-    return '${head}Reklamacja z tytułu rękojmi\n\nDnia ${_f.format(it.date)} kupiłem(am) u Państwa: ${it.name}$cena. Dowód zakupu: $proof.\n\n$by$w'
-        'Na podstawie przepisów o rękojmi za wady rzeczy sprzedanej (art. 556 i nast. oraz art. 43a i nast. Kodeksu cywilnego) żądam: ${rekReq[req]}.\n\n'
+    return '${head}Reklamacja – brak zgodności towaru z umową (rękojmia)\n\nDnia ${_f.format(it.date)} kupiłem(am) u Państwa: ${it.name}$cena. Dowód zakupu: $proof.\n\n$by$w'
+        'Na podstawie przepisów o odpowiedzialności sprzedawcy za brak zgodności towaru z umową (art. 43a i nast. ustawy z dnia 30 maja 2014 r. o prawach konsumenta) żądam: ${rekReq[req]}.\n\n'
         'Proszę o ustosunkowanie się do żądania w terminie 14 dni od otrzymania pisma. Brak odpowiedzi w tym terminie oznacza, że żądanie zostało uznane za uzasadnione.\n\n'
         'Odpowiedź proszę przesłać na: ${_o(me['c'], '[e-mail lub telefon]')}.\n\nZałączniki: kopia dowodu zakupu, zdjęcia wady.\n\nZ poważaniem,\n$nm';
   }
@@ -54,10 +56,28 @@ String buildLetter(Item it, String basis, int req, String desc, DateTime dt, Str
       'Zastrzegam, że zgłoszenie gwarancyjne nie wyłącza moich uprawnień z tytułu rękojmi wobec sprzedawcy.\n\nZałączniki: kopia dowodu zakupu, zdjęcia wady.\n\nZ poważaniem,\n$nm';
 }
 
-// PDF z polskimi znakami (czcionka Roboto pobierana przy pierwszym użyciu; do pracy offline dołącz TTF do assets)
-Future<void> sharePdf(String text, String name) async {
-  final font = await PdfGoogleFonts.robotoRegular();
-  final doc = pw.Document();
-  doc.addPage(pw.MultiPage(pageFormat: PdfPageFormat.a4, margin: const pw.EdgeInsets.all(48), build: (c) => [pw.Text(text, style: pw.TextStyle(font: font, fontSize: 11, lineSpacing: 3))]));
-  await Printing.sharePdf(bytes: await doc.save(), filename: '$name.pdf');
+// PDF z polskimi znakami (czcionka z aplikacji, działa bez internetu). Do pisma dołączamy zdjęcie paragonu i usterki.
+Future<pw.Font> _font(String file) async {
+  try { return pw.Font.ttf(await rootBundle.load('assets/fonts/$file')); } catch (_) { return PdfGoogleFonts.robotoRegular(); }
+}
+Future<void> sharePdf(String text, String name, {File? receipt, File? defect}) async {
+  final reg = await _font('PlusJakartaSans-400Regular.ttf');
+  final bold = await _font('PlusJakartaSans-700Bold.ttf');
+  final doc = pw.Document(title: name, author: 'Szuflada');
+  final paras = text.split(RegExp(r'\n\s*\n'));
+  doc.addPage(pw.MultiPage(pageFormat: PdfPageFormat.a4, margin: const pw.EdgeInsets.fromLTRB(56, 52, 56, 52), build: (c) => [
+        for (final p in paras) pw.Padding(padding: const pw.EdgeInsets.only(bottom: 10), child: pw.Text(p.trim(),
+            style: pw.TextStyle(font: p.startsWith('Reklamacja') || p.startsWith('Zgłoszenie') ? bold : reg, fontSize: p.startsWith('Reklamacja') || p.startsWith('Zgłoszenie') ? 13 : 10.5, lineSpacing: 3))),
+      ]));
+  for (final e in [['Załącznik: dowód zakupu', receipt], ['Załącznik: zdjęcie usterki', defect]]) {
+    final f = e[1] as File?;
+    if (f == null || !await f.exists()) continue;
+    final img = pw.MemoryImage(await f.readAsBytes());
+    doc.addPage(pw.Page(pageFormat: PdfPageFormat.a4, margin: const pw.EdgeInsets.all(48), build: (c) => pw.Column(crossAxisAlignment: pw.CrossAxisAlignment.start, children: [
+          pw.Text(e[0] as String, style: pw.TextStyle(font: bold, fontSize: 12)), pw.SizedBox(height: 12),
+          pw.Expanded(child: pw.Center(child: pw.Image(img, fit: pw.BoxFit.contain))),
+        ])));
+  }
+  final safe = name.replaceAll(RegExp(r'[^A-Za-z0-9ĄąĆćĘęŁłŃńÓóŚśŹźŻż _-]'), '').trim().replaceAll(' ', '-');
+  await Printing.sharePdf(bytes: await doc.save(), filename: '${safe.isEmpty ? 'reklamacja' : safe}.pdf');
 }

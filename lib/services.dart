@@ -13,26 +13,44 @@ import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:timezone/data/latest.dart' as tzdata;
 import 'package:timezone/timezone.dart' as tz;
+import 'package:flutter/material.dart';
 import 'core.dart';
+import 'ui.dart';
 
 // Przypomnienia: lokalne powiadomienia, działają przy zamkniętej aplikacji
+final openItemN = ValueNotifier<int?>(null); // dotknięte powiadomienie -> otwórz dokument
 class Notifier {
   static final _p = FlutterLocalNotificationsPlugin();
+  static AndroidFlutterLocalNotificationsPlugin? get _a => _p.resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>();
+  static const _details = NotificationDetails(android: AndroidNotificationDetails('gwarancje', 'Przypomnienia o gwarancjach',
+      channelDescription: 'Koniec gwarancji, zwroty i terminy reklamacji', importance: Importance.high, priority: Priority.high, color: Color(0xFF5A3DF0)));
+  static void _open(NotificationResponse r) { final id = int.tryParse(r.payload ?? ''); if (id != null) openItemN.value = id; }
   static Future<void> init() async {
     tzdata.initializeTimeZones();
-    await _p.initialize(const InitializationSettings(android: AndroidInitializationSettings('@mipmap/ic_launcher')));
-    await _p.resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()?.requestNotificationsPermission();
+    try {
+      await _p.initialize(const InitializationSettings(android: AndroidInitializationSettings('ic_stat_szuflada')), onDidReceiveNotificationResponse: _open);
+    } catch (_) {
+      await _p.initialize(const InitializationSettings(android: AndroidInitializationSettings('@mipmap/ic_launcher')), onDidReceiveNotificationResponse: _open);
+    }
+    try {
+      final l = await _p.getNotificationAppLaunchDetails();
+      final r = l?.notificationResponse;
+      if (l != null && l.didNotificationLaunchApp && r != null) _open(r);
+    } catch (_) {}
   }
+  static Future<bool> enabled() async { try { return await _a?.areNotificationsEnabled() ?? true; } catch (_) { return true; } }
+  static Future<bool> request() async { try { return await _a?.requestNotificationsPermission() ?? true; } catch (_) { return false; } }
+  static Future<void> test() => _p.show(1, 'Szuflada', 'Tak będą wyglądać przypomnienia o końcu gwarancji.', _details);
   static Future<void> reschedule(List<Item> items) async {
     await _p.cancelAll();
-    final now = DateTime.now();
+    final now = DateTime.now(); var n = 0;
     for (final r in remindersFor(items)) {
-      final at = DateTime(r.d.year, r.d.month, r.d.day, 9);
+      final at = DateTime(r.d.year, r.d.month, r.d.day, store.remindHour);
       if (at.isBefore(now)) continue;
+      if (++n > 400) break; // Android ogranicza liczbę zaplanowanych alarmów
       await _p.zonedSchedule(
-        (r.it.id % 100000000) * 10 + r.kind, r.it.name, r.txt, tz.TZDateTime.from(at, tz.UTC),
-        const NotificationDetails(android: AndroidNotificationDetails('gwarancje', 'Przypomnienia o gwarancjach', importance: Importance.high, priority: Priority.high)),
-        androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
+        (r.it.id % 100000000) * 10 + r.kind, r.it.name, r.txt, tz.TZDateTime.from(at, tz.UTC), _details,
+        androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle, payload: '${r.it.id}',
       );
     }
   }
@@ -42,24 +60,40 @@ class Notifier {
 class Billing {
   static const sku = 'pro_yearly';
   static ProductDetails? product;
+  static bool available = false;
+  static String get price => product?.price ?? '29,99 zł';
   static Future<void> init() async {
     final iap = InAppPurchase.instance;
-    if (!await iap.isAvailable()) return;
+    try { available = await iap.isAvailable(); } catch (_) { available = false; }
+    if (!available) return;
     iap.purchaseStream.listen((list) async {
       for (final p in list) {
-        if (p.productID == sku && (p.status == PurchaseStatus.purchased || p.status == PurchaseStatus.restored)) await store.setPro();
+        if (p.productID == sku && (p.status == PurchaseStatus.purchased || p.status == PurchaseStatus.restored)) {
+          final was = store.pro; await store.setPro();
+          if (!was && p.status == PurchaseStatus.purchased) toast('Dziękujemy! Szuflada Pro jest aktywna.');
+        }
+        if (p.status == PurchaseStatus.error) toast('Płatność nie powiodła się. Spróbuj ponownie.');
         if (p.pendingCompletePurchase) await iap.completePurchase(p);
       }
-    });
-    final r = await iap.queryProductDetails({sku});
-    if (r.productDetails.isNotEmpty) { product = r.productDetails.first; store.touch(); }
-    await iap.restorePurchases();
+    }, onError: (_) {});
+    try {
+      final r = await iap.queryProductDetails({sku});
+      if (r.productDetails.isNotEmpty) { product = r.productDetails.first; store.touch(); }
+      await iap.restorePurchases();
+    } catch (_) {}
   }
   static Future<bool> buy() async {
     final d = product; if (d == null) return false;
-    return InAppPurchase.instance.buyNonConsumable(purchaseParam: PurchaseParam(productDetails: d));
+    try { return await InAppPurchase.instance.buyNonConsumable(purchaseParam: PurchaseParam(productDetails: d)); } catch (_) { return false; }
   }
-  static Future<void> restore() => InAppPurchase.instance.restorePurchases();
+  static Future<void> restore() async { try { await InAppPurchase.instance.restorePurchases(); } catch (_) {} }
+}
+
+// Udostępnianie dokumentu (zdjęcie + opis)
+Future<void> shareItem(Item it) async {
+  final txt = '${it.name}${it.store.isNotEmpty ? ' (${it.store})' : ''}\nZakup: ${fmtD.format(it.date)}${it.price > 0 ? ' · ${money(it.price)}' : ''}\nGwarancja do: ${fmtD.format(it.end)}${it.docNo.isNotEmpty ? '\n${it.doc} nr ${it.docNo}' : ''}';
+  final f = store.img(it.photo);
+  if (f != null && await f.exists()) { await Share.shareXFiles([XFile(f.path)], text: txt); } else { await Share.share(txt); }
 }
 
 // Blokada: odcisk palca, twarz lub PIN telefonu
