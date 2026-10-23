@@ -29,15 +29,20 @@ jobs:
       - name: Projekt Androida
         run: |
           flutter --version 2>&1 | tee /tmp/1-version.log
-          cp -r lib /tmp/lib_bak && cp pubspec.yaml /tmp/pubspec_bak
+          cp -r lib /tmp/lib_bak && cp -r test /tmp/test_bak && cp pubspec.yaml /tmp/pubspec_bak
           flutter create --platforms=android --org com.cubemobilegames --project-name szuflada . 2>&1 | tail -5 | tee /tmp/2-create.log
-          rm -rf lib test && cp -r /tmp/lib_bak lib && cp /tmp/pubspec_bak pubspec.yaml
+          rm -rf lib test && cp -r /tmp/lib_bak lib && cp -r /tmp/test_bak test && cp /tmp/pubspec_bak pubspec.yaml
           python3 tool/setup_android.py 2>&1 | tee -a /tmp/2-create.log
           python3 tool/gradle_fix.py > /dev/null
       - name: pub get
         run: flutter pub get 2>&1 | tee /tmp/3-pub.log
       - name: analyze
         run: flutter analyze --no-fatal-infos --no-fatal-warnings 2>&1 | tee /tmp/4-analyze.log
+      - name: test ekranow (zrzuty)
+        continue-on-error: true
+        run: |
+          flutter test --update-goldens test/screens_test.dart 2>&1 | tail -150 | tee /tmp/7-test.log
+          test ${PIPESTATUS[0]} -eq 0
       - name: ikona
         run: dart run flutter_launcher_icons 2>&1 | tail -20 | tee /tmp/5-icons.log
       - name: build apk
@@ -45,7 +50,8 @@ jobs:
       - name: Zapisz logi na galaz ci-logs
         if: always()
         run: |
-          mkdir -p /tmp/out && cp /tmp/*.log /tmp/out/ 2>/dev/null || true
+          mkdir -p /tmp/out/shots && cp /tmp/*.log /tmp/out/ 2>/dev/null || true
+          cp test/shots/*.png /tmp/out/shots/ 2>/dev/null || true
           echo "${{ github.sha }} run ${{ github.run_number }} ${{ job.status }}" > /tmp/out/status.txt
           ls -la build/app/outputs/flutter-apk/ >> /tmp/out/status.txt 2>&1 || true
           cd /tmp/out && git init -q && git checkout -q -b ci-logs && git add -A

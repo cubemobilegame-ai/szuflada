@@ -168,7 +168,7 @@ class _ShellState extends State<Shell> {
           child: Center(heightFactor: 1, child: ConstrainedBox(constraints: const BoxConstraints(maxWidth: 600), child: Row(crossAxisAlignment: CrossAxisAlignment.end, children: [
             for (var k = 0; k < 5; k++)
               Expanded(child: tabs[k] == null
-                  ? Center(child: Tap(onTap: () => openAdd(c), haptic: true, child: Container(width: 46, height: 46, margin: const EdgeInsets.only(bottom: 4),
+                  ? Center(heightFactor: 1, child: Tap(onTap: () => openAdd(c), haptic: true, child: Container(width: 46, height: 46, margin: const EdgeInsets.only(bottom: 4),
                       decoration: BoxDecoration(color: t.accent, borderRadius: BorderRadius.circular(14), boxShadow: [BoxShadow(color: t.accent.withValues(alpha: .4), blurRadius: 16, offset: const Offset(0, 6))]),
                       child: Center(child: Ic('plus', size: 22, color: t.on, width: 2.6)))))
                   : Tap(onTap: () => goTab(k), child: Padding(padding: const EdgeInsets.only(top: 6, bottom: 4), child: Column(mainAxisSize: MainAxisSize.min, children: [
