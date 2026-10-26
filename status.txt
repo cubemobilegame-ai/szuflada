@@ -1,0 +1,6 @@
+21be276207d8d5cee85879875234edc94cbb2a0b run 10 success
+total 98588
+drwxr-xr-x 2 runner runner      4096 Oct 26 20:14 .
+drwxr-xr-x 7 runner runner      4096 Oct 26 20:14 ..
+-rw-r--r-- 1 runner runner 100938833 Oct 26 20:14 app-release.apk
+-rw-r--r-- 1 runner runner        40 Oct 26 20:14 app-release.apk.sha1

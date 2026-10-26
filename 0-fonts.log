@@ -1,0 +1,67 @@
+npm notice
+npm notice 📦  @expo-google-fonts/manrope@0.4.2
+npm notice Tarball Contents
+npm notice 153B 200ExtraLight/index.d.ts
+npm notice 200B 200ExtraLight/index.js
+npm notice 96.7kB 200ExtraLight/Manrope_200ExtraLight.ttf
+npm notice 100.8kB 200ExtraLight/Manrope_200ExtraLight.ttf.png
+npm notice 148B 300Light/index.d.ts
+npm notice 190B 300Light/index.js
+npm notice 96.7kB 300Light/Manrope_300Light.ttf
+npm notice 95.0kB 300Light/Manrope_300Light.ttf.png
+npm notice 150B 400Regular/index.d.ts
+npm notice 194B 400Regular/index.js
+npm notice 96.8kB 400Regular/Manrope_400Regular.ttf
+npm notice 97.8kB 400Regular/Manrope_400Regular.ttf.png
+npm notice 149B 500Medium/index.d.ts
+npm notice 192B 500Medium/index.js
+npm notice 96.9kB 500Medium/Manrope_500Medium.ttf
+npm notice 95.3kB 500Medium/Manrope_500Medium.ttf.png
+npm notice 151B 600SemiBold/index.d.ts
+npm notice 196B 600SemiBold/index.js
+npm notice 96.9kB 600SemiBold/Manrope_600SemiBold.ttf
+npm notice 96.9kB 600SemiBold/Manrope_600SemiBold.ttf.png
+npm notice 147B 700Bold/index.d.ts
+npm notice 188B 700Bold/index.js
+npm notice 96.8kB 700Bold/Manrope_700Bold.ttf
+npm notice 87.3kB 700Bold/Manrope_700Bold.ttf.png
+npm notice 152B 800ExtraBold/index.d.ts
+npm notice 198B 800ExtraBold/index.js
+npm notice 97.5kB 800ExtraBold/Manrope_800ExtraBold.ttf
+npm notice 93.6kB 800ExtraBold/Manrope_800ExtraBold.ttf.png
+npm notice 1.1kB LICENSE
+npm notice 4.4kB LICENSE_FONT
+npm notice 6.3kB README.md
+npm notice 36.8kB font-family.png
+npm notice 470B index.d.ts
+npm notice 784B index.js
+npm notice 1.1kB metadata.json
+npm notice 528B package.json
+npm notice 575B useFonts.d.ts
+npm notice 748B useFonts.js
+npm notice Tarball Details
+npm notice name: @expo-google-fonts/manrope
+npm notice version: 0.4.2
+npm notice filename: expo-google-fonts-manrope-0.4.2.tgz
+npm notice package size: 973.3 kB
+npm notice unpacked size: 1.4 MB
+npm notice shasum: d681e9701eb8df840bcfe893f41008d4d8b00778
+npm notice integrity: sha512-BZsKe8d9BJrVn[...]kpWICnovATr/g==
+npm notice total files: 38
+npm notice
+expo-google-fonts-manrope-0.4.2.tgz
+/tmp/package/800ExtraBold/Manrope_800ExtraBold.ttf
+/tmp/package/200ExtraLight/Manrope_200ExtraLight.ttf
+/tmp/package/400Regular/Manrope_400Regular.ttf
+/tmp/package/700Bold/Manrope_700Bold.ttf
+/tmp/package/500Medium/Manrope_500Medium.ttf
+/tmp/package/600SemiBold/Manrope_600SemiBold.ttf
+/tmp/package/300Light/Manrope_300Light.ttf
+total 488
+drwxr-xr-x 2 runner runner  4096 Oct 26 20:08 .
+drwxr-xr-x 3 runner runner  4096 Oct 26 20:08 ..
+-rw-r--r-- 1 runner runner 96832 Oct 26 20:08 Manrope-400Regular.ttf
+-rw-r--r-- 1 runner runner 96904 Oct 26 20:08 Manrope-500Medium.ttf
+-rw-r--r-- 1 runner runner 96936 Oct 26 20:08 Manrope-600SemiBold.ttf
+-rw-r--r-- 1 runner runner 96800 Oct 26 20:08 Manrope-700Bold.ttf
+-rw-r--r-- 1 runner runner 97524 Oct 26 20:08 Manrope-800ExtraBold.ttf

@@ -1,0 +1,1065 @@
+2026-10-26 20:13:13.016 [daemon] INFO: Kotlin compiler daemon version 2.4.0-release-281
+2026-10-26 20:13:13.040 [daemon] INFO: daemon JVM args: -Djava.awt.headless=true -Djava.rmi.server.hostname=127.0.0.1 -Xmx8G -XX:MaxMetaspaceSize=4G -XX:ReservedCodeCacheSize=512m -Dkotlin.environment.keepalive -ea -Dkotlin.daemon.custom.run.files.path.for.tests=/home/runner/.kotlin/daemon -XX:+UseCodeCacheFlushing -XX:+UseParallelGC -Dkotlin.daemon.initiator.marker.file=/tmp/kotlin-compiler-client-2102677954299698622-is-running --add-exports=java.base/sun.nio.ch=ALL-UNNAMED
+2026-10-26 20:13:13.040 [daemon] INFO: daemon args: --daemon-logsPath /tmp --daemon-logsFileSizeLimit=1048576 --daemon-logsFileCountLimit=3 --daemon-runFilesPath /home/runner/.kotlin/daemon --daemon-autoshutdownIdleSeconds=7200 --daemon-compilerClasspath /home/runner/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-build-tools-compat/2.4.0/209372718c8759fbcb47402dc130d45f00c3f81/kotlin-build-tools-compat-2.4.0.jar:/home/runner/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-build-tools-impl/2.4.0/3dde5b4075cd7963afd0b0b2835627f40abc1149/kotlin-build-tools-impl-2.4.0.jar:/home/runner/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-tooling-core/2.4.0/75970f5a2a9cb4d25557965bbec0a7ccd55bfbcf/kotlin-tooling-core-2.4.0.jar:/home/runner/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-build-tools-cri-impl/2.4.0/7fdfe4b4de70b7e6d81c054572e862121aa1603a/kotlin-build-tools-cri-impl-2.4.0.jar:/home/runner/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-compiler-runner/2.4.0/d2b2336d493d2d3a8047c826cb27606f67029da8/kotlin-compiler-runner-2.4.0.jar:/home/runner/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-compiler-embeddable/2.4.0/f1a24af8bd111a83950236b1aec7a6d72a97e92c/kotlin-compiler-embeddable-2.4.0.jar:/home/runner/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-build-tools-api/2.4.0/46429d5887df2d02f33fe11a0c8444c5be5fd8da/kotlin-build-tools-api-2.4.0.jar:/home/runner/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-daemon-client/2.4.0/e9080614f98d07554367b7e5810529963e9f43e2/kotlin-daemon-client-2.4.0.jar:/home/runner/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/2.4.0/4e9f4b531dce5c7dee58ed2de9a8b9a763c8dc6c/kotlin-stdlib-2.4.0.jar:/home/runner/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/13.0/919f0dfe192fb4e063e7dacadee7f8bb9a2672a9/annotations-13.0.jar:/home/runner/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-script-runtime/2.4.0/1de03f0ef3e208ab5f97ee6a587e9b8480447df6/kotlin-script-runtime-2.4.0.jar:/home/runner/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-reflect/1.6.10/1cbe9c92c12a94eea200d23c2bbaedaf3daf5132/kotlin-reflect-1.6.10.jar:/home/runner/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-daemon-embeddable/2.4.0/1ecabef3a8ba6a8e25654573d54edb7e4136e903/kotlin-daemon-embeddable-2.4.0.jar:/home/runner/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlinx/kotlinx-coroutines-core-jvm/1.8.0/ac1dc37a30a93150b704022f8d895ee1bd3a36b3/kotlinx-coroutines-core-jvm-1.8.0.jar
+2026-10-26 20:13:13.051 [daemon] INFO: starting daemon
+2026-10-26 20:13:13.205 [compiler] INFO: Registered a client alive file: /tmp/kotlin-compiler-client-2102677954299698622-is-running
+2026-10-26 20:13:13.205 [compiler] INFO: Periodic liveness check activities configured
+2026-10-26 20:13:13.206 [daemon] INFO: daemon is listening on port: 17784
+2026-10-26 20:13:13.214 [compiler] INFO: initiate elections
+2026-10-26 20:13:13.310 [compiler] INFO: getDaemonJVMOptions: DaemonJVMOptions(maxMemory=8G, maxMetaspaceSize=4G, reservedCodeCacheSize=512m, jvmParams=[-Djava.awt.headless=true, -Djava.rmi.server.hostname=127.0.0.1, -Dkotlin.environment.keepalive, -ea, -Dkotlin.daemon.custom.run.files.path.for.tests=/home/runner/.kotlin/daemon, -XX:+UseCodeCacheFlushing, -XX:+UseParallelGC, -Dkotlin.daemon.initiator.marker.file=/tmp/kotlin-compiler-client-2102677954299698622-is-running, --add-exports=java.base/sun.nio.ch=ALL-UNNAMED, Dkotlin.environment.keepalive, ea])
+2026-10-26 20:13:13.323 [compiler] INFO: Registered a client alive file: /tmp/kotlin-compiler-client-2102677954299698622-is-running
+2026-10-26 20:13:13.330 [compiler] INFO: leased a new session 1, session alive file: /tmp/kotlin-compilation-session-16216656802023742453-is-running
+2026-10-26 20:13:13.401 [compiler] INFO: Starting compilation with args: -Xallow-no-source-files -classpath /usr/local/lib/android/sdk/platforms/android-36/android.jar:/usr/local/lib/android/sdk/build-tools/36.0.0/core-lambda-stubs.jar:/home/runner/work/szuflada/szuflada/build/image_picker_android/intermediates/compile_r_class_jar/release/generateReleaseRFile/R.jar:/home/runner/work/szuflada/szuflada/build/flutter_plugin_android_lifecycle/intermediates/compile_library_classes_jar/release/bundleLibCompileToJarRelease/classes.jar:/home/runner/.gradle/caches/modules-2/files-2.1/io.flutter/flutter_embedding_release/1.0.0-cf636b1dfb818dd6a3ff16e390e93b1a036969c8/d217f3ddfe4bafb9745d9c5267fdab477bb915c/flutter_embedding_release-1.0.0-cf636b1dfb818dd6a3ff16e390e93b1a036969c8.jar:/home/runner/.gradle/caches/9.3.1/transforms/f796811feda99eece882f76180e3857a/transformed/fragment-1.7.1-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/bb0465db696078aa2a1e3704061a974e/transformed/activity-1.13.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/fc55f5bb727c8671c951640c0d4498ba/transformed/loader-1.0.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/19a20cbf72e6321aa9586dc52a92c1c5/transformed/lifecycle-livedata-core-ktx-2.7.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/961111a85b57977bf784ce27e450afb6/transformed/lifecycle-livedata-2.7.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/a58fbea6b7704ddc93de691feea2e339/transformed/lifecycle-viewmodel-2.7.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/7284b3526fc4fd97751646a63c45f78b/transformed/lifecycle-livedata-core-2.7.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/b469c4b9f6b2e19d16af2c7d6b90c761/transformed/lifecycle-process-2.7.0-api.jar:/home/runner/.gradle/caches/modules-2/files-2.1/androidx.lifecycle/lifecycle-common-java8/2.7.0/2ad14aed781c4a73ed4dbb421966d408a0a06686/lifecycle-common-java8-2.7.0.jar:/home/runner/.gradle/caches/9.3.1/transforms/35c2d2de606fb0b3e6e285b86c33a18d/transformed/lifecycle-runtime-2.7.0-api.jar:/home/runner/.gradle/caches/modules-2/files-2.1/androidx.lifecycle/lifecycle-common/2.7.0/85334205d65cca70ed0109c3acbd29e22a2d9cb1/lifecycle-common-2.7.0.jar:/home/runner/.gradle/caches/9.3.1/transforms/3ce635fc0d68f184f5012f054eeec323/transformed/lifecycle-viewmodel-savedstate-2.7.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/805ba734c3fbab25568cd757bafe1377/transformed/core-ktx-1.18.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/c05551ddb812bab574c8c294bcf83c90/transformed/viewpager-1.0.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/07115ed611bc420811b48daa75db2cd4/transformed/customview-1.0.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/bbfbced02cdb61952037a056f68ee63f/transformed/core-1.18.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/65a325726f0c919bc1973e1dddeb3da7/transformed/annotation-experimental-1.4.1-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/22cbc235653e33dd1a1830cbbba1ddcb/transformed/core-viewtree-1.0.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/bea504738426426f4512d82d48fe00d4/transformed/versionedparcelable-1.1.1-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/9540aadaf24ecbc75e4063a9cfb2b8da/transformed/savedstate-1.2.1-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/08014c35e8ea21d02f51e4193df4f9ca/transformed/navigationevent-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/645d64b24c4bb8eee647c651c99462f6/transformed/core-runtime-2.2.0-api.jar:/home/runner/.gradle/caches/modules-2/files-2.1/androidx.arch.core/core-common/2.2.0/5e1b8b81dfd5f52c56a8d53b18ca759c19a301f3/core-common-2.2.0.jar:/home/runner/.gradle/caches/modules-2/files-2.1/androidx.collection/collection/1.1.0/1f27220b47669781457de0d600849a5de0e89909/collection-1.1.0.jar:/home/runner/.gradle/caches/modules-2/files-2.1/androidx.annotation/annotation-jvm/1.10.0/388cfaa79001d0f024d28f6a13d5a3dfc2f0e18f/annotation-jvm-1.10.0.jar:/home/runner/.gradle/caches/9.3.1/transforms/8a8f3e1aa984b75d2319f739d75ab7a0/transformed/window-1.2.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/52acac2bbb679a3a6feaae8ef8e2d8bb/transformed/window-java-1.2.0-api.jar:/home/runner/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlinx/kotlinx-coroutines-android/1.9.0/6cf3b8df5a2ce8c6b0dffe55657a827c405ee2fe/kotlinx-coroutines-android-1.9.0.jar:/home/runner/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlinx/kotlinx-coroutines-core-jvm/1.9.0/9beade4c1c1569e4f36cbd2c37e02e3e41502601/kotlinx-coroutines-core-jvm-1.9.0.jar:/home/runner/.gradle/caches/9.3.1/transforms/d4c291394c798f037d74e4159aa8f17e/transformed/runtime-annotation-api.jar:/home/runner/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/2.4.0/4e9f4b531dce5c7dee58ed2de9a8b9a763c8dc6c/kotlin-stdlib-2.4.0.jar:/home/runner/.gradle/caches/9.3.1/transforms/c5b0e5d9615c9b7018b6475c8377ab24/transformed/exifinterface-1.4.2-api.jar:/home/runner/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/23.0.0/8cc20c07506ec18e0834947b84a864bfc094484e/annotations-23.0.0.jar:/home/runner/.gradle/caches/modules-2/files-2.1/com.google.guava/listenablefuture/1.0/c949a840a6acbc5268d088e47b04177bf90b3cad/listenablefuture-1.0.jar:/home/runner/.gradle/caches/modules-2/files-2.1/org.jspecify/jspecify/1.0.0/7425a601c1c7ec76645a78d22b8c6a627edee507/jspecify-1.0.0.jar:/home/runner/.gradle/caches/9.3.1/transforms/a004d937aa6a8b5840f65ed0d12a29c7/transformed/tracing-1.2.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/6fc6a1db7cc21fae735951620ceb89a0/transformed/relinker-1.4.5-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/9a4634247faf03f4a8c522f04e33b098/transformed/startup-runtime-1.1.1-api.jar -d /home/runner/work/szuflada/szuflada/build/image_picker_android/tmp/kotlin-classes/release -jvm-target 17 -module-name io.flutter.plugins.imagepicker:image_picker_android_release -no-jdk -no-reflect -no-stdlib /home/runner/.pub-cache/hosted/pub.dev/image_picker_android-0.8.13+25/android/src/main/java/io/flutter/plugins/imagepicker/FileUtils.java /home/runner/.pub-cache/hosted/pub.dev/image_picker_android-0.8.13+25/android/src/main/java/io/flutter/plugins/imagepicker/ImagePickerUtils.java /home/runner/.pub-cache/hosted/pub.dev/image_picker_android-0.8.13+25/android/src/main/java/io/flutter/plugins/imagepicker/ImagePickerCache.java /home/runner/.pub-cache/hosted/pub.dev/image_picker_android-0.8.13+25/android/src/main/java/io/flutter/plugins/imagepicker/ImagePickerDelegate.java /home/runner/.pub-cache/hosted/pub.dev/image_picker_android-0.8.13+25/android/src/main/java/io/flutter/plugins/imagepicker/ImagePickerFileProvider.java /home/runner/.pub-cache/hosted/pub.dev/image_picker_android-0.8.13+25/android/src/main/java/io/flutter/plugins/imagepicker/ExifDataCopier.java /home/runner/.pub-cache/hosted/pub.dev/image_picker_android-0.8.13+25/android/src/main/java/io/flutter/plugins/imagepicker/ImagePickerPlugin.java /home/runner/.pub-cache/hosted/pub.dev/image_picker_android-0.8.13+25/android/src/main/java/io/flutter/plugins/imagepicker/ImageResizer.java /home/runner/.pub-cache/hosted/pub.dev/image_picker_android-0.8.13+25/android/src/main/kotlin/io/flutter/plugins/imagepicker/Messages.kt /home/runner/.pub-cache/hosted/pub.dev/image_picker_android-0.8.13+25/android/src/main/kotlin/io/flutter/plugins/imagepicker/ResultUtils.kt
+2026-10-26 20:13:18.831 [daemon] INFO: Message: logging: using Kotlin home directory <no_path>
+2026-10-26 20:13:18.832 [daemon] INFO: Message: logging: exception on loading scripting plugin: java.lang.ClassNotFoundException: org.jetbrains.kotlin.scripting.compiler.plugin.ScriptingCompilerConfigurationComponentRegistrar
+2026-10-26 20:13:18.832 [daemon] INFO: Message: logging: scripting plugin will not be loaded: not all required jars are present in the classpath (missing files: [./kotlin-scripting-compiler.jar, ./kotlin-scripting-compiler-impl.jar, ./kotlin-scripting-common.jar, ./kotlin-scripting-jvm.jar])
+2026-10-26 20:13:18.832 [daemon] INFO: Message: logging: configuring the compilation environment
+2026-10-26 20:13:18.833 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/image_picker_android/tmp/kotlin-classes/release/io/flutter/plugins/imagepicker/MessagesPigeonUtils.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/image_picker_android-0.8.13+25/android/src/main/kotlin/io/flutter/plugins/imagepicker/Messages.kt
+2026-10-26 20:13:18.834 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/image_picker_android/tmp/kotlin-classes/release/io/flutter/plugins/imagepicker/FlutterError.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/image_picker_android-0.8.13+25/android/src/main/kotlin/io/flutter/plugins/imagepicker/Messages.kt
+2026-10-26 20:13:18.835 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/image_picker_android/tmp/kotlin-classes/release/io/flutter/plugins/imagepicker/SourceCamera.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/image_picker_android-0.8.13+25/android/src/main/kotlin/io/flutter/plugins/imagepicker/Messages.kt
+2026-10-26 20:13:18.835 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/image_picker_android/tmp/kotlin-classes/release/io/flutter/plugins/imagepicker/SourceCamera$Companion.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/image_picker_android-0.8.13+25/android/src/main/kotlin/io/flutter/plugins/imagepicker/Messages.kt
+2026-10-26 20:13:18.836 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/image_picker_android/tmp/kotlin-classes/release/io/flutter/plugins/imagepicker/SourceType.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/image_picker_android-0.8.13+25/android/src/main/kotlin/io/flutter/plugins/imagepicker/Messages.kt
+2026-10-26 20:13:18.837 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/image_picker_android/tmp/kotlin-classes/release/io/flutter/plugins/imagepicker/SourceType$Companion.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/image_picker_android-0.8.13+25/android/src/main/kotlin/io/flutter/plugins/imagepicker/Messages.kt
+2026-10-26 20:13:18.837 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/image_picker_android/tmp/kotlin-classes/release/io/flutter/plugins/imagepicker/CacheRetrievalType.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/image_picker_android-0.8.13+25/android/src/main/kotlin/io/flutter/plugins/imagepicker/Messages.kt
+2026-10-26 20:13:18.838 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/image_picker_android/tmp/kotlin-classes/release/io/flutter/plugins/imagepicker/CacheRetrievalType$Companion.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/image_picker_android-0.8.13+25/android/src/main/kotlin/io/flutter/plugins/imagepicker/Messages.kt
+2026-10-26 20:13:18.838 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/image_picker_android/tmp/kotlin-classes/release/io/flutter/plugins/imagepicker/GeneralOptions.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/image_picker_android-0.8.13+25/android/src/main/kotlin/io/flutter/plugins/imagepicker/Messages.kt
+2026-10-26 20:13:18.839 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/image_picker_android/tmp/kotlin-classes/release/io/flutter/plugins/imagepicker/GeneralOptions$Companion.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/image_picker_android-0.8.13+25/android/src/main/kotlin/io/flutter/plugins/imagepicker/Messages.kt
+2026-10-26 20:13:18.839 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/image_picker_android/tmp/kotlin-classes/release/io/flutter/plugins/imagepicker/ImageSelectionOptions.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/image_picker_android-0.8.13+25/android/src/main/kotlin/io/flutter/plugins/imagepicker/Messages.kt
+2026-10-26 20:13:18.840 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/image_picker_android/tmp/kotlin-classes/release/io/flutter/plugins/imagepicker/ImageSelectionOptions$Companion.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/image_picker_android-0.8.13+25/android/src/main/kotlin/io/flutter/plugins/imagepicker/Messages.kt
+2026-10-26 20:13:18.840 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/image_picker_android/tmp/kotlin-classes/release/io/flutter/plugins/imagepicker/MediaSelectionOptions.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/image_picker_android-0.8.13+25/android/src/main/kotlin/io/flutter/plugins/imagepicker/Messages.kt
+2026-10-26 20:13:18.841 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/image_picker_android/tmp/kotlin-classes/release/io/flutter/plugins/imagepicker/MediaSelectionOptions$Companion.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/image_picker_android-0.8.13+25/android/src/main/kotlin/io/flutter/plugins/imagepicker/Messages.kt
+2026-10-26 20:13:18.841 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/image_picker_android/tmp/kotlin-classes/release/io/flutter/plugins/imagepicker/VideoSelectionOptions.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/image_picker_android-0.8.13+25/android/src/main/kotlin/io/flutter/plugins/imagepicker/Messages.kt
+2026-10-26 20:13:18.842 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/image_picker_android/tmp/kotlin-classes/release/io/flutter/plugins/imagepicker/VideoSelectionOptions$Companion.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/image_picker_android-0.8.13+25/android/src/main/kotlin/io/flutter/plugins/imagepicker/Messages.kt
+2026-10-26 20:13:18.842 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/image_picker_android/tmp/kotlin-classes/release/io/flutter/plugins/imagepicker/SourceSpecification.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/image_picker_android-0.8.13+25/android/src/main/kotlin/io/flutter/plugins/imagepicker/Messages.kt
+2026-10-26 20:13:18.843 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/image_picker_android/tmp/kotlin-classes/release/io/flutter/plugins/imagepicker/SourceSpecification$Companion.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/image_picker_android-0.8.13+25/android/src/main/kotlin/io/flutter/plugins/imagepicker/Messages.kt
+2026-10-26 20:13:18.843 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/image_picker_android/tmp/kotlin-classes/release/io/flutter/plugins/imagepicker/CacheRetrievalError.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/image_picker_android-0.8.13+25/android/src/main/kotlin/io/flutter/plugins/imagepicker/Messages.kt
+2026-10-26 20:13:18.844 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/image_picker_android/tmp/kotlin-classes/release/io/flutter/plugins/imagepicker/CacheRetrievalError$Companion.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/image_picker_android-0.8.13+25/android/src/main/kotlin/io/flutter/plugins/imagepicker/Messages.kt
+2026-10-26 20:13:18.844 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/image_picker_android/tmp/kotlin-classes/release/io/flutter/plugins/imagepicker/CacheRetrievalResult.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/image_picker_android-0.8.13+25/android/src/main/kotlin/io/flutter/plugins/imagepicker/Messages.kt
+2026-10-26 20:13:18.845 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/image_picker_android/tmp/kotlin-classes/release/io/flutter/plugins/imagepicker/CacheRetrievalResult$Companion.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/image_picker_android-0.8.13+25/android/src/main/kotlin/io/flutter/plugins/imagepicker/Messages.kt
+2026-10-26 20:13:18.845 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/image_picker_android/tmp/kotlin-classes/release/io/flutter/plugins/imagepicker/MessagesPigeonCodec.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/image_picker_android-0.8.13+25/android/src/main/kotlin/io/flutter/plugins/imagepicker/Messages.kt
+2026-10-26 20:13:18.846 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/image_picker_android/tmp/kotlin-classes/release/io/flutter/plugins/imagepicker/ImagePickerApi.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/image_picker_android-0.8.13+25/android/src/main/kotlin/io/flutter/plugins/imagepicker/Messages.kt
+2026-10-26 20:13:18.848 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/image_picker_android/tmp/kotlin-classes/release/io/flutter/plugins/imagepicker/ImagePickerApi$Companion.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/image_picker_android-0.8.13+25/android/src/main/kotlin/io/flutter/plugins/imagepicker/Messages.kt
+2026-10-26 20:13:18.849 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/image_picker_android/tmp/kotlin-classes/release/io/flutter/plugins/imagepicker/ResultUtilsKt.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/image_picker_android-0.8.13+25/android/src/main/kotlin/io/flutter/plugins/imagepicker/ResultUtils.kt
+2026-10-26 20:13:18.849 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/image_picker_android/tmp/kotlin-classes/release/META-INF/io.flutter.plugins.imagepicker_image_picker_android_release.kotlin_module
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/image_picker_android-0.8.13+25/android/src/main/kotlin/io/flutter/plugins/imagepicker/Messages.kt
+/home/runner/.pub-cache/hosted/pub.dev/image_picker_android-0.8.13+25/android/src/main/kotlin/io/flutter/plugins/imagepicker/ResultUtils.kt
+2026-10-26 20:13:19.207 [compiler] INFO: getDaemonJVMOptions: DaemonJVMOptions(maxMemory=8G, maxMetaspaceSize=4G, reservedCodeCacheSize=512m, jvmParams=[-Djava.awt.headless=true, -Djava.rmi.server.hostname=127.0.0.1, -Dkotlin.environment.keepalive, -ea, -Dkotlin.daemon.custom.run.files.path.for.tests=/home/runner/.kotlin/daemon, -XX:+UseCodeCacheFlushing, -XX:+UseParallelGC, -Dkotlin.daemon.initiator.marker.file=/tmp/kotlin-compiler-client-2102677954299698622-is-running, --add-exports=java.base/sun.nio.ch=ALL-UNNAMED, Dkotlin.environment.keepalive, ea])
+2026-10-26 20:13:19.211 [compiler] INFO: Registered a client alive file: /tmp/kotlin-compiler-client-2102677954299698622-is-running
+2026-10-26 20:13:19.212 [compiler] INFO: leased a new session 2, session alive file: /tmp/kotlin-compilation-session-16216656802023742453-is-running
+2026-10-26 20:13:19.226 [compiler] INFO: Starting compilation with args: -Xallow-no-source-files -classpath /usr/local/lib/android/sdk/platforms/android-36/android.jar:/usr/local/lib/android/sdk/build-tools/36.0.0/core-lambda-stubs.jar:/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/intermediates/compile_r_class_jar/release/generateReleaseRFile/R.jar:/home/runner/.gradle/caches/modules-2/files-2.1/io.flutter/flutter_embedding_release/1.0.0-cf636b1dfb818dd6a3ff16e390e93b1a036969c8/d217f3ddfe4bafb9745d9c5267fdab477bb915c/flutter_embedding_release-1.0.0-cf636b1dfb818dd6a3ff16e390e93b1a036969c8.jar:/home/runner/.gradle/caches/9.3.1/transforms/74d8e993a020b2e1aacee88e7159da50/transformed/billing-9.1.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/f1fb65d3bcd8e5b223d6b85871cbda73/transformed/play-services-location-19.0.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/beb7cd63af26fbe515e7b187a92bb5bb/transformed/play-services-base-18.5.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/86dcdd57f08c0adaf05090c928ff9deb/transformed/play-services-tasks-18.2.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/a84a45f106b4b8342ba625d120030a4b/transformed/play-services-places-placereport-17.0.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/ba9d0d566e696f89c9b621cc577d7269/transformed/play-services-basement-18.9.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/f796811feda99eece882f76180e3857a/transformed/fragment-1.7.1-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/520619d7e9a60bff67a03a23e0939bc5/transformed/activity-1.8.1-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/fc55f5bb727c8671c951640c0d4498ba/transformed/loader-1.0.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/19a20cbf72e6321aa9586dc52a92c1c5/transformed/lifecycle-livedata-core-ktx-2.7.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/961111a85b57977bf784ce27e450afb6/transformed/lifecycle-livedata-2.7.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/7284b3526fc4fd97751646a63c45f78b/transformed/lifecycle-livedata-core-2.7.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/a58fbea6b7704ddc93de691feea2e339/transformed/lifecycle-viewmodel-2.7.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/35c2d2de606fb0b3e6e285b86c33a18d/transformed/lifecycle-runtime-2.7.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/b469c4b9f6b2e19d16af2c7d6b90c761/transformed/lifecycle-process-2.7.0-api.jar:/home/runner/.gradle/caches/modules-2/files-2.1/androidx.lifecycle/lifecycle-common-java8/2.7.0/2ad14aed781c4a73ed4dbb421966d408a0a06686/lifecycle-common-java8-2.7.0.jar:/home/runner/.gradle/caches/modules-2/files-2.1/androidx.lifecycle/lifecycle-common/2.7.0/85334205d65cca70ed0109c3acbd29e22a2d9cb1/lifecycle-common-2.7.0.jar:/home/runner/.gradle/caches/9.3.1/transforms/3ce635fc0d68f184f5012f054eeec323/transformed/lifecycle-viewmodel-savedstate-2.7.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/0261a958c579f70a9eaab5fb4bcfaf1a/transformed/core-ktx-1.2.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/c05551ddb812bab574c8c294bcf83c90/transformed/viewpager-1.0.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/07115ed611bc420811b48daa75db2cd4/transformed/customview-1.0.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/0981a102f95c6845e344fdf4f10a4135/transformed/core-1.15.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/985ec846968309834570b888453f195c/transformed/transport-backend-cct-3.1.8-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/1f47ff9198f259094f5949c0d450f43e/transformed/transport-runtime-3.1.8-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/459648e15b2b687bd4c4819e68d64a3b/transformed/transport-api-3.0.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/bea504738426426f4512d82d48fe00d4/transformed/versionedparcelable-1.1.1-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/73d46f4590d5703b5cd540663d8c2fd9/transformed/firebase-encoders-json-18.0.0-api.jar:/home/runner/.gradle/caches/modules-2/files-2.1/com.google.firebase/firebase-encoders-proto/16.0.0/a42d5fd83b96ae7b73a8617d29c94703e18c9992/firebase-encoders-proto-16.0.0.jar:/home/runner/.gradle/caches/modules-2/files-2.1/com.google.firebase/firebase-encoders/17.0.0/26f52dc549c42575b155f8c720e84059ee600a85/firebase-encoders-17.0.0.jar:/home/runner/.gradle/caches/9.3.1/transforms/645d64b24c4bb8eee647c651c99462f6/transformed/core-runtime-2.2.0-api.jar:/home/runner/.gradle/caches/modules-2/files-2.1/androidx.arch.core/core-common/2.2.0/5e1b8b81dfd5f52c56a8d53b18ca759c19a301f3/core-common-2.2.0.jar:/home/runner/.gradle/caches/modules-2/files-2.1/androidx.collection/collection/1.1.0/1f27220b47669781457de0d600849a5de0e89909/collection-1.1.0.jar:/home/runner/.gradle/caches/9.3.1/transforms/9540aadaf24ecbc75e4063a9cfb2b8da/transformed/savedstate-1.2.1-api.jar:/home/runner/.gradle/caches/modules-2/files-2.1/androidx.annotation/annotation-jvm/1.10.0/388cfaa79001d0f024d28f6a13d5a3dfc2f0e18f/annotation-jvm-1.10.0.jar:/home/runner/.gradle/caches/9.3.1/transforms/8a8f3e1aa984b75d2319f739d75ab7a0/transformed/window-1.2.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/52acac2bbb679a3a6feaae8ef8e2d8bb/transformed/window-java-1.2.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/65a325726f0c919bc1973e1dddeb3da7/transformed/annotation-experimental-1.4.1-api.jar:/home/runner/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlinx/kotlinx-coroutines-core-jvm/1.7.1/63a0779cf668e2a47d13fda7c3b0c4f8dc7762f4/kotlinx-coroutines-core-jvm-1.7.1.jar:/home/runner/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlinx/kotlinx-coroutines-android/1.7.1/c2d86b569f10b7fc7e28d3f50c0eed97897d77a7/kotlinx-coroutines-android-1.7.1.jar:/home/runner/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-jdk8/1.8.20/73576ddf378c5b4f1f6b449fe6b119b8183fc078/kotlin-stdlib-jdk8-1.8.20.jar:/home/runner/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-jdk7/1.8.20/3aa51faf20aae8b31e1a4bc54f8370673d7b7df4/kotlin-stdlib-jdk7-1.8.20.jar:/home/runner/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/2.4.0/4e9f4b531dce5c7dee58ed2de9a8b9a763c8dc6c/kotlin-stdlib-2.4.0.jar:/home/runner/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/23.0.0/8cc20c07506ec18e0834947b84a864bfc094484e/annotations-23.0.0.jar:/home/runner/.gradle/caches/9.3.1/transforms/a004d937aa6a8b5840f65ed0d12a29c7/transformed/tracing-1.2.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/6fc6a1db7cc21fae735951620ceb89a0/transformed/relinker-1.4.5-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/a841bfa07fa9a42eef5b7467afca48b3/transformed/exifinterface-1.4.1-api.jar:/home/runner/.gradle/caches/modules-2/files-2.1/javax.inject/javax.inject/1/6975da39a7040257bd51d21a231b76c915872d38/javax.inject-1.jar:/home/runner/.gradle/caches/9.3.1/transforms/9a4634247faf03f4a8c522f04e33b098/transformed/startup-runtime-1.1.1-api.jar:/home/runner/.gradle/caches/modules-2/files-2.1/org.jspecify/jspecify/1.0.0/7425a601c1c7ec76645a78d22b8c6a627edee507/jspecify-1.0.0.jar -d /home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release -jvm-target 17 -module-name io.flutter.plugins.inapppurchase:in_app_purchase_android_release -no-jdk -no-reflect -no-stdlib /home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/java/io/flutter/plugins/inapppurchase/BillingClientFactory.java /home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/java/io/flutter/plugins/inapppurchase/InAppPurchasePlugin.java /home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/java/io/flutter/plugins/inapppurchase/BillingClientFactoryImpl.java /home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/java/io/flutter/plugins/inapppurchase/PluginPurchaseListener.java /home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/java/io/flutter/plugins/inapppurchase/MethodCallHandlerImpl.java /home/runner/work/szuflada/szuflada/build/in_app_purchase_android/generated/source/buildConfig/release/io/flutter/plugins/inapppurchase/BuildConfig.java /home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt /home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Translator.kt /home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/ResultUtils.kt
+2026-10-26 20:13:19.244 [compiler] INFO: Done with result 0
+2026-10-26 20:13:19.248 [compiler] INFO: cleaning after session 1
+2026-10-26 20:13:23.031 [compiler] INFO: getDaemonJVMOptions: DaemonJVMOptions(maxMemory=8G, maxMetaspaceSize=4G, reservedCodeCacheSize=512m, jvmParams=[-Djava.awt.headless=true, -Djava.rmi.server.hostname=127.0.0.1, -Dkotlin.environment.keepalive, -ea, -Dkotlin.daemon.custom.run.files.path.for.tests=/home/runner/.kotlin/daemon, -XX:+UseCodeCacheFlushing, -XX:+UseParallelGC, -Dkotlin.daemon.initiator.marker.file=/tmp/kotlin-compiler-client-2102677954299698622-is-running, --add-exports=java.base/sun.nio.ch=ALL-UNNAMED, Dkotlin.environment.keepalive, ea])
+2026-10-26 20:13:23.040 [compiler] INFO: Registered a client alive file: /tmp/kotlin-compiler-client-2102677954299698622-is-running
+2026-10-26 20:13:23.042 [compiler] INFO: leased a new session 3, session alive file: /tmp/kotlin-compilation-session-16216656802023742453-is-running
+2026-10-26 20:13:23.091 [compiler] INFO: Starting compilation with args: -Xallow-no-source-files -classpath /usr/local/lib/android/sdk/platforms/android-36/android.jar:/usr/local/lib/android/sdk/build-tools/36.0.0/core-lambda-stubs.jar:/home/runner/work/szuflada/szuflada/build/shared_preferences_android/intermediates/compile_r_class_jar/release/generateReleaseRFile/R.jar:/home/runner/work/szuflada/szuflada/build/jni/intermediates/compile_library_classes_jar/release/bundleLibCompileToJarRelease/classes.jar:/home/runner/.gradle/caches/9.3.1/transforms/ef7791021d16b3cb5ffe4be3da8ffde3/transformed/datastore-preferences-core-api.jar:/home/runner/.gradle/caches/modules-2/files-2.1/androidx.datastore/datastore-core-okio-jvm/1.2.1/16e01a0603ce8cf206b21a304ff1ded7a9bff1da/datastore-core-okio-jvm-1.2.1.jar:/home/runner/.gradle/caches/9.3.1/transforms/4d0a35e7fffbbe1e7977f67f44c2bdf4/transformed/datastore-core-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/c0f87f7066af461cd59f4470a4b2405f/transformed/datastore-preferences-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/dd616f45764cee433e13986b899657d2/transformed/datastore-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/469b5f21336437c66f12bf649275b3e8/transformed/preference-1.2.1-api.jar:/home/runner/.gradle/caches/modules-2/files-2.1/io.flutter/flutter_embedding_release/1.0.0-cf636b1dfb818dd6a3ff16e390e93b1a036969c8/d217f3ddfe4bafb9745d9c5267fdab477bb915c/flutter_embedding_release-1.0.0-cf636b1dfb818dd6a3ff16e390e93b1a036969c8.jar:/home/runner/.gradle/caches/9.3.1/transforms/8b931e55e169f69b97aa053a4156500f/transformed/appcompat-1.1.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/e4d59aa1ce5eb93499455c743b848e15/transformed/recyclerview-1.0.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/951530b1fdcb25f794d78f383690d528/transformed/appcompat-resources-1.1.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/d41740d0db40ea7727da453f16d7ffaf/transformed/legacy-support-core-ui-1.0.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/7ddb8abdc2a6c967ec47314a13464012/transformed/drawerlayout-1.0.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/dc2b9258cfcd27dc00a7e5e81cc98510/transformed/slidingpanelayout-1.2.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/ba6d227b02edd53157c83521148ff623/transformed/fragment-ktx-1.7.1-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/f796811feda99eece882f76180e3857a/transformed/fragment-1.7.1-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/c05551ddb812bab574c8c294bcf83c90/transformed/viewpager-1.0.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/d68f40283527e69c4aab1a9ecb85bee6/transformed/coordinatorlayout-1.0.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/a204b648fdf35d6be07526f52a07f042/transformed/customview-1.1.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/1239baea2b530b2d67ec79170c19c03f/transformed/activity-ktx-1.8.1-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/520619d7e9a60bff67a03a23e0939bc5/transformed/activity-1.8.1-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/2d39882407bd881ff41ec20724ede8e6/transformed/legacy-support-core-utils-1.0.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/fc55f5bb727c8671c951640c0d4498ba/transformed/loader-1.0.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/2687e45343a25d458d3a4e9361e5d156/transformed/vectordrawable-animated-1.1.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/6e6c38016f24f9db459544a2acc4f5d2/transformed/vectordrawable-1.1.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/9f86bcb8baa06a90fac39b951725c6d6/transformed/swiperefreshlayout-1.0.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/9c653475f21b80959825bf181eaae44b/transformed/asynclayoutinflater-1.0.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/13bd81d05d5e9ee2aa38822423a1fc71/transformed/lifecycle-runtime-ktx-2.7.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/961111a85b57977bf784ce27e450afb6/transformed/lifecycle-livedata-2.7.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/fe0dc1f79b1e83ec55867ff7c0fbf0b7/transformed/lifecycle-viewmodel-ktx-2.7.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/19a20cbf72e6321aa9586dc52a92c1c5/transformed/lifecycle-livedata-core-ktx-2.7.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/a58fbea6b7704ddc93de691feea2e339/transformed/lifecycle-viewmodel-2.7.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/7284b3526fc4fd97751646a63c45f78b/transformed/lifecycle-livedata-core-2.7.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/b469c4b9f6b2e19d16af2c7d6b90c761/transformed/lifecycle-process-2.7.0-api.jar:/home/runner/.gradle/caches/modules-2/files-2.1/androidx.lifecycle/lifecycle-common-java8/2.7.0/2ad14aed781c4a73ed4dbb421966d408a0a06686/lifecycle-common-java8-2.7.0.jar:/home/runner/.gradle/caches/modules-2/files-2.1/androidx.lifecycle/lifecycle-common/2.7.0/85334205d65cca70ed0109c3acbd29e22a2d9cb1/lifecycle-common-2.7.0.jar:/home/runner/.gradle/caches/9.3.1/transforms/35c2d2de606fb0b3e6e285b86c33a18d/transformed/lifecycle-runtime-2.7.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/3ce635fc0d68f184f5012f054eeec323/transformed/lifecycle-viewmodel-savedstate-2.7.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/63503da9d174eea7cac42f68e685767f/transformed/core-ktx-1.9.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/97f16fdef81ab16c454946a365fc3d9b/transformed/core-1.13.1-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/8a8f3e1aa984b75d2319f739d75ab7a0/transformed/window-1.2.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/52acac2bbb679a3a6feaae8ef8e2d8bb/transformed/window-java-1.2.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/7657cbabe48eeea3c7d4edc4511db6d3/transformed/annotation-experimental-1.4.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/7da184353e1ba6bdb3f34a042474dc5d/transformed/savedstate-ktx-1.2.1-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/9540aadaf24ecbc75e4063a9cfb2b8da/transformed/savedstate-1.2.1-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/7956e260cce28e9196f1c559e4b9b2e3/transformed/cursoradapter-1.0.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/bea504738426426f4512d82d48fe00d4/transformed/versionedparcelable-1.1.1-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/645d64b24c4bb8eee647c651c99462f6/transformed/core-runtime-2.2.0-api.jar:/home/runner/.gradle/caches/modules-2/files-2.1/androidx.arch.core/core-common/2.2.0/5e1b8b81dfd5f52c56a8d53b18ca759c19a301f3/core-common-2.2.0.jar:/home/runner/.gradle/caches/modules-2/files-2.1/androidx.collection/collection-ktx/1.1.0/f807b2f366f7b75142a67d2f3c10031065b5168/collection-ktx-1.1.0.jar:/home/runner/.gradle/caches/modules-2/files-2.1/androidx.collection/collection/1.1.0/1f27220b47669781457de0d600849a5de0e89909/collection-1.1.0.jar:/home/runner/.gradle/caches/9.3.1/transforms/b2d414dcdf8eeb02e2524ff5a37f8b05/transformed/interpolator-1.0.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/b78ee695ae6122d3cb3df3da6e7a86d4/transformed/documentfile-1.0.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/3ca28156298a90fc6157eca795c468a8/transformed/localbroadcastmanager-1.0.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/295c4277bb3a752b501680a553697fe3/transformed/print-1.0.0-api.jar:/home/runner/.gradle/caches/modules-2/files-2.1/androidx.annotation/annotation-jvm/1.9.1/b17951747e38bf3986a24431b9ba0d039958aa5f/annotation-jvm-1.9.1.jar:/home/runner/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlinx/kotlinx-coroutines-android/1.9.0/6cf3b8df5a2ce8c6b0dffe55657a827c405ee2fe/kotlinx-coroutines-android-1.9.0.jar:/home/runner/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlinx/kotlinx-coroutines-core-jvm/1.9.0/9beade4c1c1569e4f36cbd2c37e02e3e41502601/kotlinx-coroutines-core-jvm-1.9.0.jar:/home/runner/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio-jvm/3.9.1/79696e3f4ff05d41ba2b3dc68adb5808a2e5dc53/okio-jvm-3.9.1.jar:/home/runner/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/2.4.0/4e9f4b531dce5c7dee58ed2de9a8b9a763c8dc6c/kotlin-stdlib-2.4.0.jar:/home/runner/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/23.0.0/8cc20c07506ec18e0834947b84a864bfc094484e/annotations-23.0.0.jar:/home/runner/.gradle/caches/9.3.1/transforms/a004d937aa6a8b5840f65ed0d12a29c7/transformed/tracing-1.2.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/6fc6a1db7cc21fae735951620ceb89a0/transformed/relinker-1.4.5-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/a841bfa07fa9a42eef5b7467afca48b3/transformed/exifinterface-1.4.1-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/9a4634247faf03f4a8c522f04e33b098/transformed/startup-runtime-1.1.1-api.jar:/home/runner/.gradle/caches/modules-2/files-2.1/org.jspecify/jspecify/1.0.0/7425a601c1c7ec76645a78d22b8c6a627edee507/jspecify-1.0.0.jar -d /home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release -jvm-target 17 -module-name io.flutter.plugins.sharedpreferences:shared_preferences_android_release -no-jdk -no-reflect -no-stdlib /home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/MessagesAsync.g.kt /home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt /home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/Messages.g.kt /home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesListEncoder.kt /home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/LegacySharedPreferencesPlugin.kt /home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/StringListObjectInputStream.kt
+2026-10-26 20:13:23.983 [daemon] INFO: Message: logging: using Kotlin home directory <no_path>
+2026-10-26 20:13:23.984 [daemon] INFO: Message: logging: exception on loading scripting plugin: java.lang.ClassNotFoundException: org.jetbrains.kotlin.scripting.compiler.plugin.ScriptingCompilerConfigurationComponentRegistrar
+2026-10-26 20:13:23.984 [daemon] INFO: Message: logging: scripting plugin will not be loaded: not all required jars are present in the classpath (missing files: [./kotlin-scripting-compiler.jar, ./kotlin-scripting-compiler-impl.jar, ./kotlin-scripting-common.jar, ./kotlin-scripting-jvm.jar])
+2026-10-26 20:13:23.984 [daemon] INFO: Message: logging: configuring the compilation environment
+2026-10-26 20:13:23.984 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/MessagesPigeonUtils.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:23.988 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/FlutterError.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:23.989 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/PlatformBillingResponse.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:23.990 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/PlatformBillingResponse$Companion.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:23.991 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/PlatformInAppMessageResponse.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:23.991 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/PlatformInAppMessageResponse$Companion.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:23.992 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/PlatformReplacementMode.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:23.994 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/PlatformReplacementMode$Companion.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:23.996 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/PlatformProductType.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:23.997 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/PlatformProductType$Companion.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:24.000 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/PlatformBillingChoiceMode.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:24.001 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/PlatformBillingChoiceMode$Companion.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:24.002 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/PlatformBillingClientFeature.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:24.002 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/PlatformBillingClientFeature$Companion.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:24.004 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/PlatformPurchaseState.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:24.004 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/PlatformPurchaseState$Companion.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:24.005 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/PlatformRecurrenceMode.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:24.006 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/PlatformRecurrenceMode$Companion.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:24.008 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/PlatformQueryProduct.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:24.009 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/PlatformQueryProduct$Companion.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:24.009 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/PlatformAccountIdentifiers.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:24.010 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/PlatformAccountIdentifiers$Companion.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:24.010 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/PlatformBillingResult.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:24.010 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/PlatformBillingResult$Companion.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:24.012 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/PlatformOneTimePurchaseOfferDetails.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:24.013 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/PlatformOneTimePurchaseOfferDetails$Companion.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:24.013 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/PlatformProductDetails.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:24.014 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/PlatformProductDetails$Companion.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:24.014 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/PlatformProductDetailsResponse.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:24.016 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/PlatformProductDetailsResponse$Companion.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:24.017 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/PlatformAlternativeBillingOnlyReportingDetailsResponse.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:24.017 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/PlatformAlternativeBillingOnlyReportingDetailsResponse$Companion.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:24.018 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/PlatformInAppMessageResult.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:24.018 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/PlatformInAppMessageResult$Companion.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:24.019 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/PlatformBillingConfigResponse.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:24.019 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/PlatformBillingConfigResponse$Companion.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:24.019 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/PlatformBillingFlowParams.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:24.020 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/PlatformBillingFlowParams$Companion.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:24.020 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/PlatformPricingPhase.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:24.020 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/PlatformPricingPhase$Companion.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:24.021 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/PlatformPurchase.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:24.022 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/PlatformPurchase$Companion.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:24.022 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/PlatformPendingPurchaseUpdate.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:24.024 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/PlatformPendingPurchaseUpdate$Companion.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:24.025 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/PlatformPurchaseHistoryRecord.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:24.025 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/PlatformPurchaseHistoryRecord$Companion.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:24.025 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/PlatformPurchaseHistoryResponse.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:24.026 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/PlatformPurchaseHistoryResponse$Companion.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:24.026 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/PlatformPurchasesResponse.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:24.026 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/PlatformPurchasesResponse$Companion.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:24.027 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/PlatformSubscriptionOfferDetails.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:24.027 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/PlatformSubscriptionOfferDetails$Companion.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:24.027 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/PlatformUserChoiceDetails.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:24.028 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/PlatformUserChoiceDetails$Companion.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:24.028 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/PlatformUserChoiceProduct.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:24.028 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/PlatformUserChoiceProduct$Companion.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:24.029 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/PlatformInstallmentPlanDetails.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:24.029 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/PlatformInstallmentPlanDetails$Companion.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:24.030 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/PlatformPendingPurchasesParams.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:24.030 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/PlatformPendingPurchasesParams$Companion.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:24.031 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/PlatformUnfetchedProduct.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:24.031 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/PlatformUnfetchedProduct$Companion.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:24.031 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/MessagesPigeonCodec.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:24.031 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/InAppPurchaseApi.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:24.033 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/InAppPurchaseApi$Companion.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:24.035 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/InAppPurchaseCallbackApi.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:24.035 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/InAppPurchaseCallbackApi$Companion.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+2026-10-26 20:13:24.035 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/ResultCompat.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/ResultUtils.kt
+2026-10-26 20:13:24.036 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/ResultCompat$Companion.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/ResultUtils.kt
+2026-10-26 20:13:24.037 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/ResultUtilsKt.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/ResultUtils.kt
+2026-10-26 20:13:24.037 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/TranslatorKt.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Translator.kt
+2026-10-26 20:13:24.037 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/io/flutter/plugins/inapppurchase/TranslatorKt$WhenMappings.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Translator.kt
+2026-10-26 20:13:24.038 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/tmp/kotlin-classes/release/META-INF/io.flutter.plugins.inapppurchase_in_app_purchase_android_release.kotlin_module
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/ResultUtils.kt
+/home/runner/.pub-cache/hosted/pub.dev/in_app_purchase_android-0.5.5/android/src/main/kotlin/io/flutter/plugins/inapppurchase/Translator.kt
+2026-10-26 20:13:24.238 [compiler] INFO: Done with result 0
+2026-10-26 20:13:24.240 [compiler] INFO: cleaning after session 2
+2026-10-26 20:13:24.790 [compiler] INFO: getDaemonJVMOptions: DaemonJVMOptions(maxMemory=8G, maxMetaspaceSize=4G, reservedCodeCacheSize=512m, jvmParams=[-Djava.awt.headless=true, -Djava.rmi.server.hostname=127.0.0.1, -Dkotlin.environment.keepalive, -ea, -Dkotlin.daemon.custom.run.files.path.for.tests=/home/runner/.kotlin/daemon, -XX:+UseCodeCacheFlushing, -XX:+UseParallelGC, -Dkotlin.daemon.initiator.marker.file=/tmp/kotlin-compiler-client-2102677954299698622-is-running, --add-exports=java.base/sun.nio.ch=ALL-UNNAMED, Dkotlin.environment.keepalive, ea])
+2026-10-26 20:13:24.792 [compiler] INFO: Registered a client alive file: /tmp/kotlin-compiler-client-2102677954299698622-is-running
+2026-10-26 20:13:24.792 [compiler] INFO: leased a new session 4, session alive file: /tmp/kotlin-compilation-session-16216656802023742453-is-running
+2026-10-26 20:13:24.809 [compiler] INFO: Starting compilation with args: -Xallow-no-source-files -classpath /usr/local/lib/android/sdk/platforms/android-36/android.jar:/usr/local/lib/android/sdk/build-tools/36.0.0/core-lambda-stubs.jar:/home/runner/work/szuflada/szuflada/build/share_plus/intermediates/compile_r_class_jar/release/generateReleaseRFile/R.jar:/home/runner/.gradle/caches/modules-2/files-2.1/io.flutter/flutter_embedding_release/1.0.0-cf636b1dfb818dd6a3ff16e390e93b1a036969c8/d217f3ddfe4bafb9745d9c5267fdab477bb915c/flutter_embedding_release-1.0.0-cf636b1dfb818dd6a3ff16e390e93b1a036969c8.jar:/home/runner/.gradle/caches/9.3.1/transforms/f796811feda99eece882f76180e3857a/transformed/fragment-1.7.1-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/520619d7e9a60bff67a03a23e0939bc5/transformed/activity-1.8.1-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/fc55f5bb727c8671c951640c0d4498ba/transformed/loader-1.0.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/c05551ddb812bab574c8c294bcf83c90/transformed/viewpager-1.0.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/07115ed611bc420811b48daa75db2cd4/transformed/customview-1.0.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/97f16fdef81ab16c454946a365fc3d9b/transformed/core-1.13.1-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/19a20cbf72e6321aa9586dc52a92c1c5/transformed/lifecycle-livedata-core-ktx-2.7.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/961111a85b57977bf784ce27e450afb6/transformed/lifecycle-livedata-2.7.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/a58fbea6b7704ddc93de691feea2e339/transformed/lifecycle-viewmodel-2.7.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/7284b3526fc4fd97751646a63c45f78b/transformed/lifecycle-livedata-core-2.7.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/b469c4b9f6b2e19d16af2c7d6b90c761/transformed/lifecycle-process-2.7.0-api.jar:/home/runner/.gradle/caches/modules-2/files-2.1/androidx.lifecycle/lifecycle-common-java8/2.7.0/2ad14aed781c4a73ed4dbb421966d408a0a06686/lifecycle-common-java8-2.7.0.jar:/home/runner/.gradle/caches/modules-2/files-2.1/androidx.lifecycle/lifecycle-common/2.7.0/85334205d65cca70ed0109c3acbd29e22a2d9cb1/lifecycle-common-2.7.0.jar:/home/runner/.gradle/caches/9.3.1/transforms/35c2d2de606fb0b3e6e285b86c33a18d/transformed/lifecycle-runtime-2.7.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/3ce635fc0d68f184f5012f054eeec323/transformed/lifecycle-viewmodel-savedstate-2.7.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/a048d136b62f79b4b4e20d15d20dd27a/transformed/core-ktx-1.13.1-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/bea504738426426f4512d82d48fe00d4/transformed/versionedparcelable-1.1.1-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/645d64b24c4bb8eee647c651c99462f6/transformed/core-runtime-2.2.0-api.jar:/home/runner/.gradle/caches/modules-2/files-2.1/androidx.arch.core/core-common/2.2.0/5e1b8b81dfd5f52c56a8d53b18ca759c19a301f3/core-common-2.2.0.jar:/home/runner/.gradle/caches/modules-2/files-2.1/androidx.collection/collection/1.1.0/1f27220b47669781457de0d600849a5de0e89909/collection-1.1.0.jar:/home/runner/.gradle/caches/9.3.1/transforms/9540aadaf24ecbc75e4063a9cfb2b8da/transformed/savedstate-1.2.1-api.jar:/home/runner/.gradle/caches/modules-2/files-2.1/androidx.annotation/annotation-jvm/1.8.2/b8a16fe526014b7941c1debaccaf9c5153692dbb/annotation-jvm-1.8.2.jar:/home/runner/.gradle/caches/9.3.1/transforms/8a8f3e1aa984b75d2319f739d75ab7a0/transformed/window-1.2.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/52acac2bbb679a3a6feaae8ef8e2d8bb/transformed/window-java-1.2.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/7657cbabe48eeea3c7d4edc4511db6d3/transformed/annotation-experimental-1.4.0-api.jar:/home/runner/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlinx/kotlinx-coroutines-core-jvm/1.7.1/63a0779cf668e2a47d13fda7c3b0c4f8dc7762f4/kotlinx-coroutines-core-jvm-1.7.1.jar:/home/runner/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlinx/kotlinx-coroutines-android/1.7.1/c2d86b569f10b7fc7e28d3f50c0eed97897d77a7/kotlinx-coroutines-android-1.7.1.jar:/home/runner/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-jdk8/1.8.20/73576ddf378c5b4f1f6b449fe6b119b8183fc078/kotlin-stdlib-jdk8-1.8.20.jar:/home/runner/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-jdk7/1.8.20/3aa51faf20aae8b31e1a4bc54f8370673d7b7df4/kotlin-stdlib-jdk7-1.8.20.jar:/home/runner/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.8.22/636bf8b320e7627482771bbac9ed7246773c02bd/kotlin-stdlib-1.8.22.jar:/home/runner/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-common/1.8.22/1a8e3601703ae14bb58757ea6b2d8e8e5935a586/kotlin-stdlib-common-1.8.22.jar:/home/runner/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/23.0.0/8cc20c07506ec18e0834947b84a864bfc094484e/annotations-23.0.0.jar:/home/runner/.gradle/caches/9.3.1/transforms/a004d937aa6a8b5840f65ed0d12a29c7/transformed/tracing-1.2.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/6fc6a1db7cc21fae735951620ceb89a0/transformed/relinker-1.4.5-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/a841bfa07fa9a42eef5b7467afca48b3/transformed/exifinterface-1.4.1-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/9a4634247faf03f4a8c522f04e33b098/transformed/startup-runtime-1.1.1-api.jar:/home/runner/.gradle/caches/modules-2/files-2.1/org.jspecify/jspecify/1.0.0/7425a601c1c7ec76645a78d22b8c6a627edee507/jspecify-1.0.0.jar -d /home/runner/work/szuflada/szuflada/build/share_plus/tmp/kotlin-classes/release -jvm-target 17 -module-name dev.fluttercommunity.plus.share:share_plus_release -no-jdk -no-reflect -no-stdlib /home/runner/.pub-cache/hosted/pub.dev/share_plus-10.1.4/android/src/main/kotlin/dev/fluttercommunity/plus/share/Share.kt /home/runner/.pub-cache/hosted/pub.dev/share_plus-10.1.4/android/src/main/kotlin/dev/fluttercommunity/plus/share/MethodCallHandler.kt /home/runner/.pub-cache/hosted/pub.dev/share_plus-10.1.4/android/src/main/kotlin/dev/fluttercommunity/plus/share/ShareSuccessManager.kt /home/runner/.pub-cache/hosted/pub.dev/share_plus-10.1.4/android/src/main/kotlin/dev/fluttercommunity/plus/share/SharePlusPendingIntent.kt /home/runner/.pub-cache/hosted/pub.dev/share_plus-10.1.4/android/src/main/kotlin/dev/fluttercommunity/plus/share/SharePlusPlugin.kt /home/runner/.pub-cache/hosted/pub.dev/share_plus-10.1.4/android/src/main/kotlin/dev/fluttercommunity/plus/share/ShareFileProvider.kt
+2026-10-26 20:13:26.239 [daemon] INFO: Message: logging: using Kotlin home directory <no_path>
+2026-10-26 20:13:26.240 [daemon] INFO: Message: logging: exception on loading scripting plugin: java.lang.ClassNotFoundException: org.jetbrains.kotlin.scripting.compiler.plugin.ScriptingCompilerConfigurationComponentRegistrar
+2026-10-26 20:13:26.240 [daemon] INFO: Message: logging: scripting plugin will not be loaded: not all required jars are present in the classpath (missing files: [./kotlin-scripting-compiler.jar, ./kotlin-scripting-compiler-impl.jar, ./kotlin-scripting-common.jar, ./kotlin-scripting-jvm.jar])
+2026-10-26 20:13:26.240 [daemon] INFO: Message: logging: configuring the compilation environment
+2026-10-26 20:13:26.240 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/share_plus/tmp/kotlin-classes/release/dev/fluttercommunity/plus/share/MethodCallHandler.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/share_plus-10.1.4/android/src/main/kotlin/dev/fluttercommunity/plus/share/MethodCallHandler.kt
+2026-10-26 20:13:26.241 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/share_plus/tmp/kotlin-classes/release/dev/fluttercommunity/plus/share/Share.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/share_plus-10.1.4/android/src/main/kotlin/dev/fluttercommunity/plus/share/Share.kt
+2026-10-26 20:13:26.241 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/share_plus/tmp/kotlin-classes/release/dev/fluttercommunity/plus/share/ShareFileProvider.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/share_plus-10.1.4/android/src/main/kotlin/dev/fluttercommunity/plus/share/ShareFileProvider.kt
+2026-10-26 20:13:26.242 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/share_plus/tmp/kotlin-classes/release/dev/fluttercommunity/plus/share/SharePlusPendingIntent.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/share_plus-10.1.4/android/src/main/kotlin/dev/fluttercommunity/plus/share/SharePlusPendingIntent.kt
+2026-10-26 20:13:26.243 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/share_plus/tmp/kotlin-classes/release/dev/fluttercommunity/plus/share/SharePlusPendingIntent$Companion.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/share_plus-10.1.4/android/src/main/kotlin/dev/fluttercommunity/plus/share/SharePlusPendingIntent.kt
+2026-10-26 20:13:26.245 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/share_plus/tmp/kotlin-classes/release/dev/fluttercommunity/plus/share/SharePlusPlugin.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/share_plus-10.1.4/android/src/main/kotlin/dev/fluttercommunity/plus/share/SharePlusPlugin.kt
+2026-10-26 20:13:26.246 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/share_plus/tmp/kotlin-classes/release/dev/fluttercommunity/plus/share/SharePlusPlugin$Companion.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/share_plus-10.1.4/android/src/main/kotlin/dev/fluttercommunity/plus/share/SharePlusPlugin.kt
+2026-10-26 20:13:26.246 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/share_plus/tmp/kotlin-classes/release/dev/fluttercommunity/plus/share/ShareSuccessManager.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/share_plus-10.1.4/android/src/main/kotlin/dev/fluttercommunity/plus/share/ShareSuccessManager.kt
+2026-10-26 20:13:26.247 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/share_plus/tmp/kotlin-classes/release/dev/fluttercommunity/plus/share/ShareSuccessManager$Companion.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/share_plus-10.1.4/android/src/main/kotlin/dev/fluttercommunity/plus/share/ShareSuccessManager.kt
+2026-10-26 20:13:26.247 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/share_plus/tmp/kotlin-classes/release/META-INF/dev.fluttercommunity.plus.share_share_plus_release.kotlin_module
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/share_plus-10.1.4/android/src/main/kotlin/dev/fluttercommunity/plus/share/ShareFileProvider.kt
+/home/runner/.pub-cache/hosted/pub.dev/share_plus-10.1.4/android/src/main/kotlin/dev/fluttercommunity/plus/share/SharePlusPendingIntent.kt
+/home/runner/.pub-cache/hosted/pub.dev/share_plus-10.1.4/android/src/main/kotlin/dev/fluttercommunity/plus/share/SharePlusPlugin.kt
+/home/runner/.pub-cache/hosted/pub.dev/share_plus-10.1.4/android/src/main/kotlin/dev/fluttercommunity/plus/share/Share.kt
+/home/runner/.pub-cache/hosted/pub.dev/share_plus-10.1.4/android/src/main/kotlin/dev/fluttercommunity/plus/share/MethodCallHandler.kt
+/home/runner/.pub-cache/hosted/pub.dev/share_plus-10.1.4/android/src/main/kotlin/dev/fluttercommunity/plus/share/ShareSuccessManager.kt
+2026-10-26 20:13:26.538 [compiler] INFO: Done with result 0
+2026-10-26 20:13:26.542 [compiler] INFO: cleaning after session 4
+2026-10-26 20:13:26.834 [daemon] INFO: Message: logging: using Kotlin home directory <no_path>
+2026-10-26 20:13:26.835 [daemon] INFO: Message: logging: exception on loading scripting plugin: java.lang.ClassNotFoundException: org.jetbrains.kotlin.scripting.compiler.plugin.ScriptingCompilerConfigurationComponentRegistrar
+2026-10-26 20:13:26.835 [daemon] INFO: Message: logging: scripting plugin will not be loaded: not all required jars are present in the classpath (missing files: [./kotlin-scripting-compiler.jar, ./kotlin-scripting-compiler-impl.jar, ./kotlin-scripting-common.jar, ./kotlin-scripting-jvm.jar])
+2026-10-26 20:13:26.835 [daemon] INFO: Message: logging: configuring the compilation environment
+2026-10-26 20:13:26.835 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/LegacySharedPreferencesPlugin.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/LegacySharedPreferencesPlugin.kt
+2026-10-26 20:13:26.836 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/LegacySharedPreferencesPlugin$setBool$2.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/LegacySharedPreferencesPlugin.kt
+2026-10-26 20:13:26.836 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/LegacySharedPreferencesPlugin$setString$2.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/LegacySharedPreferencesPlugin.kt
+2026-10-26 20:13:26.836 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/LegacySharedPreferencesPlugin$setInt$2.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/LegacySharedPreferencesPlugin.kt
+2026-10-26 20:13:26.837 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/LegacySharedPreferencesPlugin$setDouble$2.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/LegacySharedPreferencesPlugin.kt
+2026-10-26 20:13:26.837 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/LegacySharedPreferencesPlugin$remove$2.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/LegacySharedPreferencesPlugin.kt
+2026-10-26 20:13:26.838 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/LegacySharedPreferencesPlugin$setEncodedStringList$2.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/LegacySharedPreferencesPlugin.kt
+2026-10-26 20:13:26.838 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/LegacySharedPreferencesPlugin$setDeprecatedStringList$2.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/LegacySharedPreferencesPlugin.kt
+2026-10-26 20:13:26.838 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/LegacySharedPreferencesPlugin$getAll$2.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/LegacySharedPreferencesPlugin.kt
+2026-10-26 20:13:26.839 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/LegacySharedPreferencesPlugin$clear$2.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/LegacySharedPreferencesPlugin.kt
+2026-10-26 20:13:26.839 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/LegacySharedPreferencesPlugin$ListEncoder.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/LegacySharedPreferencesPlugin.kt
+2026-10-26 20:13:26.840 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/LegacySharedPreferencesPlugin$Companion.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/LegacySharedPreferencesPlugin.kt
+2026-10-26 20:13:26.840 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/MessagesPigeonUtils.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/Messages.g.kt
+2026-10-26 20:13:26.840 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/FlutterError.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/Messages.g.kt
+2026-10-26 20:13:26.841 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesApi.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/Messages.g.kt
+2026-10-26 20:13:26.841 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesApiRegistrar.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/Messages.g.kt
+2026-10-26 20:13:26.841 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesApiRegistrar$remove$1.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/Messages.g.kt
+2026-10-26 20:13:26.842 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesApiRegistrar$setBool$1.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/Messages.g.kt
+2026-10-26 20:13:26.842 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesApiRegistrar$setString$1.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/Messages.g.kt
+2026-10-26 20:13:26.842 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesApiRegistrar$setInt$1.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/Messages.g.kt
+2026-10-26 20:13:26.843 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesApiRegistrar$setDouble$1.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/Messages.g.kt
+2026-10-26 20:13:26.843 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesApiRegistrar$setEncodedStringList$1.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/Messages.g.kt
+2026-10-26 20:13:26.843 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesApiRegistrar$setDeprecatedStringList$1.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/Messages.g.kt
+2026-10-26 20:13:26.844 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesApiRegistrar$clear$1.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/Messages.g.kt
+2026-10-26 20:13:26.844 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesApiRegistrar$getAll$1.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/Messages.g.kt
+2026-10-26 20:13:26.844 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/Messages_gKt.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/Messages.g.kt
+2026-10-26 20:13:26.845 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/MessagesAsyncPigeonUtils.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/MessagesAsync.g.kt
+2026-10-26 20:13:26.845 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesError.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/MessagesAsync.g.kt
+2026-10-26 20:13:26.846 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/StringListLookupResultType.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/MessagesAsync.g.kt
+2026-10-26 20:13:26.846 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/StringListLookupResultType$Companion.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/MessagesAsync.g.kt
+2026-10-26 20:13:26.846 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesPigeonOptions.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/MessagesAsync.g.kt
+2026-10-26 20:13:26.846 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesPigeonOptions$Companion.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/MessagesAsync.g.kt
+2026-10-26 20:13:26.847 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/StringListResult.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/MessagesAsync.g.kt
+2026-10-26 20:13:26.847 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/StringListResult$Companion.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/MessagesAsync.g.kt
+2026-10-26 20:13:26.847 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesAsyncApi.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/MessagesAsync.g.kt
+2026-10-26 20:13:26.848 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesAsyncApiRegistrar.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/MessagesAsync.g.kt
+2026-10-26 20:13:26.848 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesAsyncApiRegistrar$setBool$1.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/MessagesAsync.g.kt
+2026-10-26 20:13:26.849 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesAsyncApiRegistrar$setString$1.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/MessagesAsync.g.kt
+2026-10-26 20:13:26.849 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesAsyncApiRegistrar$setInt$1.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/MessagesAsync.g.kt
+2026-10-26 20:13:26.849 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesAsyncApiRegistrar$setDouble$1.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/MessagesAsync.g.kt
+2026-10-26 20:13:26.849 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesAsyncApiRegistrar$setEncodedStringList$1.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/MessagesAsync.g.kt
+2026-10-26 20:13:26.849 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesAsyncApiRegistrar$setDeprecatedStringList$1.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/MessagesAsync.g.kt
+2026-10-26 20:13:26.850 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesAsyncApiRegistrar$getString$1.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/MessagesAsync.g.kt
+2026-10-26 20:13:26.850 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesAsyncApiRegistrar$getBool$1.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/MessagesAsync.g.kt
+2026-10-26 20:13:26.850 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesAsyncApiRegistrar$getDouble$1.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/MessagesAsync.g.kt
+2026-10-26 20:13:26.851 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesAsyncApiRegistrar$getInt$1.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/MessagesAsync.g.kt
+2026-10-26 20:13:26.851 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesAsyncApiRegistrar$getPlatformEncodedStringList$1.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/MessagesAsync.g.kt
+2026-10-26 20:13:26.851 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesAsyncApiRegistrar$getStringList$1.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/MessagesAsync.g.kt
+2026-10-26 20:13:26.852 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesAsyncApiRegistrar$clear$1.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/MessagesAsync.g.kt
+2026-10-26 20:13:26.852 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesAsyncApiRegistrar$getAll$1.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/MessagesAsync.g.kt
+2026-10-26 20:13:26.852 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesAsyncApiRegistrar$getKeys$1.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/MessagesAsync.g.kt
+2026-10-26 20:13:26.853 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/MessagesAsync_gKt.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/MessagesAsync.g.kt
+2026-10-26 20:13:26.853 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesListEncoder.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesListEncoder.kt
+2026-10-26 20:13:26.853 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.853 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin$setBool$2.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.854 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin$setBool$2$1.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.854 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin$setBool$1.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.854 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin$setString$2.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.855 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin$dataStoreSetString$2.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.855 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin$dataStoreSetString$1.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.855 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin$setInt$2.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.856 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin$setInt$2$1.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.856 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin$setInt$1.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.856 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin$setDouble$2.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.856 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin$setDouble$2$1.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.857 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin$setDouble$1.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.857 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin$setEncodedStringList$2.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.857 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin$setDeprecatedStringList$2.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.857 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin$clear$2.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.858 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin$clear$2$1.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.858 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin$clear$1.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.858 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin$getAll$2.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.858 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin$getInt$2.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.859 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin$getInt$2$invokeSuspend$$inlined$map$1.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.859 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin$getInt$2$invokeSuspend$$inlined$map$1$1.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.859 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin$getInt$2$invokeSuspend$$inlined$map$1$2.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.860 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin$getInt$2$invokeSuspend$$inlined$map$1$2$1.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.860 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin$getBool$2.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.860 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin$getBool$2$invokeSuspend$$inlined$map$1.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.861 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin$getBool$2$invokeSuspend$$inlined$map$1$1.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.861 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin$getBool$2$invokeSuspend$$inlined$map$1$2.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.861 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin$getBool$2$invokeSuspend$$inlined$map$1$2$1.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.862 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin$getDouble$2.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.862 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin$getDouble$2$invokeSuspend$$inlined$map$1.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.862 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin$getDouble$2$invokeSuspend$$inlined$map$1$1.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.863 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin$getDouble$2$invokeSuspend$$inlined$map$1$2.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.863 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin$getDouble$2$invokeSuspend$$inlined$map$1$2$1.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.863 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin$getString$2.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.864 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin$getString$2$invokeSuspend$$inlined$map$1.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.864 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin$getString$2$invokeSuspend$$inlined$map$1$1.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.864 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin$getString$2$invokeSuspend$$inlined$map$1$2.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.865 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin$getString$2$invokeSuspend$$inlined$map$1$2$1.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.865 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin$getStringList$2.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.865 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin$getPlatformEncodedStringList$2.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.866 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin$getKeys$2.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.866 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin$getPrefs$1.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.866 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin$readAllKeys$$inlined$map$1.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.866 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin$readAllKeys$$inlined$map$1$1.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.867 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin$readAllKeys$$inlined$map$1$2.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.867 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin$readAllKeys$$inlined$map$1$2$1.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.867 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin$getValueByKey$$inlined$map$1.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.868 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin$getValueByKey$$inlined$map$1$1.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.868 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin$getValueByKey$$inlined$map$1$2.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.869 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin$getValueByKey$$inlined$map$1$2$1.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.869 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesBackend.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.869 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesBackend$setBool$2.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.870 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesBackend$setString$2.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.871 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesBackend$setInt$2.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.871 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesBackend$setDouble$2.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.872 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesBackend$setEncodedStringList$2.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.873 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesBackend$setDeprecatedStringList$2.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.873 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesBackend$clear$2.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.874 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesBackend$getAll$2.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.874 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesBackend$getInt$2.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.875 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesBackend$getBool$2.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.875 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesBackend$getDouble$2.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.876 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesBackend$getString$2.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.877 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesBackend$getStringList$2.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.877 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesBackend$getPlatformEncodedStringList$2.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.877 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesBackend$getKeys$2.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.878 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/ListEncoder.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.878 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/SharedPreferencesPluginKt.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+2026-10-26 20:13:26.879 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/io/flutter/plugins/sharedpreferences/StringListObjectInputStream.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/StringListObjectInputStream.kt
+2026-10-26 20:13:26.879 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/shared_preferences_android/tmp/kotlin-classes/release/META-INF/io.flutter.plugins.sharedpreferences_shared_preferences_android_release.kotlin_module
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/Messages.g.kt
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesPlugin.kt
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/SharedPreferencesListEncoder.kt
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/MessagesAsync.g.kt
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/LegacySharedPreferencesPlugin.kt
+/home/runner/.pub-cache/hosted/pub.dev/shared_preferences_android-2.5.3/android/src/main/kotlin/io/flutter/plugins/sharedpreferences/StringListObjectInputStream.kt
+2026-10-26 20:13:26.970 [compiler] INFO: Done with result 0
+2026-10-26 20:13:26.971 [compiler] INFO: cleaning after session 3
+2026-10-26 20:13:27.253 [compiler] INFO: getDaemonJVMOptions: DaemonJVMOptions(maxMemory=8G, maxMetaspaceSize=4G, reservedCodeCacheSize=512m, jvmParams=[-Djava.awt.headless=true, -Djava.rmi.server.hostname=127.0.0.1, -Dkotlin.environment.keepalive, -ea, -Dkotlin.daemon.custom.run.files.path.for.tests=/home/runner/.kotlin/daemon, -XX:+UseCodeCacheFlushing, -XX:+UseParallelGC, -Dkotlin.daemon.initiator.marker.file=/tmp/kotlin-compiler-client-2102677954299698622-is-running, --add-exports=java.base/sun.nio.ch=ALL-UNNAMED, Dkotlin.environment.keepalive, ea])
+2026-10-26 20:13:27.254 [compiler] INFO: Registered a client alive file: /tmp/kotlin-compiler-client-2102677954299698622-is-running
+2026-10-26 20:13:27.256 [compiler] INFO: leased a new session 5, session alive file: /tmp/kotlin-compilation-session-16216656802023742453-is-running
+2026-10-26 20:13:27.264 [compiler] INFO: Starting compilation with args: -Xallow-no-source-files -classpath /usr/local/lib/android/sdk/platforms/android-36/android.jar:/usr/local/lib/android/sdk/build-tools/36.0.0/core-lambda-stubs.jar:/home/runner/work/szuflada/szuflada/build/url_launcher_android/intermediates/compile_r_class_jar/release/generateReleaseRFile/R.jar:/home/runner/.gradle/caches/9.3.1/transforms/ed1fd955ad7448fa35caad7c1053e296/transformed/browser-1.9.0-api.jar:/home/runner/.gradle/caches/modules-2/files-2.1/io.flutter/flutter_embedding_release/1.0.0-cf636b1dfb818dd6a3ff16e390e93b1a036969c8/d217f3ddfe4bafb9745d9c5267fdab477bb915c/flutter_embedding_release-1.0.0-cf636b1dfb818dd6a3ff16e390e93b1a036969c8.jar:/home/runner/.gradle/caches/9.3.1/transforms/f796811feda99eece882f76180e3857a/transformed/fragment-1.7.1-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/520619d7e9a60bff67a03a23e0939bc5/transformed/activity-1.8.1-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/fc55f5bb727c8671c951640c0d4498ba/transformed/loader-1.0.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/19a20cbf72e6321aa9586dc52a92c1c5/transformed/lifecycle-livedata-core-ktx-2.7.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/961111a85b57977bf784ce27e450afb6/transformed/lifecycle-livedata-2.7.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/a58fbea6b7704ddc93de691feea2e339/transformed/lifecycle-viewmodel-2.7.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/7284b3526fc4fd97751646a63c45f78b/transformed/lifecycle-livedata-core-2.7.0-api.jar:/home/runner/.gradle/caches/modules-2/files-2.1/androidx.lifecycle/lifecycle-common-java8/2.7.0/2ad14aed781c4a73ed4dbb421966d408a0a06686/lifecycle-common-java8-2.7.0.jar:/home/runner/.gradle/caches/9.3.1/transforms/35c2d2de606fb0b3e6e285b86c33a18d/transformed/lifecycle-runtime-2.7.0-api.jar:/home/runner/.gradle/caches/modules-2/files-2.1/androidx.lifecycle/lifecycle-common/2.7.0/85334205d65cca70ed0109c3acbd29e22a2d9cb1/lifecycle-common-2.7.0.jar:/home/runner/.gradle/caches/9.3.1/transforms/b469c4b9f6b2e19d16af2c7d6b90c761/transformed/lifecycle-process-2.7.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/3ce635fc0d68f184f5012f054eeec323/transformed/lifecycle-viewmodel-savedstate-2.7.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/0261a958c579f70a9eaab5fb4bcfaf1a/transformed/core-ktx-1.2.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/c05551ddb812bab574c8c294bcf83c90/transformed/viewpager-1.0.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/07115ed611bc420811b48daa75db2cd4/transformed/customview-1.0.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/227d1f64aef825bde5935e55ffcf5be2/transformed/core-1.17.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/65a325726f0c919bc1973e1dddeb3da7/transformed/annotation-experimental-1.4.1-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/22cbc235653e33dd1a1830cbbba1ddcb/transformed/core-viewtree-1.0.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/bea504738426426f4512d82d48fe00d4/transformed/versionedparcelable-1.1.1-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/645d64b24c4bb8eee647c651c99462f6/transformed/core-runtime-2.2.0-api.jar:/home/runner/.gradle/caches/modules-2/files-2.1/androidx.arch.core/core-common/2.2.0/5e1b8b81dfd5f52c56a8d53b18ca759c19a301f3/core-common-2.2.0.jar:/home/runner/.gradle/caches/modules-2/files-2.1/androidx.collection/collection/1.1.0/1f27220b47669781457de0d600849a5de0e89909/collection-1.1.0.jar:/home/runner/.gradle/caches/9.3.1/transforms/9540aadaf24ecbc75e4063a9cfb2b8da/transformed/savedstate-1.2.1-api.jar:/home/runner/.gradle/caches/modules-2/files-2.1/androidx.annotation/annotation-jvm/1.10.0/388cfaa79001d0f024d28f6a13d5a3dfc2f0e18f/annotation-jvm-1.10.0.jar:/home/runner/.gradle/caches/9.3.1/transforms/8a8f3e1aa984b75d2319f739d75ab7a0/transformed/window-1.2.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/52acac2bbb679a3a6feaae8ef8e2d8bb/transformed/window-java-1.2.0-api.jar:/home/runner/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlinx/kotlinx-coroutines-android/1.8.1/73e2acdd18df99dd4849d99f188dff529fc0afe0/kotlinx-coroutines-android-1.8.1.jar:/home/runner/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlinx/kotlinx-coroutines-core-jvm/1.8.1/bb0e192bd7c2b6b8217440d36e9758e377e450/kotlinx-coroutines-core-jvm-1.8.1.jar:/home/runner/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/2.4.0/4e9f4b531dce5c7dee58ed2de9a8b9a763c8dc6c/kotlin-stdlib-2.4.0.jar:/home/runner/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/23.0.0/8cc20c07506ec18e0834947b84a864bfc094484e/annotations-23.0.0.jar:/home/runner/.gradle/caches/modules-2/files-2.1/com.google.guava/listenablefuture/1.0/c949a840a6acbc5268d088e47b04177bf90b3cad/listenablefuture-1.0.jar:/home/runner/.gradle/caches/9.3.1/transforms/a841bfa07fa9a42eef5b7467afca48b3/transformed/exifinterface-1.4.1-api.jar:/home/runner/.gradle/caches/modules-2/files-2.1/org.jspecify/jspecify/1.0.0/7425a601c1c7ec76645a78d22b8c6a627edee507/jspecify-1.0.0.jar:/home/runner/.gradle/caches/9.3.1/transforms/a004d937aa6a8b5840f65ed0d12a29c7/transformed/tracing-1.2.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/6fc6a1db7cc21fae735951620ceb89a0/transformed/relinker-1.4.5-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/9a4634247faf03f4a8c522f04e33b098/transformed/startup-runtime-1.1.1-api.jar -d /home/runner/work/szuflada/szuflada/build/url_launcher_android/tmp/kotlin-classes/release -jvm-target 17 -module-name io.flutter.plugins.urllauncher:url_launcher_android_release -no-jdk -no-reflect -no-stdlib /home/runner/.pub-cache/hosted/pub.dev/url_launcher_android-6.3.33/android/src/main/java/io/flutter/plugins/urllauncher/UrlLauncherPlugin.java /home/runner/.pub-cache/hosted/pub.dev/url_launcher_android-6.3.33/android/src/main/java/io/flutter/plugins/urllauncher/WebViewActivity.java /home/runner/.pub-cache/hosted/pub.dev/url_launcher_android-6.3.33/android/src/main/java/io/flutter/plugins/urllauncher/UrlLauncher.java /home/runner/work/szuflada/szuflada/build/url_launcher_android/generated/source/buildConfig/release/io/flutter/plugins/urllauncher/BuildConfig.java /home/runner/.pub-cache/hosted/pub.dev/url_launcher_android-6.3.33/android/src/main/kotlin/io/flutter/plugins/urllauncher/Messages.kt
+2026-10-26 20:13:28.455 [daemon] INFO: Message: logging: using Kotlin home directory <no_path>
+2026-10-26 20:13:28.456 [daemon] INFO: Message: logging: exception on loading scripting plugin: java.lang.ClassNotFoundException: org.jetbrains.kotlin.scripting.compiler.plugin.ScriptingCompilerConfigurationComponentRegistrar
+2026-10-26 20:13:28.456 [daemon] INFO: Message: logging: scripting plugin will not be loaded: not all required jars are present in the classpath (missing files: [./kotlin-scripting-compiler.jar, ./kotlin-scripting-compiler-impl.jar, ./kotlin-scripting-common.jar, ./kotlin-scripting-jvm.jar])
+2026-10-26 20:13:28.456 [daemon] INFO: Message: logging: configuring the compilation environment
+2026-10-26 20:13:28.456 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/url_launcher_android/tmp/kotlin-classes/release/io/flutter/plugins/urllauncher/MessagesPigeonUtils.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/url_launcher_android-6.3.33/android/src/main/kotlin/io/flutter/plugins/urllauncher/Messages.kt
+2026-10-26 20:13:28.457 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/url_launcher_android/tmp/kotlin-classes/release/io/flutter/plugins/urllauncher/FlutterError.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/url_launcher_android-6.3.33/android/src/main/kotlin/io/flutter/plugins/urllauncher/Messages.kt
+2026-10-26 20:13:28.460 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/url_launcher_android/tmp/kotlin-classes/release/io/flutter/plugins/urllauncher/WebViewOptions.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/url_launcher_android-6.3.33/android/src/main/kotlin/io/flutter/plugins/urllauncher/Messages.kt
+2026-10-26 20:13:28.466 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/url_launcher_android/tmp/kotlin-classes/release/io/flutter/plugins/urllauncher/WebViewOptions$Companion.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/url_launcher_android-6.3.33/android/src/main/kotlin/io/flutter/plugins/urllauncher/Messages.kt
+2026-10-26 20:13:28.467 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/url_launcher_android/tmp/kotlin-classes/release/io/flutter/plugins/urllauncher/BrowserOptions.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/url_launcher_android-6.3.33/android/src/main/kotlin/io/flutter/plugins/urllauncher/Messages.kt
+2026-10-26 20:13:28.467 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/url_launcher_android/tmp/kotlin-classes/release/io/flutter/plugins/urllauncher/BrowserOptions$Companion.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/url_launcher_android-6.3.33/android/src/main/kotlin/io/flutter/plugins/urllauncher/Messages.kt
+2026-10-26 20:13:28.468 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/url_launcher_android/tmp/kotlin-classes/release/io/flutter/plugins/urllauncher/MessagesPigeonCodec.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/url_launcher_android-6.3.33/android/src/main/kotlin/io/flutter/plugins/urllauncher/Messages.kt
+2026-10-26 20:13:28.468 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/url_launcher_android/tmp/kotlin-classes/release/io/flutter/plugins/urllauncher/UrlLauncherApi.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/url_launcher_android-6.3.33/android/src/main/kotlin/io/flutter/plugins/urllauncher/Messages.kt
+2026-10-26 20:13:28.469 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/url_launcher_android/tmp/kotlin-classes/release/io/flutter/plugins/urllauncher/UrlLauncherApi$Companion.class
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/url_launcher_android-6.3.33/android/src/main/kotlin/io/flutter/plugins/urllauncher/Messages.kt
+2026-10-26 20:13:28.472 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/url_launcher_android/tmp/kotlin-classes/release/META-INF/io.flutter.plugins.urllauncher_url_launcher_android_release.kotlin_module
+Sources:
+/home/runner/.pub-cache/hosted/pub.dev/url_launcher_android-6.3.33/android/src/main/kotlin/io/flutter/plugins/urllauncher/Messages.kt
+2026-10-26 20:13:28.554 [compiler] INFO: Done with result 0
+2026-10-26 20:13:28.555 [compiler] INFO: cleaning after session 5
+2026-10-26 20:13:29.255 [compiler] INFO: getDaemonJVMOptions: DaemonJVMOptions(maxMemory=8G, maxMetaspaceSize=4G, reservedCodeCacheSize=512m, jvmParams=[-Djava.awt.headless=true, -Djava.rmi.server.hostname=127.0.0.1, -Dkotlin.environment.keepalive, -ea, -Dkotlin.daemon.custom.run.files.path.for.tests=/home/runner/.kotlin/daemon, -XX:+UseCodeCacheFlushing, -XX:+UseParallelGC, -Dkotlin.daemon.initiator.marker.file=/tmp/kotlin-compiler-client-2102677954299698622-is-running, --add-exports=java.base/sun.nio.ch=ALL-UNNAMED, Dkotlin.environment.keepalive, ea])
+2026-10-26 20:13:29.261 [compiler] INFO: Registered a client alive file: /tmp/kotlin-compiler-client-2102677954299698622-is-running
+2026-10-26 20:13:29.262 [compiler] INFO: leased a new session 6, session alive file: /tmp/kotlin-compilation-session-16216656802023742453-is-running
+2026-10-26 20:13:29.272 [compiler] INFO: Starting compilation with args: -Xallow-no-source-files -classpath /usr/local/lib/android/sdk/platforms/android-36/android.jar:/usr/local/lib/android/sdk/build-tools/36.0.0/core-lambda-stubs.jar:/home/runner/work/szuflada/szuflada/build/app/intermediates/compile_r_class_jar/release/generateReleaseRFile/R.jar:/home/runner/work/szuflada/szuflada/build/file_picker/intermediates/compile_library_classes_jar/release/bundleLibCompileToJarRelease/classes.jar:/home/runner/work/szuflada/szuflada/build/flutter_local_notifications/intermediates/compile_library_classes_jar/release/bundleLibCompileToJarRelease/classes.jar:/home/runner/work/szuflada/szuflada/build/flutter_plugin_android_lifecycle/intermediates/compile_library_classes_jar/release/bundleLibCompileToJarRelease/classes.jar:/home/runner/work/szuflada/szuflada/build/google_mlkit_commons/intermediates/compile_library_classes_jar/release/bundleLibCompileToJarRelease/classes.jar:/home/runner/work/szuflada/szuflada/build/google_mlkit_document_scanner/intermediates/compile_library_classes_jar/release/bundleLibCompileToJarRelease/classes.jar:/home/runner/work/szuflada/szuflada/build/google_mlkit_text_recognition/intermediates/compile_library_classes_jar/release/bundleLibCompileToJarRelease/classes.jar:/home/runner/work/szuflada/szuflada/build/image_picker_android/intermediates/compile_library_classes_jar/release/bundleLibCompileToJarRelease/classes.jar:/home/runner/work/szuflada/szuflada/build/in_app_purchase_android/intermediates/compile_library_classes_jar/release/bundleLibCompileToJarRelease/classes.jar:/home/runner/work/szuflada/szuflada/build/jni/intermediates/compile_library_classes_jar/release/bundleLibCompileToJarRelease/classes.jar:/home/runner/work/szuflada/szuflada/build/jni_flutter/intermediates/compile_library_classes_jar/release/bundleLibCompileToJarRelease/classes.jar:/home/runner/work/szuflada/szuflada/build/local_auth_android/intermediates/compile_library_classes_jar/release/bundleLibCompileToJarRelease/classes.jar:/home/runner/work/szuflada/szuflada/build/printing/intermediates/compile_library_classes_jar/release/bundleLibCompileToJarRelease/classes.jar:/home/runner/work/szuflada/szuflada/build/shared_preferences_android/intermediates/compile_library_classes_jar/release/bundleLibCompileToJarRelease/classes.jar:/home/runner/work/szuflada/szuflada/build/url_launcher_android/intermediates/compile_library_classes_jar/release/bundleLibCompileToJarRelease/classes.jar:/home/runner/.gradle/caches/9.3.1/transforms/6f70d2ed87bb5e24ec25de26168f06c4/transformed/appcompat-resources-1.7.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/3ac6b04ec655694459eb3b415a787df0/transformed/appcompat-1.7.0-api.jar:/home/runner/work/szuflada/szuflada/build/share_plus/intermediates/compile_library_classes_jar/release/bundleLibCompileToJarRelease/classes.jar:/home/runner/.gradle/caches/modules-2/files-2.1/io.flutter/flutter_embedding_release/1.0.0-cf636b1dfb818dd6a3ff16e390e93b1a036969c8/d217f3ddfe4bafb9745d9c5267fdab477bb915c/flutter_embedding_release-1.0.0-cf636b1dfb818dd6a3ff16e390e93b1a036969c8.jar:/home/runner/.gradle/caches/9.3.1/transforms/753bee9213044adb89c0b808d1adcbdb/transformed/biometric-1.1.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/f0495e77a2c4b9121eb4740de21c1263/transformed/fragment-1.8.9-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/520619d7e9a60bff67a03a23e0939bc5/transformed/activity-1.8.1-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/7ddb8abdc2a6c967ec47314a13464012/transformed/drawerlayout-1.0.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/2687e45343a25d458d3a4e9361e5d156/transformed/vectordrawable-animated-1.1.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/6e6c38016f24f9db459544a2acc4f5d2/transformed/vectordrawable-1.1.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/c05551ddb812bab574c8c294bcf83c90/transformed/viewpager-1.0.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/07115ed611bc420811b48daa75db2cd4/transformed/customview-1.0.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/0261a958c579f70a9eaab5fb4bcfaf1a/transformed/core-ktx-1.2.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/fc55f5bb727c8671c951640c0d4498ba/transformed/loader-1.0.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/97f16fdef81ab16c454946a365fc3d9b/transformed/core-1.13.1-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/19a20cbf72e6321aa9586dc52a92c1c5/transformed/lifecycle-livedata-core-ktx-2.7.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/961111a85b57977bf784ce27e450afb6/transformed/lifecycle-livedata-2.7.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/a58fbea6b7704ddc93de691feea2e339/transformed/lifecycle-viewmodel-2.7.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/7284b3526fc4fd97751646a63c45f78b/transformed/lifecycle-livedata-core-2.7.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/b469c4b9f6b2e19d16af2c7d6b90c761/transformed/lifecycle-process-2.7.0-api.jar:/home/runner/.gradle/caches/modules-2/files-2.1/androidx.lifecycle/lifecycle-common-java8/2.7.0/2ad14aed781c4a73ed4dbb421966d408a0a06686/lifecycle-common-java8-2.7.0.jar:/home/runner/.gradle/caches/modules-2/files-2.1/androidx.lifecycle/lifecycle-common/2.7.0/85334205d65cca70ed0109c3acbd29e22a2d9cb1/lifecycle-common-2.7.0.jar:/home/runner/.gradle/caches/9.3.1/transforms/35c2d2de606fb0b3e6e285b86c33a18d/transformed/lifecycle-runtime-2.7.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/3ce635fc0d68f184f5012f054eeec323/transformed/lifecycle-viewmodel-savedstate-2.7.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/9540aadaf24ecbc75e4063a9cfb2b8da/transformed/savedstate-1.2.1-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/8a8f3e1aa984b75d2319f739d75ab7a0/transformed/window-1.2.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/52acac2bbb679a3a6feaae8ef8e2d8bb/transformed/window-java-1.2.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/7657cbabe48eeea3c7d4edc4511db6d3/transformed/annotation-experimental-1.4.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/7956e260cce28e9196f1c559e4b9b2e3/transformed/cursoradapter-1.0.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/bea504738426426f4512d82d48fe00d4/transformed/versionedparcelable-1.1.1-api.jar:/home/runner/.gradle/caches/modules-2/files-2.1/androidx.collection/collection/1.1.0/1f27220b47669781457de0d600849a5de0e89909/collection-1.1.0.jar:/home/runner/.gradle/caches/9.3.1/transforms/b2d414dcdf8eeb02e2524ff5a37f8b05/transformed/interpolator-1.0.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/645d64b24c4bb8eee647c651c99462f6/transformed/core-runtime-2.2.0-api.jar:/home/runner/.gradle/caches/modules-2/files-2.1/androidx.arch.core/core-common/2.2.0/5e1b8b81dfd5f52c56a8d53b18ca759c19a301f3/core-common-2.2.0.jar:/home/runner/.gradle/caches/modules-2/files-2.1/androidx.annotation/annotation-jvm/1.8.1/b8a16fe526014b7941c1debaccaf9c5153692dbb/annotation-jvm-1.8.1.jar:/home/runner/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlinx/kotlinx-coroutines-core-jvm/1.7.1/63a0779cf668e2a47d13fda7c3b0c4f8dc7762f4/kotlinx-coroutines-core-jvm-1.7.1.jar:/home/runner/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlinx/kotlinx-coroutines-android/1.7.1/c2d86b569f10b7fc7e28d3f50c0eed97897d77a7/kotlinx-coroutines-android-1.7.1.jar:/home/runner/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-jdk8/1.8.20/73576ddf378c5b4f1f6b449fe6b119b8183fc078/kotlin-stdlib-jdk8-1.8.20.jar:/home/runner/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-jdk7/1.8.20/3aa51faf20aae8b31e1a4bc54f8370673d7b7df4/kotlin-stdlib-jdk7-1.8.20.jar:/home/runner/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/2.4.0/4e9f4b531dce5c7dee58ed2de9a8b9a763c8dc6c/kotlin-stdlib-2.4.0.jar:/home/runner/.gradle/caches/modules-2/files-2.1/io.flutter/armeabi_v7a_release/1.0.0-cf636b1dfb818dd6a3ff16e390e93b1a036969c8/149b8a189dfd0f2633ba274dfa0bb504237b7d8/armeabi_v7a_release-1.0.0-cf636b1dfb818dd6a3ff16e390e93b1a036969c8.jar:/home/runner/.gradle/caches/modules-2/files-2.1/io.flutter/arm64_v8a_release/1.0.0-cf636b1dfb818dd6a3ff16e390e93b1a036969c8/d045ce95c9f41201b364f743bde49c97a89ca359/arm64_v8a_release-1.0.0-cf636b1dfb818dd6a3ff16e390e93b1a036969c8.jar:/home/runner/.gradle/caches/modules-2/files-2.1/io.flutter/x86_64_release/1.0.0-cf636b1dfb818dd6a3ff16e390e93b1a036969c8/6903c430a62612cac767f7c09470be7692848908/x86_64_release-1.0.0-cf636b1dfb818dd6a3ff16e390e93b1a036969c8.jar:/home/runner/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/23.0.0/8cc20c07506ec18e0834947b84a864bfc094484e/annotations-23.0.0.jar:/home/runner/.gradle/caches/9.3.1/transforms/a004d937aa6a8b5840f65ed0d12a29c7/transformed/tracing-1.2.0-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/6fc6a1db7cc21fae735951620ceb89a0/transformed/relinker-1.4.5-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/a841bfa07fa9a42eef5b7467afca48b3/transformed/exifinterface-1.4.1-api.jar:/home/runner/.gradle/caches/9.3.1/transforms/9a4634247faf03f4a8c522f04e33b098/transformed/startup-runtime-1.1.1-api.jar:/home/runner/.gradle/caches/modules-2/files-2.1/org.jspecify/jspecify/1.0.0/7425a601c1c7ec76645a78d22b8c6a627edee507/jspecify-1.0.0.jar -d /home/runner/work/szuflada/szuflada/build/app/tmp/kotlin-classes/release -jvm-target 17 -module-name android:app_release -no-jdk -no-reflect -no-stdlib /home/runner/work/szuflada/szuflada/android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java /home/runner/work/szuflada/szuflada/android/app/src/main/kotlin/com/cubemobilegames/szuflada/MainActivity.kt
+2026-10-26 20:13:29.972 [daemon] INFO: Message: logging: using Kotlin home directory <no_path>
+2026-10-26 20:13:29.973 [daemon] INFO: Message: logging: exception on loading scripting plugin: java.lang.ClassNotFoundException: org.jetbrains.kotlin.scripting.compiler.plugin.ScriptingCompilerConfigurationComponentRegistrar
+2026-10-26 20:13:29.976 [daemon] INFO: Message: logging: scripting plugin will not be loaded: not all required jars are present in the classpath (missing files: [./kotlin-scripting-compiler.jar, ./kotlin-scripting-compiler-impl.jar, ./kotlin-scripting-common.jar, ./kotlin-scripting-jvm.jar])
+2026-10-26 20:13:29.978 [daemon] INFO: Message: logging: configuring the compilation environment
+2026-10-26 20:13:29.978 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/app/tmp/kotlin-classes/release/com/cubemobilegames/szuflada/MainActivity.class
+Sources:
+/home/runner/work/szuflada/szuflada/android/app/src/main/kotlin/com/cubemobilegames/szuflada/MainActivity.kt
+2026-10-26 20:13:29.979 [daemon] INFO: Message: output: output:
+/home/runner/work/szuflada/szuflada/build/app/tmp/kotlin-classes/release/META-INF/android_app_release.kotlin_module
+Sources:
+/home/runner/work/szuflada/szuflada/android/app/src/main/kotlin/com/cubemobilegames/szuflada/MainActivity.kt
+2026-10-26 20:13:30.070 [compiler] INFO: Done with result 0
+2026-10-26 20:13:30.072 [compiler] INFO: cleaning after session 6
