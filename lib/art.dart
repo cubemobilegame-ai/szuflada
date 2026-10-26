@@ -60,13 +60,14 @@ const ic = <String, String>{
 
 // logo aplikacji (to samo co ikona na telefonie)
 const logoSvg = '''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024"><defs>
-<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1f1d2b"/><stop offset="1" stop-color="#121214"/></linearGradient>
-<linearGradient id="dr" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#b3a6ff"/><stop offset="1" stop-color="#5a3df0"/></linearGradient>
-<linearGradient id="pp" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#e9e5ff"/></linearGradient></defs>
-<rect width="1024" height="1024" rx="230" fill="url(#bg)"/><g transform="translate(82 100) scale(.84)">
-<g transform="rotate(10 485 440)"><path d="M330 640V258l25.8-22 25.9 22 25.8-22 25.9 22 25.8-22 25.9 22 25.8-22 25.9 22 25.8-22 25.9 22 25.8-22 25.9 22v382z" fill="url(#pp)"/>
-<rect x="372" y="300" width="120" height="30" rx="15" fill="#5a3df0"/><rect x="372" y="370" width="218" height="22" rx="11" fill="#c9c0ff"/><rect x="372" y="420" width="168" height="22" rx="11" fill="#c9c0ff"/><circle cx="586" cy="316" r="20" fill="#ffd166"/></g>
-<g transform="rotate(-6 512 640)"><rect x="196" y="486" width="630" height="314" rx="66" fill="url(#dr)"/><rect x="420" y="618" width="184" height="42" rx="21" fill="#fff" opacity=".94"/></g></g></svg>''';
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#e4eaff"/></linearGradient>
+<linearGradient id="dr" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4a6bff"/><stop offset="1" stop-color="#1d3bb8"/></linearGradient></defs>
+<rect width="1024" height="1024" rx="230" fill="url(#bg)"/><g transform="translate(82 72) scale(.84)">
+<g transform="rotate(6 512 420)"><path d="M330 640V200l36.4 -30l36.4 30l36.4 -30l36.4 30l36.4 -30l36.4 30l36.4 -30l36.4 30l36.4 -30l36.4 30V640z" fill="#1d3bb8" opacity=".08" transform="translate(0 14)"/><path d="M330 640V200l36.4 -30l36.4 30l36.4 -30l36.4 30l36.4 -30l36.4 30l36.4 -30l36.4 30l36.4 -30l36.4 30V640z" fill="#fff"/>
+<rect x="382" y="250" width="130" height="36" rx="18" fill="#ff8a3d"/><rect x="382" y="326" width="218" height="24" rx="12" fill="#c7d2ff"/><rect x="382" y="380" width="161" height="24" rx="12" fill="#c7d2ff"/><rect x="382" y="434" width="192" height="24" rx="12" fill="#c7d2ff"/></g>
+<rect x="178" y="556" width="668" height="330" rx="84" fill="#1d3bb8" opacity=".14"/>
+<rect x="170" y="520" width="684" height="340" rx="84" fill="url(#dr)"/><rect x="170" y="520" width="684" height="80" rx="40" fill="#fff" opacity=".16"/>
+<rect x="392" y="664" width="240" height="48" rx="24" fill="#fff"/></g></svg>''';
 
 const _swoosh = '<path d="M-20 230 C 40 120, 150 60, 230 90 S 330 200, 250 250 S 90 250, 120 170 S 260 60, 340 40" fill="none" stroke="#24242c" stroke-width="26" stroke-linecap="round"/>';
 String _sp(double x, double y, double s, String c) => '<path d="M0,-9 C1.2,-2.4 2.4,-1.2 9,0 C2.4,1.2 1.2,2.4 0,9 C-1.2,2.4 -2.4,1.2 -9,0 C-2.4,-1.2 -1.2,-2.4 0,-9Z" transform="translate($x $y) scale($s)" fill="$c"/>';

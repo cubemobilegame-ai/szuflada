@@ -9,7 +9,7 @@ import 'services.dart';
 // NARZĘDZIA TESTERA (przełącznik Pro, przykładowe dane). Przed publikacją w Google Play ustaw na false.
 const testerMode = true;
 const freeLimit = 15;
-const appVersion = '1.1.2';
+const appVersion = '1.1.3';
 const supportMail = 'cubemobilegame@gmail.com';
 
 // ---------- kategorie ----------
