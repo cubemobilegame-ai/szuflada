@@ -32,3 +32,40 @@ for g, kts in [('android/app/build.gradle.kts', 1), ('android/app/build.gradle',
             t = re.sub(r'(release\s*\{)', lambda m: m.group(1) + '\n            ' + add, t, count=1)
         open(g, 'w').write(t)
         print(t)
+
+# Podpis wydania kluczem z sekretów GitHuba (SZ_KEYSTORE = ścieżka do pliku, SZ_KEY_PASS = hasło)
+ks = os.environ.get('SZ_KEYSTORE', '')
+if ks and os.path.exists(ks):
+    for g, kts in [('android/app/build.gradle.kts', 1), ('android/app/build.gradle', 0)]:
+        if not os.path.exists(g):
+            continue
+        t = open(g).read()
+        if 'SZ_KEY_PASS' in t:
+            continue
+        if kts:
+            cfg = '''    signingConfigs {
+        create("release") {
+            storeFile = file(System.getenv("SZ_KEYSTORE"))
+            storePassword = System.getenv("SZ_KEY_PASS")
+            keyAlias = "upload"
+            keyPassword = System.getenv("SZ_KEY_PASS")
+        }
+    }
+'''
+            t = re.sub(r'signingConfig\s*=\s*signingConfigs\.getByName\("debug"\)', 'signingConfig = signingConfigs.getByName("release")', t)
+        else:
+            cfg = '''    signingConfigs {
+        release {
+            storeFile file(System.getenv("SZ_KEYSTORE"))
+            storePassword System.getenv("SZ_KEY_PASS")
+            keyAlias "upload"
+            keyPassword System.getenv("SZ_KEY_PASS")
+        }
+    }
+'''
+            t = re.sub(r'signingConfig\s+signingConfigs\.debug', 'signingConfig signingConfigs.release', t)
+        t = re.sub(r'(\n\s*buildTypes\s*\{)', '\n' + cfg.rstrip('\n') + r'\1', t, count=1)
+        open(g, 'w').write(t)
+        print('PODPIS: klucz upload ustawiony w', g)
+else:
+    print('PODPIS: brak sekretu SZ_KEYSTORE_B64 - wydanie podpisane kluczem testowym')

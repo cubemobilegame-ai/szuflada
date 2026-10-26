@@ -9,6 +9,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 60
+    env:
+      SZ_KEY_PASS: ${{ secrets.SZ_KEY_PASS }}
     steps:
       - uses: actions/checkout@v4
       - name: Uporzadkuj pliki (jesli wgrano je bez folderow)
@@ -41,6 +43,10 @@ jobs:
             rm -rf lib test && cp -r /tmp/lib_bak lib && cp /tmp/pubspec_bak pubspec.yaml
           fi
           python3 tool/setup_android.py
+      - name: Klucz podpisu ze schowka sekretow
+        env: { KS: '${{ secrets.SZ_KEYSTORE_B64 }}' }
+        run: |
+          if [ -n "$KS" ]; then echo "$KS" | base64 -d > "$RUNNER_TEMP/upload.jks"; echo "SZ_KEYSTORE=$RUNNER_TEMP/upload.jks" >> "$GITHUB_ENV"; echo "klucz jest"; else echo "brak klucza"; fi
       - name: Dopasuj ustawienia Androida (compileSdk 36 dla wszystkich wtyczek, R8)
         run: python3 tool/gradle_fix.py
       - run: flutter pub get
@@ -48,6 +54,8 @@ jobs:
         run: dart run flutter_launcher_icons
       - run: flutter build apk --release
       - run: flutter build appbundle --release
+      - name: Sprawdz podpis
+        run: keytool -printcert -jarfile build/app/outputs/bundle/release/app-release.aab | grep -E "Owner|SHA256" | tee /tmp/podpis.txt
       - name: Opublikuj plik APK w zakladce Releases
         env:
           GH_TOKEN: ${{ github.token }}
@@ -57,4 +65,4 @@ jobs:
             build/app/outputs/bundle/release/app-release.aab \
             --target "${{ github.sha }}" \
             --title "Szuflada - wersja ${{ github.run_number }}" \
-            --notes "Automatycznie zbudowana aplikacja. Pobierz plik app-release.apk i zainstaluj na telefonie."
+            --notes "Automatycznie zbudowana aplikacja. APK do instalacji na telefonie, AAB do Google Play. Podpis: $(tr '\n' ' ' < /tmp/podpis.txt)"
