@@ -1,0 +1,24 @@
+Physical size: 1080x2400
+Physical density: 420
+zrzut 01-onboarding
+tap 540 2243 (Pomiń)
+zrzut 02-ostatni-slajd
+tap 540 2123 (Zaczynamy)
+zrzut 03-start-pusty
+tap 324 2290 (Paragony)
+zrzut 04-paragony-puste
+tap 756 2290 (Przypomnienia)
+zrzut 05-przypomnienia-puste
+tap 972 2290 (Plan)
+zrzut 06-plan
+tap 108 2290 (Start)
+tap 540 2290 (plus)
+zrzut 07-dodaj
+tap 540 2243 (Pomiń)
+tap 540 2243 (Zobacz na przykładach)
+zrzut 08-start-demo
+tap 324 2290 (Paragony)
+zrzut 09-paragony-demo
+tap 540 900 (pierwszy produkt)
+zrzut 10-szczegoly
+zrzut 11-czcionka-130
