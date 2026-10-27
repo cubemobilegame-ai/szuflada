@@ -1,0 +1,68 @@
+name: Build Android
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      SZ_KEY_PASS: ${{ secrets.SZ_KEY_PASS }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Uporzadkuj pliki (jesli wgrano je bez folderow)
+        run: |
+          mkdir -p lib tool assets/fonts
+          for f in add art claim core detail letters main pages services ui; do
+            if [ -f "$f.dart" ]; then mv "$f.dart" lib/; fi
+          done
+          for f in setup_android gradle_fix; do if [ -f "$f.py" ]; then mv "$f.py" tool/; fi; done
+          for f in icon icon_fg icon_mono notif; do if [ -f "$f.png" ]; then mv "$f.png" assets/; fi; done
+          ls -R lib tool assets
+      - name: Czcionka Manrope
+        run: |
+          cd /tmp && npm pack @expo-google-fonts/manrope >/dev/null && tar xzf expo-google-fonts-manrope-*.tgz
+          cd "$GITHUB_WORKSPACE"
+          for w in 400Regular 500Medium 600SemiBold 700Bold 800ExtraBold; do
+            f=$(find /tmp/package -name "Manrope_${w}.ttf" | head -1)
+            test -n "$f" && cp "$f" "assets/fonts/Manrope-${w}.ttf"
+          done
+          ls -la assets/fonts
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: '17' }
+      - uses: subosito/flutter-action@v2
+        with: { channel: stable, cache: true }
+      - name: Wygeneruj projekt Androida, jesli go brak
+        run: |
+          if [ ! -d android ]; then
+            cp -r lib /tmp/lib_bak && cp pubspec.yaml /tmp/pubspec_bak
+            flutter create --platforms=android --org com.cubemobilegames --project-name szuflada .
+            rm -rf lib test && cp -r /tmp/lib_bak lib && cp /tmp/pubspec_bak pubspec.yaml
+          fi
+          python3 tool/setup_android.py
+      - name: Klucz podpisu ze schowka sekretow
+        env: { KS: '${{ secrets.SZ_KEYSTORE_B64 }}' }
+        run: |
+          if [ -n "$KS" ]; then echo "$KS" | base64 -d > "$RUNNER_TEMP/upload.jks"; echo "SZ_KEYSTORE=$RUNNER_TEMP/upload.jks" >> "$GITHUB_ENV"; echo "klucz jest"; else echo "brak klucza"; fi
+      - name: Dopasuj ustawienia Androida (compileSdk 36 dla wszystkich wtyczek, R8)
+        run: python3 tool/gradle_fix.py
+      - run: flutter pub get
+      - name: Ikona aplikacji
+        run: dart run flutter_launcher_icons
+      - run: flutter build apk --release --build-number=$((GITHUB_RUN_NUMBER + 100))
+      - run: flutter build appbundle --release --build-number=$((GITHUB_RUN_NUMBER + 100))
+      - name: Sprawdz podpis
+        run: keytool -printcert -jarfile build/app/outputs/bundle/release/app-release.aab | grep -E "Owner|SHA256" | tee /tmp/podpis.txt
+      - name: Opublikuj plik APK w zakladce Releases
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "build-${{ github.run_number }}" \
+            build/app/outputs/flutter-apk/app-release.apk \
+            build/app/outputs/bundle/release/app-release.aab \
+            --target "${{ github.sha }}" \
+            --title "Szuflada - wersja ${{ github.run_number }}" \
+            --notes "Automatycznie zbudowana aplikacja. APK do instalacji na telefonie, AAB do Google Play. Podpis: $(tr '\n' ' ' < /tmp/podpis.txt)"
